@@ -1,0 +1,455 @@
+
+
+
+
+Privacy Preserving Measurement                                   S. Wang
+Internet-Draft                                                Apple Inc.
+Intended status: Informational                                 C. Patton
+Expires: 19 March 2023                                        Cloudflare
+                                                       15 September 2022
+
+
+                   In-band Task Provisioning for DAP
+                   draft-wang-ppm-dap-taskprov-latest
+
+Abstract
+
+   An extension for the Distributed Aggregation Protocol (DAP) is
+   specified that allows the task configuration to be provisioned in-
+   band.
+
+About This Document
+
+   This note is to be removed before publishing as an RFC.
+
+   The latest revision of this draft can be found at
+   https://wangshan.github.io/draft-wang-ppm-dap-taskprov/draft-wang-
+   ppm-dap-taskprov.html.  Status information for this document may be
+   found at https://datatracker.ietf.org/doc/draft-wang-ppm-dap-
+   taskprov/.
+
+   Discussion of this document takes place on the Privacy Preserving
+   Measurement Working Group mailing list (mailto:ppm@ietf.org), which
+   is archived at https://mailarchive.ietf.org/arch/browse/ppm/.
+   Subscribe at https://www.ietf.org/mailman/listinfo/ppm/.
+
+   Source for this draft and an issue tracker can be found at
+   https://github.com/wangshan/draft-wang-ppm-dap-taskprov.
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on 19 March 2023.
+
+Copyright Notice
+
+   Copyright (c) 2022 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.  Code Components
+   extracted from this document must include Revised BSD License text as
+   described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Revised BSD License.
+
+Table of Contents
+
+   1.  Introduction
+   2.  Conventions and Definitions
+   3.  The "task-prov" Extension
+     3.1.  Out-of-band parameters
+   4.  Client Behavior
+     4.1.  Construct task ID
+   5.  Provisioning a task
+   6.  Leader Behavior
+     6.1.  Change to upload sub-protocol
+   7.  Helper Behavior
+     7.1.  Change to helper aggregate sub-protocol
+   8.  Collector Behavior
+   9.  Implementation and Operational Considerations
+   10. Security Considerations
+   11. IANA Considerations
+   12. References
+     12.1.  Normative References
+     12.2.  Informative References
+   Acknowledgments
+   Authors' Addresses
+
+1.  Introduction
+
+   The DAP protocol [DAP] enables secure aggregation of a set of reports
+   submitted by clients.  This process is centered around a "task" that
+   determines, among other things, the cryptographic scheme to use for
+   the secure computation (a Verifiable Distributed Aggregation Function
+   [VDAF]), how reports are partitioned into batches, and privacy
+   parameters such as the minumum size of each batch.
+
+   The core DAP specifcation does not define a mechanism for
+   provisioning task configurations to the various parties (i.e., the
+   clients, aggregators, and the collector).  Thus it is up to each
+   deployment of DAP to securely implement its own mechanism.
+
+   This document describes a mechanism for configuring tasks that may be
+   useful in many deployments.  The goal of this mechanism is to define
+   a task provision method that utilizes just the upload channel and the
+   metadata in the Report itself.
+
+   At a high level, this extension asks client to include all the task
+   configuration parameters it received out-of-band from task author, in
+   the extension field of the Report it uploads to aggregators.  The
+   aggregators will create a DAP task upon receiving Report with such
+   extension (or ReportShare in the case of helper.)
+
+   By defining this mechanism as an extension, we can guarantee that for
+   any deployments implementing this extension, all information required
+   for aggregating a report is included in the report itself.  There is
+   no need for out-of-band task orchestration between leader and
+   helpers, therefore making adoption of DAP easier.  Since aggregators
+   must create tasks using the same parameters client sent, this
+   extension prevents task authors from giving clients and aggregators
+   different task parameters in order to achieve reduced privacy
+   guarantee, without requiring an out-of-band mechanism.
+
+   This extension affects upload, aggregate and collect sub-protocols.
+
+2.  Conventions and Definitions
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+   Similar to [DAP], this document uses the verbs "abort" and "alert
+   with [some error message]" to describe how protocol participants
+   react to various error conditions.
+
+   The terms used follow those described in [DAP].  The following new
+   terms are used:
+
+   Task provisioning:  The process of creating a DAP task.
+
+   Task configuration:  The non-secret parameters required to create a
+      task in task provision.
+
+   Task author:  The entity that defines the parameters of a task.
+
+      TODO: clarify the definition of task author.
+
+3.  The "task-prov" Extension
+
+      NOTE(cjpatton) It will be useful to think of a good name for this.
+      Something succinct and descriptive is ideal. task-prov is fine,
+      but we can maybe do better.
+
+   A new extension is defined:
+
+   enum {
+       task-prov(0xff00),
+       (65535)
+   } ExtensionType;
+
+      NOTE(shan) TLS uses underscore _ to define codepoints, which is
+      different from DAP's convension of using hyphen -, which one to
+      follow?  See #314 (ietf-wg-ppm/draft-ietf-ppm-dap#314) for
+      discussion.
+
+   When the Client includes this extension with its report, the body of
+   the extension is a TaskConfig defined follows:
+
+ struct {
+     /* Info specific for a task. */
+     opaque task_info<1..2^8-1>;
+
+     /* A list of URLs relative to which an aggregator's API endpoints
+     can be found. Defined in I-D.draft-ietf-ppm-dap-02. */
+     Url aggregator_endpoints<1..2^16-1>;
+
+     /* This determines the query type for batch selection and the
+     properties that all batches for this task must have. Defined in
+     I-D.draft-ietf-ppm-dap-02. */
+     QueryConfig query_config;
+
+     /* The maximum number of times a batch of reports may be queried by
+     the Collector. */
+     uint16 max_batch_lifetime;
+
+     /* Time up to which Clients are allowed to upload to this task. See
+     https://github.com/ietf-wg-ppm/draft-ietf-ppm-dap/pull/304. Defined
+     in I-D.draft-ietf-ppm-dap-02. */
+     Time task_expiration;
+
+     /* Determines the VDAF type and its config parameters. */
+     VdafConfig vdaf_config;
+ } TaskConfig;
+
+   The purpose of TaskConfig is to define all parameters that are
+   necessary for configuring an aggregator.  It includes all the fields
+   to be associated with a task.  (See task configuration in [DAP].)  In
+   addition to the aggregator endpoints, maximum batch lifetime, and
+   task expriation, the structure includes an opaque task_info field
+   that is specific to a deployment.  For example, this can be a string
+   describing the purpose of this task.
+
+   The query_config field defines the DAP query configuration used to
+   guide batch selection.  It is defined as follows:
+
+ struct {
+     QueryType query_type;    /* Defined in I-D.draft-ietf-ppm-dap-02 */
+     Duration time_precision; /* Defined in I-D.draft-ietf-ppm-dap-02 */
+     uint32 min_batch_size;
+     select (QueryConfig.query_type) {
+         case time-interval: Empty;
+         case fixed-size:    uint32 max_batch_size;
+     }
+ } QueryConfig;
+
+   The vdaf_config defines the configuration of the VDAF in use for this
+   task.  It is structured as follows:
+
+enum {
+    prio3-aes128-count(0x00000000),     /* I-D.draft-irtf-cfrg-vdaf-03 */
+    prio3-aes128-sum(0x00000001),       /* I-D.draft-irtf-cfrg-vdaf-03 */
+    prio3-aes128-histogram(0x00000002), /* I-D.draft-irtf-cfrg-vdaf-03 */
+    poplar1-aes128(0x00001000),         /* I-D.draft-irtf-cfrg-vdaf-03 */
+    (2^32-1)
+} VdafType;
+
+struct {
+    DpConfig dp_config;
+    VdafType vdaf_type;
+    select (VdafConfig.vdaf_type) {
+        case prio3-aes128-count: Empty;
+        case prio3-aes128-sum: uint8 bits;
+        case prio3-aes128-histogram: uint64 buckets<8, 2^24-8>;
+        case poplar1-aes128: uint16 bits;
+    }
+} VdafConfig;
+
+   Apart from the VDAF-specific parameters, this structure includes a
+   mechanism for differential privacy (DP).  This field, dp_config, is
+   structured as follows:
+
+   enum {
+       reserved(0), /* Reserved for testing purposes */
+       none(1),
+       (255)
+   } DpMechanism;
+
+   struct {
+       DpMechanism dp_mechanism;
+       select (DpConfig.dp_mechanism) {
+           case none: Empty;
+       }
+   } DpConfig;
+
+      OPEN ISSUE: Should spell out definition of DcConfig for various
+      differential privacy mechanisms and parameters.  See issue #94
+      (https://github.com/cfrg/draft-irtf-cfrg-vdaf/issues/94) for
+      discussion.
+
+   The definition of Time, Duration, Url, and QueryType follow those in
+   [DAP].
+
+3.1.  Out-of-band parameters
+
+   Note that TaskConfig does not encode all of the parameters required
+   for the aggregator to run a task.  In particular, parameters that
+   should not be known to clients, like the VDAF verification key, the
+   collector HPKE configuration, and whatever assets are required for
+   HTTP request authentication are still established out-of-band.
+
+      OPEN ISSUE: VDAF verification key needs to be unique per task,
+      spell out derivation of it.
+
+4.  Client Behavior
+
+   The client should know whether task-prov extension will be used and
+   all parameters required for TaskConfig prior to constructing the
+   extension body, either out-of-band from aggregators, or from
+   information already saved on client.
+
+   To offer the task-prov extension, the client adds the TaskConfig
+   structure it received from the task author in the extensions field of
+   its Report.  It computes the task ID as described in Section 4.1.
+
+4.1.  Construct task ID
+
+   For task-prov extension, a DAP task is not created before
+   distributing task configuration to clients.  Therefore, clients,
+   aggregators and collector construct the DAP task ID prior to
+   uploading.  A DAP task ID is computed as follows:
+
+   task_id = SHA-256(task_config)
+
+5.  Provisioning a task
+
+   Upon receiving the payload containing extension, leader and helpers
+   perform similar steps to provision a task.
+
+   If aggregator supports task-prov extension, it should first check if
+   the task ID already exists, if so the aggregator continues to the
+   rest of the flow being processed.  Note if the existing tasks's
+   configuration is different from the one in extension, HPKE decryption
+   will fail due to mismatched AAD.
+
+   If the task ID has not been seen before, aggregator should read and
+   decode extension_data with the TaskConfig schema.  If the decoding
+   failed, it MUST abort the sub protocol with error
+   "unrecognizedMessage".
+
+   If the decoding succeeds, aggregator creates a new task using the
+   task ID from the decoded extension, and save task configuration with
+   the newly created task.  In particular, aggregator should deserialize
+   vdaf_config corresponding to vdaf_type, and pass the relevant
+   parameters to the VDAF initializer.  At this point, the task
+   provision step has completed.
+
+6.  Leader Behavior
+
+   Leader should have saved any parameters described in Section 3.1.
+   Leader may not know the task ID of the current task before receiving
+   the first upload request.
+
+6.1.  Change to upload sub-protocol
+
+   Upon receiving a report, leader reads the extension codepoint in
+   extension_type.  If the leader does not support this extension, it
+   MUST ignore it.  In particular, if the task ID is not known, then it
+   MUST abort the handshake with "unrecognizedTask".
+
+      See #334 (https://github.com/ietf-wg-ppm/draft-ietf-ppm-dap/
+      issues/334) for discussion.
+
+   If aggregator supports task-prov extension, it should proceed to
+   Section 5.  If task provision failed, leader MUST alert the client
+   with error from Section 5.  If task provision succeeded, leader
+   should continue to the rest of upload flow.
+
+   Leader MAY return error to the client if task creation failed.
+
+7.  Helper Behavior
+
+   Helper should have saved any parameters described in Section 3.1.
+   Similar to leader, helper may not know the task ID of the current
+   task before receiving the first AggregateInitializeReq message from
+   the leader.
+
+7.1.  Change to helper aggregate sub-protocol
+
+   Upon receipt of a AggregateInitializeReq, helper reads the extension
+   codepoint in extension_type.  If helper does not support this
+   extension, it MUST ignore it.  If the task ID is not known, then it
+   MUST abort the aggregate protocol and alert the leader with error
+   "unrecognizedTask".
+
+   If helper supports task-prov extension, it should proceed to
+   Section 5.  If task provision failed, helper MUST alert the leader
+   with error from Section 5.  If task provision succeeded, helper
+   should continue to the rest of helper initialization.
+
+8.  Collector Behavior
+
+   Collector should behave the same whether it supports task-prov
+   extension or not.  In particular, if leader does not recognize the
+   task ID in the CollectReq, it will return HTTP status code 400 Bad
+   Request with error type unrecognizedTask and an optional Retry-After
+   header.  Collector SHOULD retry with the same CollectReq, using
+   interval in the Retry-After header if one exists.
+
+9.  Implementation and Operational Considerations
+
+      OPEN ISSUE: This mechanism brings added overhead in Report and
+      ReportShare since more duplicated data is passed around.  Some
+      optimisation can be done in the core protocol to reduce this
+      overhead.
+
+10.  Security Considerations
+
+      NOTE(cjpatton) In this section we would describe any security
+      goals we have that go beyond the core DAP spec.  We will also
+      discuss if/how the extension impacts the security of DAP itself.
+
+   A "task" now means the same task ID and same task configuration, if a
+   malicious client changes the task ID or task configuration, its
+   report will be aggregated in a different task, with other poison
+   reports from the same malicious attack.  The "good" reports will not
+   be polluted.
+
+11.  IANA Considerations
+
+      NOTE(cjpatton) Eventually we'll have IANA considerations (at the
+      very least we'll need to allocate a codepoint) but we can leave
+      this blank for now.
+
+12.  References
+
+12.1.  Normative References
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/rfc/rfc2119>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+12.2.  Informative References
+
+   [DAP]      Geoghegan, T., Patton, C., Rescorla, E., and C. A. Wood,
+              "Distributed Aggregation Protocol for Privacy Preserving
+              Measurement", Work in Progress, Internet-Draft, draft-
+              ietf-ppm-dap-01, 11 July 2022,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-ppm-dap-
+              01>.
+
+   [VDAF]     Barnes, R., Patton, C., and P. Schoppmann, "Verifiable
+              Distributed Aggregation Functions", Work in Progress,
+              Internet-Draft, draft-irtf-cfrg-vdaf-01, 26 May 2022,
+              <https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-
+              vdaf-01>.
+
+Acknowledgments
+
+      NOTE(cjpatton) It's a good idea to acknowledge anyone by name who
+      contributed to the spec in some way, either directly or
+      indirectly.  NOTE(shan) Will add more in future commits.
+
+   Contributors
+
+   Junye Chen Apple Inc. junyec@apple.com
+
+   Michael Scaria Apple Inc. mscaria@apple.com
+
+   Suman Ganta Apple Inc. sganta2@apple.com
+
+   Christopher A.  Wood Cloudflare caw@heapingbits.net
+
+   Kunal Talwar Apple Inc. ktalwar@apple.com
+
+Authors' Addresses
+
+   Shan Wang
+   Apple Inc.
+   Email: shan_wang@apple.com
+
+
+   Christopher Patton
+   Cloudflare
+   Email: chrispatton+ietf@gmail.com

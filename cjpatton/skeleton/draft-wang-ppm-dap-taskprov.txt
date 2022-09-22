@@ -1,0 +1,212 @@
+
+
+
+
+Privacy Preserving Measurement                                Y. N. Here
+Internet-Draft                                    Your Organization Here
+Intended status: Informational                            24 August 2022
+Expires: 25 February 2023
+
+
+                   In-band Task Provisioning for DAP
+                   draft-wang-ppm-dap-taskprov-latest
+
+Abstract
+
+   An extension for the Distributed Aggregation Protocol (DAP) is
+   specified that allows the task configuration to be provisioned in-
+   band.
+
+About This Document
+
+   This note is to be removed before publishing as an RFC.
+
+   The latest revision of this draft can be found at
+   https://wangshan.github.io/draft-wang-ppm-dap-taskprov/draft-wang-
+   ppm-dap-taskprov.html.  Status information for this document may be
+   found at https://datatracker.ietf.org/doc/draft-wang-ppm-dap-
+   taskprov/.
+
+   Discussion of this document takes place on the Privacy Preserving
+   Measurement Working Group mailing list (mailto:ppm@ietf.org), which
+   is archived at https://mailarchive.ietf.org/arch/browse/ppm/.
+   Subscribe at https://www.ietf.org/mailman/listinfo/ppm/.
+
+   Source for this draft and an issue tracker can be found at
+   https://github.com/wangshan/draft-wang-ppm-dap-taskprov.
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on 25 February 2023.
+
+Copyright Notice
+
+   Copyright (c) 2022 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.  Code Components
+   extracted from this document must include Revised BSD License text as
+   described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Revised BSD License.
+
+Table of Contents
+
+   1.  Introduction
+   2.  Conventions and Definitions
+   3.  The "task_prov" Extension
+   4.  Client Behavior
+   5.  Leader Behavior
+   6.  Helper Behavior
+   7.  Collector Behavior
+   8.  Security Considerations
+   9.  IANA Considerations
+   10. References
+     10.1.  Normative References
+     10.2.  Informative References
+   Acknowledgments
+   Author's Address
+
+1.  Introduction
+
+   The DAP protocol [DAP] enables secure aggregation of a set of reports
+   submitted by clients.  This process is centered around a "task" that
+   determines, among other things, the cryptographic scheme to use for
+   the secure computation (a Verifiable Distributed Aggregation Function
+   [VDAF]), how reports are partitioned into batches, and privacy
+   parameters such as the minumum size of each batch.
+
+   The core DAP specifcation does not define a mechanism for
+   provisioning task configurations to the various parties (i.e., the
+   clients, aggregators, and the collector).  Thus it is up to each
+   deployment of DAP to securely implement its own mechanism.
+
+   This document describes a mechanism for configuring tasks that may be
+   useful in many deployments.
+
+      TODO(wangshan) Describe the goals of this mechanism, including the
+      deployment scenario.  Then describe how the extension works at a
+      high level.  I think the intro should answer the following
+      questions:
+
+      -  Why does this mechanism need to be an extension (i.e., why are
+         protocol changes needed), as opposed to something that happens
+         completely out-of-band?
+
+      -  Which of the sub-protocols are changed: upload, aggregate,
+         collect?
+
+2.  Conventions and Definitions
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+3.  The "task_prov" Extension
+
+      NOTE(cjpatton) It will be useful to think of a good name for this.
+      Something succinct and descriptive is ideal. task_prov is fine,
+      but we can maybe do better.
+
+   A new extension is defined:
+
+   enum {
+      task_prov(0xff00), (65535)
+   } ExtensionType;
+
+   When the Client includes this extension with its report, the body of
+   the extension is structured as follows:
+
+   TODO(wangshan) Specify the structure of the extension.
+
+4.  Client Behavior
+
+      TODO(wangshan) Say how the Client constructs the extension body.
+      Does the extension change anything else about the upload flow?
+
+5.  Leader Behavior
+
+      TODO(wangshan) Say what the Leader does when it receives a report
+      with this extension.  What do Leaders do if they _don't_ support
+      this extension?  Is it safe to ignore it?  How are the upload,
+      aggregate, and collect flows impacted?
+
+6.  Helper Behavior
+
+      TODO(wangshan) Say what the Helper does when it receives a report
+      share with this extension.  (Same questions as above.)
+
+7.  Collector Behavior
+
+      TODO(wangshan) Describe if/how this extension impacts Collector
+      behavior.
+
+8.  Security Considerations
+
+      NOTE(cjpatton) In this section we would describe any security
+      goals we have that go beyond the core DAP spec.  We will also
+      discuss if/how the extension impacts the security of DAP itself.
+
+9.  IANA Considerations
+
+      NOTE(cjpatton) Eventually we'll have IANA considerations (at the
+      very least we'll need to allocate a codepoint) but we can leave
+      this blank for now.
+
+10.  References
+
+10.1.  Normative References
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/rfc/rfc2119>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+10.2.  Informative References
+
+   [DAP]      Geoghegan, T., Patton, C., Rescorla, E., and C. A. Wood,
+              "Distributed Aggregation Protocol for Privacy Preserving
+              Measurement", Work in Progress, Internet-Draft, draft-
+              ietf-ppm-dap-01, 11 July 2022,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-ppm-dap-
+              01>.
+
+   [VDAF]     Barnes, R., Patton, C., and P. Schoppmann, "Verifiable
+              Distributed Aggregation Functions", Work in Progress,
+              Internet-Draft, draft-irtf-cfrg-vdaf-01, 26 May 2022,
+              <https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-
+              vdaf-01>.
+
+Acknowledgments
+
+      NOTE(cjpatton) It's a good idea to acknowledge anyone by name who
+      contributed to the spec in some way, either directly or
+      indirectly.
+
+Author's Address
+
+   Your Name Here
+   Your Organization Here
+   Email: shan_wang@apple.com

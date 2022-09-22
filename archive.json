@@ -1,0 +1,1748 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2022-09-22T01:47:08.672979+00:00",
+  "repo": "wangshan/draft-wang-ppm-dap-taskprov",
+  "labels": [
+    {
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "name": "documentation",
+      "description": "Improvements or additions to documentation",
+      "color": "0075ca"
+    },
+    {
+      "name": "duplicate",
+      "description": "This issue or pull request already exists",
+      "color": "cfd3d7"
+    },
+    {
+      "name": "enhancement",
+      "description": "New feature or request",
+      "color": "a2eeef"
+    },
+    {
+      "name": "good first issue",
+      "description": "Good for newcomers",
+      "color": "7057ff"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
+    },
+    {
+      "name": "invalid",
+      "description": "This doesn't seem right",
+      "color": "e4e669"
+    },
+    {
+      "name": "question",
+      "description": "Further information is requested",
+      "color": "d876e3"
+    },
+    {
+      "name": "wontfix",
+      "description": "This will not be worked on",
+      "color": "ffffff"
+    }
+  ],
+  "issues": [
+    {
+      "number": 3,
+      "id": "I_kwDOH4FR585RsqjC",
+      "title": "Define \"task author\"",
+      "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/issues/3",
+      "state": "OPEN",
+      "author": "cjpatton",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This section should define the term \"task author\" (introduced by this draft) and elaborate on its role. We can do so in follow-up PR.\r\n\r\n_Originally posted by @cjpatton in https://github.com/wangshan/draft-wang-ppm-dap-taskprov/pull/2#discussion_r969014987_",
+      "createdAt": "2022-09-12T23:52:03Z",
+      "updatedAt": "2022-09-12T23:52:03Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 4,
+      "id": "I_kwDOH4FR585Rsqqa",
+      "title": "Flesh out VDAF verificaiton key derivation",
+      "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/issues/4",
+      "state": "OPEN",
+      "author": "cjpatton",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Since we're using SHA2 for the task ID, we might as well use HKDF-SHA2-Expand for deriving the verification key.",
+      "createdAt": "2022-09-12T23:52:56Z",
+      "updatedAt": "2022-09-12T23:52:56Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 5,
+      "id": "I_kwDOH4FR585R2fU7",
+      "title": "Upgrade to DAP-02",
+      "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/issues/5",
+      "state": "OPEN",
+      "author": "cjpatton",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This draft isn't out yet, so we'll have to update this later :)\r\n\r\n_Originally posted by @cjpatton in https://github.com/wangshan/draft-wang-ppm-dap-taskprov/pull/2#discussion_r971020617_",
+      "createdAt": "2022-09-14T16:02:23Z",
+      "updatedAt": "2022-09-14T16:02:23Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 6,
+      "id": "I_kwDOH4FR585R3PXm",
+      "title": "Consider renaming leader_url and helper_url",
+      "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/issues/6",
+      "state": "OPEN",
+      "author": "cjpatton",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Deployments may end up putting place holders here or doing something else.",
+      "createdAt": "2022-09-14T18:46:28Z",
+      "updatedAt": "2022-09-14T18:46:28Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 8,
+      "id": "I_kwDOH4FR585SKM4y",
+      "title": "Editorial: Use \"_\" isntead of \"-\"",
+      "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/issues/8",
+      "state": "OPEN",
+      "author": "cjpatton",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "As of https://github.com/ietf-wg-ppm/draft-ietf-ppm-dap/pull/346, DAP uses \"_\".",
+      "createdAt": "2022-09-19T19:11:34Z",
+      "updatedAt": "2022-09-19T19:11:34Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDOH4FR5849wBUs",
+      "title": "Add skeleton for the document",
+      "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/pull/1",
+      "state": "MERGED",
+      "author": "cjpatton",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Here is the doc skeleton as a PR. Feel free to merge and continue working, or you can request changes if you prefer to do things that way. Once you merge, CI will build and upload the changes automatically to https://wangshan.github.io/draft-wang-ppm-dap-taskprov/#go.draft-wang-ppm-dap-taskprov.html.",
+      "createdAt": "2022-08-24T21:18:16Z",
+      "updatedAt": "2022-09-06T15:26:07Z",
+      "baseRepository": "wangshan/draft-wang-ppm-dap-taskprov",
+      "baseRefName": "main",
+      "baseRefOid": "72ce2b4909c06ca288583afa1e13492491faa43e",
+      "headRepository": "wangshan/draft-wang-ppm-dap-taskprov",
+      "headRefName": "cjpatton/skeleton",
+      "headRefOid": "a27b7532dd873ace6729357df465fad12b9d42a1",
+      "closedAt": "2022-09-06T15:26:06Z",
+      "mergedAt": "2022-09-06T15:26:06Z",
+      "mergedBy": "wangshan",
+      "mergeCommit": {
+        "oid": "d700c41682a8f5b59f9b57b42612279ee489c23b"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH4FR585Bbx9I",
+          "commit": {
+            "abbreviatedOid": "a27b753"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-09-06T15:25:51Z",
+          "updatedAt": "2022-09-06T15:25:51Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "id": "PR_kwDOH4FR584-TxEe",
+      "title": "Add task configuration schema and describe client behaviour",
+      "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/pull/2",
+      "state": "MERGED",
+      "author": "wangshan",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "First update, it's mostly a brain dump, please have a look. I'll fix the build failure early next week.",
+      "createdAt": "2022-09-03T01:20:04Z",
+      "updatedAt": "2022-09-14T17:08:51Z",
+      "baseRepository": "wangshan/draft-wang-ppm-dap-taskprov",
+      "baseRefName": "main",
+      "baseRefOid": "d700c41682a8f5b59f9b57b42612279ee489c23b",
+      "headRepository": "wangshan/draft-wang-ppm-dap-taskprov",
+      "headRefName": "task-configuration-schema",
+      "headRefOid": "84da91b7d82fdce6c168fb8a42eeb86b6a2b9278",
+      "closedAt": "2022-09-14T17:08:51Z",
+      "mergedAt": "2022-09-14T17:08:51Z",
+      "mergedBy": "wangshan",
+      "mergeCommit": {
+        "oid": "6d5319bacf38115206557c3d07cd7ae0d0ec76c9"
+      },
+      "comments": [
+        {
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "body": "@cjpatton \r\n\r\n```\r\nVdafType uint32_t; // Codepoint from I.D-draft-irtf-cfrg-vdaf-03\r\n\r\nstruct {\r\n    VdafType type;\r\n    select type (type) {\r\n        Prio3Aes138Count: Empty;\r\n        Prio3Aes128Sum: uint8_t bits;\r\n        Prio3Aes128Histogram: uint64_t buckets<0..2^16-1>;\r\n        Poplar1Aes128:  uint16 bits;\r\n    }\r\n} VdafConfig;\r\n```\r\nwhy do we need two definitions of `VdafType uint32_t` and `VdafType type`, is the former a type alias?\r\n\r\nI'm thinking the VdafConfig struct is up to the VDAF, making it opaque will allow new VDAFs to be defined without changing this extension draft (like an extension on this extension), otherwise wouldn't this extension be tied to all the VDAFs above?\r\n",
+          "createdAt": "2022-09-06T19:00:12Z",
+          "updatedAt": "2022-09-06T19:00:12Z"
+        },
+        {
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "body": "\r\n> That's a good point: We need to make sure that unspecified VDAFs can still be encoded. This seems like a reasonable way to do it. However, for this extension to be maximally useful, it will be necessary to spell out serialization of the configs of standardized VDAFs. Just something to keep in mind for the future.\r\n\r\nI'll bring back the standardized VDAFs in a VdafConfig.",
+          "createdAt": "2022-09-07T18:48:26Z",
+          "updatedAt": "2022-09-07T18:48:26Z"
+        },
+        {
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "body": "@cjpatton why a prio3 histogram uses a list of buckets, is it for non-continuous buckets? does this mean the dimension of the one hot vector can only be (2^16-8)/8 = 8191 ",
+          "createdAt": "2022-09-09T12:27:22Z",
+          "updatedAt": "2022-09-09T12:27:22Z"
+        },
+        {
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> @cjpatton why a prio3 histogram uses a list of buckets, is it for non-continuous buckets? does this mean the dimension of the one hot vector can only be (2^16-8)/8 = 8191\r\n\r\nFor this type, `buckets` defines the boundaries between the buckets: See https://www.ietf.org/archive/id/draft-irtf-cfrg-vdaf-03.html#name-prio3aes128histogram.\r\n\r\nYes, this would constrain the dimension of the vector. We could bump the length prefix to 24 or 32 bits if needed.",
+          "createdAt": "2022-09-12T17:00:32Z",
+          "updatedAt": "2022-09-12T17:00:32Z"
+        },
+        {
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "body": "> What should an Aggregator do if the task ID does not match the hash of the task config? We'll need to spell this out in both the \"Leader Behavior\" and \"Helper Behavior\" sections.\r\n\r\n@cjpatton do we need to do anything? the current text doesn't specify any checks on aggregator side about task ID vs. hash(task_config). Any bad task ID will be grouped to it's own (bad) task.",
+          "createdAt": "2022-09-12T21:46:17Z",
+          "updatedAt": "2022-09-12T21:46:17Z"
+        },
+        {
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "body": "> > @cjpatton why a prio3 histogram uses a list of buckets, is it for non-continuous buckets? does this mean the dimension of the one hot vector can only be (2^16-8)/8 = 8191\r\n> \r\n> For this type, `buckets` defines the boundaries between the buckets: See https://www.ietf.org/archive/id/draft-irtf-cfrg-vdaf-03.html#name-prio3aes128histogram.\r\n> \r\n> Yes, this would constrain the dimension of the vector. We could bump the length prefix to 24 or 32 bits if needed.\r\n\r\nSo this is related to this issue in DAP: https://github.com/ietf-wg-ppm/draft-ietf-ppm-dap/issues/311?\r\nI'll create an issue in VDAF to bump this, 8192 is very limiting when used with differential privacy.",
+          "createdAt": "2022-09-12T21:52:27Z",
+          "updatedAt": "2022-09-12T21:52:27Z"
+        },
+        {
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> So this is related to this issue in DAP: [ietf-wg-ppm/draft-ietf-ppm-dap#311](https://github.com/ietf-wg-ppm/draft-ietf-ppm-dap/issues/311)? I'll create an issue in VDAF to bump this, 8192 is very limiting when used with differential privacy.\r\n\r\nThis not related to https://github.com/ietf-wg-ppm/draft-ietf-ppm-dap/issues/311. It's also not relevant to VDAF, which does not specify an encoding of VDAF config parameters. If you're expecting needing a large histogram, then all we need to do is increase the maximum length of the buckets list here. We're free to do whatever we want in this draft.",
+          "createdAt": "2022-09-12T23:21:02Z",
+          "updatedAt": "2022-09-12T23:21:50Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH4FR585Bbt59",
+          "commit": {
+            "abbreviatedOid": "84c8ed6"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-06T15:16:15Z",
+          "updatedAt": "2022-09-06T15:27:33Z",
+          "comments": [
+            {
+              "originalPosition": 42,
+              "body": "nit: I think 4-character tab is a bit more readable.",
+              "createdAt": "2022-09-06T15:16:16Z",
+              "updatedAt": "2022-09-06T15:27:33Z"
+            },
+            {
+              "originalPosition": 47,
+              "body": "Good catch. I think underscore is better, but consistency with DAP is more important. I filed https://github.com/ietf-wg-ppm/draft-ietf-ppm-dap/issues/314 to figure this out.",
+              "createdAt": "2022-09-06T15:21:16Z",
+              "updatedAt": "2022-09-06T15:27:33Z"
+            },
+            {
+              "originalPosition": 57,
+              "body": "Here and below.\r\n\r\n```suggestion\r\n  opaque task_info<1..2^8-1>;\r\n```",
+              "createdAt": "2022-09-06T15:21:54Z",
+              "updatedAt": "2022-09-06T15:27:33Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585BcDmH",
+          "commit": {
+            "abbreviatedOid": "dcee929"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "First pass of the schema. one high-level comment. The structure of the VDAF config is incomplete. Plus,  I think it could be spelled out cleaner. I imagine it looking something like this:\r\n\r\n```\r\nVdafType uint32_t; // Codepoint from I.D-draft-irtf-cfrg-vdaf-03\r\n\r\nstruct {\r\n    VdafType type;\r\n    select type (type) {\r\n        Prio3Aes138Count: Empty;\r\n        Prio3Aes128Sum: uint8_t bits;\r\n        Prio3Aes128Histogram: uint64_t buckets<0..2^16-1>;\r\n        Poplar1Aes128:  uint16 bits;\r\n    }\r\n} VdafConfig;\r\n```\r\n\r\nThen replace `vdaf_type` and `vdaf_parameter` with a single `VdafConfig`.",
+          "createdAt": "2022-09-06T16:00:37Z",
+          "updatedAt": "2022-09-06T17:12:10Z",
+          "comments": [
+            {
+              "originalPosition": 124,
+              "body": "Wrap lines at 80 characters",
+              "createdAt": "2022-09-06T16:00:37Z",
+              "updatedAt": "2022-09-06T17:12:10Z"
+            },
+            {
+              "originalPosition": 119,
+              "body": "Unhelpful comment\r\n```suggestion\r\n```",
+              "createdAt": "2022-09-06T16:40:40Z",
+              "updatedAt": "2022-09-06T17:12:10Z"
+            },
+            {
+              "originalPosition": 130,
+              "body": "```suggestion\r\n    QueryConfig query_config; // Defined in I-D.draft-ietf-ppm-dap-02\r\n```",
+              "createdAt": "2022-09-06T16:41:56Z",
+              "updatedAt": "2022-09-06T17:12:10Z"
+            },
+            {
+              "originalPosition": 148,
+              "body": "Don't repeat the definition, just refer to it. I've added a suggestion above for how to do this. Here's another example: https://www.ietf.org/archive/id/draft-ietf-tls-esni-14.html#name-encrypted-clienthello-confi",
+              "createdAt": "2022-09-06T16:43:19Z",
+              "updatedAt": "2022-09-06T17:12:10Z"
+            },
+            {
+              "originalPosition": 205,
+              "body": "Unhelpful comment (we aren't going to ever reserve a codepoint in this space in this document).\r\n```suggestion\r\n```",
+              "createdAt": "2022-09-06T16:45:23Z",
+              "updatedAt": "2022-09-06T17:12:11Z"
+            },
+            {
+              "originalPosition": 198,
+              "body": "All this enum does is define mapping to codepoints defined elsewhere. This doesn't constitute IANA considerations.\r\n```suggestion\r\n```",
+              "createdAt": "2022-09-06T16:46:29Z",
+              "updatedAt": "2022-09-06T17:12:11Z"
+            },
+            {
+              "originalPosition": 208,
+              "body": "I don't see any reason to allocate these codepoints until there is a document that describes how these VDAFs work.",
+              "createdAt": "2022-09-06T16:47:40Z",
+              "updatedAt": "2022-09-06T17:12:11Z"
+            },
+            {
+              "originalPosition": 214,
+              "body": "VDAF codepoints are 32 bits\r\n\r\n```suggestion\r\n    (2^32-1)\r\n```",
+              "createdAt": "2022-09-06T16:47:42Z",
+              "updatedAt": "2022-09-06T17:12:11Z"
+            },
+            {
+              "originalPosition": 158,
+              "body": "I don't defining this struct is super helpful. Better I think to just stick max_batch_size in the relevant spot in QueryConfig.",
+              "createdAt": "2022-09-06T16:49:18Z",
+              "updatedAt": "2022-09-06T17:12:11Z"
+            },
+            {
+              "originalPosition": 246,
+              "body": "We're going to need more for Prio3. Each variant (e.g., Prio3Aes128Sum) has parameters (e.g., number of bits of each summand).",
+              "createdAt": "2022-09-06T16:51:55Z",
+              "updatedAt": "2022-09-06T17:12:11Z"
+            },
+            {
+              "originalPosition": 245,
+              "body": "What about the dimension?",
+              "createdAt": "2022-09-06T16:52:38Z",
+              "updatedAt": "2022-09-06T17:12:11Z"
+            },
+            {
+              "originalPosition": 240,
+              "body": "Why is vdaf_data `opaque`? It should just be `VdafParameters`.",
+              "createdAt": "2022-09-06T16:53:00Z",
+              "updatedAt": "2022-09-06T17:12:11Z"
+            },
+            {
+              "originalPosition": 250,
+              "body": "For consistency with `QueryConfig` and `TaskConfig`.\r\n\r\n```suggestion\r\n} VdafConfig;\r\n```",
+              "createdAt": "2022-09-06T16:53:24Z",
+              "updatedAt": "2022-09-06T17:12:11Z"
+            },
+            {
+              "originalPosition": 181,
+              "body": "This should not be opaque, since the structure is actually spelled out here.",
+              "createdAt": "2022-09-06T16:57:19Z",
+              "updatedAt": "2022-09-06T17:12:11Z"
+            },
+            {
+              "originalPosition": 225,
+              "body": "This is meant to indicate the maxiumum value of one of these codepoints. If you're assertion is that a byte should be sufficient, then the value should be 255 (the largest unsigned integer)\r\n",
+              "createdAt": "2022-09-06T16:58:39Z",
+              "updatedAt": "2022-09-06T17:12:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585Bc40Q",
+          "commit": {
+            "abbreviatedOid": "1972d2b"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-06T18:46:32Z",
+          "updatedAt": "2022-09-06T18:46:33Z",
+          "comments": [
+            {
+              "originalPosition": 148,
+              "body": "is `//` a valid comment format for TLS?",
+              "createdAt": "2022-09-06T18:46:33Z",
+              "updatedAt": "2022-09-06T18:46:33Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585Bc5-l",
+          "commit": {
+            "abbreviatedOid": "23cef9b"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-06T18:50:52Z",
+          "updatedAt": "2022-09-06T18:50:52Z",
+          "comments": [
+            {
+              "originalPosition": 158,
+              "body": "wouldn't it be more clear if we have an explicitly type for it? for e.g. if we have another field required by FixedSizeQueryConfig in the future",
+              "createdAt": "2022-09-06T18:50:52Z",
+              "updatedAt": "2022-09-06T18:50:52Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585Bc6WG",
+          "commit": {
+            "abbreviatedOid": "dcee929"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-06T18:52:18Z",
+          "updatedAt": "2022-09-06T18:52:18Z",
+          "comments": [
+            {
+              "originalPosition": 225,
+              "body": "type removed",
+              "createdAt": "2022-09-06T18:52:18Z",
+              "updatedAt": "2022-09-06T18:52:18Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585BdGs4",
+          "commit": {
+            "abbreviatedOid": "23cef9b"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "Extension structure is looking good. I'll look at the rest in the next pass.\r\n\r\n> ```\r\n> VdafType uint32_t; // Codepoint from I.D-draft-irtf-cfrg-vdaf-03\r\n> \r\n> struct {\r\n>     VdafType type;\r\n>     select type (type) {\r\n>         Prio3Aes138Count: Empty;\r\n>         Prio3Aes128Sum: uint8_t bits;\r\n>         Prio3Aes128Histogram: uint64_t buckets<0..2^16-1>;\r\n>         Poplar1Aes128:  uint16 bits;\r\n>     }\r\n> } VdafConfig;\r\n> ```\r\n> \r\n> why do we need two definitions of `VdafType uint32_t` and `VdafType type`, is the former a type alias?\r\n\r\n* `VdafType uint32_t;` defines `VdafType` as a type alias for `uint32_t`.\r\n* `VdafType type;`, in the given context, defines the type of a field struct. It does not define a type. Instead, what it says is that the struct includes a `VdafType`.\r\n\r\n\r\n> I'm thinking the VdafConfig struct is up to the VDAF, making it opaque will allow new VDAFs to be defined without changing this extension draft (like an extension on this extension), otherwise wouldn't this extension be tied to all the VDAFs above?\r\n\r\nThat's a good point: We need to make sure that unspecified VDAFs can still be encoded. This seems like a reasonable way to do it. However, for this extension to be maximally useful, it will be necessary to spell out serialization of the configs of standardized VDAFs. Just something to keep in mind for the future.\r\n",
+          "createdAt": "2022-09-06T19:35:43Z",
+          "updatedAt": "2022-09-06T19:56:55Z",
+          "comments": [
+            {
+              "originalPosition": 158,
+              "body": "It's just my opinion, but I don't think this is more clear, since you now have to look in two places to understand the information conveyed by QueryConfig. However, defining new structs is sometimes appropriate. For example:\r\n1.  when either you need to serialize the same data in multiple places in the protocol\r\n2. when there are a large number of parameters in the struct.",
+              "createdAt": "2022-09-06T19:35:43Z",
+              "updatedAt": "2022-09-06T19:56:55Z"
+            },
+            {
+              "originalPosition": 130,
+              "body": "nit (weird mix of block and inline comments; similarly below): \r\n```suggestion\r\n    /* properties that all batches for this task must have.  Defined in I-D.draft-ietf-ppm-dap-02. */\r\n    QueryConfig query_config;\r\n\r\n```",
+              "createdAt": "2022-09-06T19:37:51Z",
+              "updatedAt": "2022-09-06T19:56:55Z"
+            },
+            {
+              "originalPosition": 12,
+              "body": "```suggestion\r\n    email: \"chrispatton+ietf@gmail.com\"\r\n```",
+              "createdAt": "2022-09-06T19:39:03Z",
+              "updatedAt": "2022-09-06T19:56:55Z"
+            },
+            {
+              "originalPosition": 361,
+              "body": "Chris uses his personal email for IETF contributions\r\n```suggestion\r\ncaw@heapingbits.net\r\n```",
+              "createdAt": "2022-09-06T19:40:34Z",
+              "updatedAt": "2022-09-06T19:56:55Z"
+            },
+            {
+              "originalPosition": 153,
+              "body": "```suggestion\r\n    QueryType query_type;    // Defined in I-D.draft-ietf-ppm-dap-02\r\n    Duration time_precision; // Defined in I-D.draft-ietf-ppm-dap-02\r\n```",
+              "createdAt": "2022-09-06T19:41:04Z",
+              "updatedAt": "2022-09-06T19:56:55Z"
+            },
+            {
+              "originalPosition": 135,
+              "body": "nit: In the VDAF spec I've adopted the convention of capitalizing Client, Aggregator, and Collector. For the DAP spec I've been pushing for doing the same. We can follow this convention or not, but we should try to be consistent.\r\n```suggestion\r\n    /* Time up to which Clients are allowed to upload to this task. */\r\n```",
+              "createdAt": "2022-09-06T19:50:12Z",
+              "updatedAt": "2022-09-06T19:56:55Z"
+            },
+            {
+              "originalPosition": 124,
+              "body": "Probably best to follow block comment conventions in the DAP spec.\r\n```suggestion\r\n    /* A list of URLs relative to which an aggregator's API endpoints\r\n     can be found. */\r\n```",
+              "createdAt": "2022-09-06T19:52:31Z",
+              "updatedAt": "2022-09-06T19:56:55Z"
+            },
+            {
+              "originalPosition": 139,
+              "body": "We need to say here that this is a codepoint for either a standard VDAF or reserved for private use.",
+              "createdAt": "2022-09-06T19:54:27Z",
+              "updatedAt": "2022-09-06T19:56:55Z"
+            },
+            {
+              "originalPosition": 144,
+              "body": "```suggestion\r\n    opaque vdaf_config<1..2^16-1>;\r\n```",
+              "createdAt": "2022-09-06T19:54:40Z",
+              "updatedAt": "2022-09-06T19:56:55Z"
+            },
+            {
+              "originalPosition": 143,
+              "body": "```suggestion\r\n    /* Additional parameters relevant for the vdaf_type. */\r\n```",
+              "createdAt": "2022-09-06T19:54:54Z",
+              "updatedAt": "2022-09-06T19:56:55Z"
+            },
+            {
+              "originalPosition": 181,
+              "body": "I don't think this paragraph adds anything. It can be removed.",
+              "createdAt": "2022-09-06T19:56:13Z",
+              "updatedAt": "2022-09-06T19:56:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585Bd4x7",
+          "commit": {
+            "abbreviatedOid": "23cef9b"
+          },
+          "author": "junyechen1996",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "First pass mostly for spelling mistakes and wordings.",
+          "createdAt": "2022-09-06T23:24:12Z",
+          "updatedAt": "2022-09-07T00:09:27Z",
+          "comments": [
+            {
+              "originalPosition": 34,
+              "body": "out-out-band -> out-of-band",
+              "createdAt": "2022-09-06T23:24:12Z",
+              "updatedAt": "2022-09-07T00:09:28Z"
+            },
+            {
+              "originalPosition": 42,
+              "body": "Since this paragraph only talks about task transparency, I think we can remove \"then return to server for task provision\". The sentence gets a little awkward.",
+              "createdAt": "2022-09-06T23:26:10Z",
+              "updatedAt": "2022-09-07T00:09:28Z"
+            },
+            {
+              "originalPosition": 88,
+              "body": "proviosion -> provision.",
+              "createdAt": "2022-09-06T23:27:41Z",
+              "updatedAt": "2022-09-07T00:09:28Z"
+            },
+            {
+              "originalPosition": 129,
+              "body": "`QueryConfig` is only defined in this draft. I think you already mentioned later that `QueryType` is defined in DAP-02, so the DAP-02 reference here can be removed.",
+              "createdAt": "2022-09-06T23:30:16Z",
+              "updatedAt": "2022-09-07T00:09:28Z"
+            },
+            {
+              "originalPosition": 196,
+              "body": "What's the advantage of agreeing on a separate `TaskID` if `TaskID` can be deterministically hashed based on `TaskConfig`? Maybe for flexibility?",
+              "createdAt": "2022-09-06T23:34:11Z",
+              "updatedAt": "2022-09-07T00:09:28Z"
+            },
+            {
+              "originalPosition": 222,
+              "body": "extenion -> extension.",
+              "createdAt": "2022-09-06T23:36:42Z",
+              "updatedAt": "2022-09-07T00:09:28Z"
+            },
+            {
+              "originalPosition": 251,
+              "body": "decode -> decoding",
+              "createdAt": "2022-09-06T23:38:33Z",
+              "updatedAt": "2022-09-07T00:09:28Z"
+            },
+            {
+              "originalPosition": 257,
+              "body": "should pass `vdaf_data` to the VDAF initialiser ->\r\nshould deserialize `vdaf_data` based on `VdafParameters` schema corresponding to `vdaf_type`, and pass the relevant parameters to the VDAF initialiser.",
+              "createdAt": "2022-09-06T23:41:56Z",
+              "updatedAt": "2022-09-07T00:09:28Z"
+            },
+            {
+              "originalPosition": 319,
+              "body": "`CollectResp` is only sent back if collector sends a collect job URI that leader recognizes and has completed the collect job for. I think this section is referring to the HTTP status code 404 after collector sends a `CollectReq` with an unrecognized TaskID. I think we can phrase it this way: \"If collector supports `task-prov` extension and receives a HTTP status code 404 Not Found with error type `unrecognizedTask` after sending a `CollectReq`, it SHOULD retry...\". Maybe @cjpatton can correct me if I'm wrong.",
+              "createdAt": "2022-09-06T23:46:18Z",
+              "updatedAt": "2022-09-07T00:09:28Z"
+            },
+            {
+              "originalPosition": 218,
+              "body": "What's the benefit of mentioning `/hpke_config` endpoint here? I think the only benefit is if one were to query `/hpke_config` with a task ID, it should check how the task ID can be referred. Maybe I'm missing some details.",
+              "createdAt": "2022-09-06T23:57:23Z",
+              "updatedAt": "2022-09-07T00:09:28Z"
+            },
+            {
+              "originalPosition": 231,
+              "body": "I wonder if we should briefly mention all the \"secret\" parameters in a task that cannot be agreed through the extension-based task provisioning. On top of my head, these include `vdaf_verify_key`, `collector_hpke_config`, and `aggregator_auth_tokens`",
+              "createdAt": "2022-09-07T00:00:13Z",
+              "updatedAt": "2022-09-07T00:09:28Z"
+            },
+            {
+              "originalPosition": 301,
+              "body": "existing tasks's -> existing task's",
+              "createdAt": "2022-09-07T00:02:43Z",
+              "updatedAt": "2022-09-07T00:09:28Z"
+            },
+            {
+              "originalPosition": 329,
+              "body": "`groupBy operator` -> `groupBy` operator",
+              "createdAt": "2022-09-07T00:07:18Z",
+              "updatedAt": "2022-09-07T00:09:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585BincL",
+          "commit": {
+            "abbreviatedOid": "7757bd0"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-07T17:55:52Z",
+          "updatedAt": "2022-09-07T17:55:53Z",
+          "comments": [
+            {
+              "originalPosition": 158,
+              "body": "I'll change this since I don't know what else should be include in FixedSizeQueryConfig yet.",
+              "createdAt": "2022-09-07T17:55:52Z",
+              "updatedAt": "2022-09-07T17:55:53Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585Bin_e",
+          "commit": {
+            "abbreviatedOid": "7757bd0"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-07T17:57:54Z",
+          "updatedAt": "2022-09-07T17:57:55Z",
+          "comments": [
+            {
+              "originalPosition": 181,
+              "body": "@cjpatton The core protocol task configuration includes secrets like `vdaf_verify_key`, I think this should be mentioned explicitly?  @junyechen1996 your comment https://github.com/wangshan/draft-wang-ppm-dap-taskprov/pull/2/files#r964267738 is basically addressed here",
+              "createdAt": "2022-09-07T17:57:55Z",
+              "updatedAt": "2022-09-07T17:57:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585BipMx",
+          "commit": {
+            "abbreviatedOid": "7757bd0"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-07T18:02:25Z",
+          "updatedAt": "2022-09-07T18:02:25Z",
+          "comments": [
+            {
+              "originalPosition": 196,
+              "body": "yes, but thinking about this more, we probably should enforce task ID to be created involving task config, otherwise the aggregator might aggregate the same task ID with different TaskConfig.",
+              "createdAt": "2022-09-07T18:02:25Z",
+              "updatedAt": "2022-09-07T18:02:25Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585BivLN",
+          "commit": {
+            "abbreviatedOid": "7757bd0"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-07T18:25:40Z",
+          "updatedAt": "2022-09-07T18:25:40Z",
+          "comments": [
+            {
+              "originalPosition": 218,
+              "body": "yes that's pretty much it, let me remove this sentence",
+              "createdAt": "2022-09-07T18:25:40Z",
+              "updatedAt": "2022-09-07T18:25:40Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585Bivmm",
+          "commit": {
+            "abbreviatedOid": "7757bd0"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-07T18:27:20Z",
+          "updatedAt": "2022-09-07T18:27:20Z",
+          "comments": [
+            {
+              "originalPosition": 231,
+              "body": "that is mentioned just above the client behaviour section",
+              "createdAt": "2022-09-07T18:27:20Z",
+              "updatedAt": "2022-09-07T18:27:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585BjyeU",
+          "commit": {
+            "abbreviatedOid": "dcee929"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-07T22:45:36Z",
+          "updatedAt": "2022-09-07T22:45:36Z",
+          "comments": [
+            {
+              "originalPosition": 148,
+              "body": "Yes",
+              "createdAt": "2022-09-07T22:45:36Z",
+              "updatedAt": "2022-09-07T22:45:36Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585Bj3ta",
+          "commit": {
+            "abbreviatedOid": "bdb8294"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "Pass of intro and client behavior.",
+          "createdAt": "2022-09-07T23:13:48Z",
+          "updatedAt": "2022-09-07T23:44:35Z",
+          "comments": [
+            {
+              "originalPosition": 21,
+              "body": "I continue to think that \"transparency\" is not the right sales pitch for this extension. The reason is this: To sell it this way, you'll need to (1) define transparency and (2) to make the case that vanilla DAP *isn't* transparent. So far I don't see a clear/useful definition of transparency for which this case can be made.\r\n\r\nSuppose we define transparency this way: \"A DAP deployment is transparent if what is being measured, and how, is evident to the client.\" Assuming this definition, it's not hard to argue that draft-wang-ppm-taskprov does not add any value relative to vanilla DAP. The important question is: What information does the client have now that it didn't have before? Quoting from the original issue (https://github.com/ietf-wg-ppm/draft-ietf-ppm-dap/issues/290):\r\n\r\n> By sending all task parameters to clients then return to the server, we add transparency to the task that clients participate in Client has the choice to see what data has been collected with what parameters (like min_batch_size, max_batch_lifetime, or any differential privacy parameters if that's the privacy guarantee used).  For some clients these task parameters can even be hardcoded on the client side (for e.g. on a mobile device) to avoid any tempering from server.\r\n\r\nWhy is this not true for vanilla DAP? It seems like a deployment is free to surface this information to clients, regardless of how the task is configured. In fact, at some point the client software needs this information in order to participate in the protocol. It's also possible to hardcode DP parameters and use them for multiple tasks for vanilla DAP.\r\n\r\nOn the other hand, I think a *very* strong case for this extension can be made without talking about transparency at all. Namely, it specifies a means of configuring tasks without intervention of a third-party; all information necessary for aggregating a report is carried by the report itself. This is an elegant idea on its own.\r\n\r\n",
+              "createdAt": "2022-09-07T23:13:48Z",
+              "updatedAt": "2022-09-07T23:44:35Z"
+            },
+            {
+              "originalPosition": 23,
+              "body": "Vanilla DAP does not mandate some sort of \"leader-helper\" agreement. Rather, the means by which parties are configured is not specified.",
+              "createdAt": "2022-09-07T23:14:51Z",
+              "updatedAt": "2022-09-07T23:44:35Z"
+            },
+            {
+              "originalPosition": 51,
+              "body": "I don't think this property (3.) is new to draft-wang-ppm-taskprov. In fact, it ought to hold for any deployment of DAP.",
+              "createdAt": "2022-09-07T23:16:46Z",
+              "updatedAt": "2022-09-07T23:44:35Z"
+            },
+            {
+              "originalPosition": 65,
+              "body": "This property as well should hold for any deployment of DAP. Since it's not particular to this extension, I don't think it's worth mentioning in the intro. Of course, in Security Considerations we'll want to discuss why this extension preserves the properties of DAP (i.e., does not introduce any regressions to security).",
+              "createdAt": "2022-09-07T23:19:00Z",
+              "updatedAt": "2022-09-07T23:44:35Z"
+            },
+            {
+              "originalPosition": 81,
+              "body": "```suggestion\r\nTask provisioning:\r\n```",
+              "createdAt": "2022-09-07T23:19:30Z",
+              "updatedAt": "2022-09-07T23:44:35Z"
+            },
+            {
+              "originalPosition": 135,
+              "body": "```suggestion\r\n    /* Time up to which Clients are allowed to upload to this task. See\r\n    https://github.com/ietf-wg-ppm/draft-ietf-ppm-dap/pull/304. Defined\r\n    in I-D.draft-ietf-ppm-dap-02. */\r\n```",
+              "createdAt": "2022-09-07T23:21:21Z",
+              "updatedAt": "2022-09-07T23:44:35Z"
+            },
+            {
+              "originalPosition": 139,
+              "body": "```suggestion\r\n    /* A codepoint defined in I-D.draft-irtf-cfrg-vdaf-03 or reserved for private\r\n    use. */\r\n```",
+              "createdAt": "2022-09-07T23:21:43Z",
+              "updatedAt": "2022-09-07T23:44:35Z"
+            },
+            {
+              "originalPosition": 158,
+              "body": "```suggestion\r\nThe purpose of `TaskConfig` is to define all parameters that are necessary\r\nfor configuring an aggregator. It includes all the fields to be\r\n```",
+              "createdAt": "2022-09-07T23:23:51Z",
+              "updatedAt": "2022-09-07T23:44:35Z"
+            },
+            {
+              "originalPosition": 181,
+              "body": "Hmm, I don't think my comment was very helpful. Please allow me to try again :)\r\n\r\nIt's useful to note that TaskConfig does not encode all parameters required to run a task. (Listing them is also helpful: I believe this just includes the VDAF verification key and the collector HPKE config.)\r\n\r\nWhat's less useful here is saying that these MUST be exchanged out-of-band. It's best to reserve the keyword \"MUST\" for prescriptive things, e.g., \"If the client does X, then the server MUST do Y\". Here we're saying that there are fields that MUS be exchanged out-of-band, but we don't say how.\r\n\r\nI would be happy with something like this: \r\n\r\n> Note that `TaskConfig` does not encode all of the parameters required for the aggregator to run a task. In particular, the VDAF verification key, the collector HPKE configuration, and whatever assets are required for HTTP request authentication are still established out-of-band.\r\n\r\nSide note: Is the plan to to derive the VDAF verification key from the a shared secret on-the-fly?",
+              "createdAt": "2022-09-07T23:33:22Z",
+              "updatedAt": "2022-09-07T23:44:35Z"
+            },
+            {
+              "originalPosition": 210,
+              "body": "I think so. If the goal of this extension is to do as much in-band provisioning as possible, then permitting flexibility here defeats the purpose because it requires the parties to agree, out-of-band, on the method for choosing the batch ID.\r\n\r\nAs has been pointed out, diversifying the task ID is important. One way to do this is to rely on the `task_info` to be unique across the entire deployment. Alternatively, we could add a nonce field to the TaskConfig, which the task author should fill with random bytes.",
+              "createdAt": "2022-09-07T23:42:14Z",
+              "updatedAt": "2022-09-07T23:44:35Z"
+            },
+            {
+              "originalPosition": 212,
+              "body": "This subsection is not necessary, it's sufficient to just define the extension.\r\n\r\n",
+              "createdAt": "2022-09-07T23:43:50Z",
+              "updatedAt": "2022-09-07T23:44:35Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585Bj_vj",
+          "commit": {
+            "abbreviatedOid": "de5a673"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-08T00:19:49Z",
+          "updatedAt": "2022-09-08T00:19:49Z",
+          "comments": [
+            {
+              "originalPosition": 65,
+              "body": "let me move this to Security Considerations as a quoted comment, we can update/remove it when Security Considerations are fleshed out.",
+              "createdAt": "2022-09-08T00:19:49Z",
+              "updatedAt": "2022-09-08T00:19:49Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585BkAP4",
+          "commit": {
+            "abbreviatedOid": "de5a673"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-08T00:24:29Z",
+          "updatedAt": "2022-09-08T00:24:29Z",
+          "comments": [
+            {
+              "originalPosition": 181,
+              "body": "I see, let me update it.\r\n\r\nRe: vdaf_verify_key, I think our last conclusion was that if the leader chooses vdaf_verify_key, then the privacy leak threat already exists, generate it using a shared secret doesn't help, do we have consensus on this?",
+              "createdAt": "2022-09-08T00:24:29Z",
+              "updatedAt": "2022-09-08T00:24:29Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585BkA4v",
+          "commit": {
+            "abbreviatedOid": "de5a673"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-08T00:30:20Z",
+          "updatedAt": "2022-09-08T00:30:20Z",
+          "comments": [
+            {
+              "originalPosition": 21,
+              "body": "I agree with the part that transparency in the form of \"client knows the parameters\" is true to vanilla DAP. \r\n\r\nBut what this extension adds is: the client's measurement will be aggregated using the parameters, because aggregators use these exact parameters to define a task. While in vanilla DAP, there's nothing stopping task authors from giving clients and helpers different parameters.",
+              "createdAt": "2022-09-08T00:30:20Z",
+              "updatedAt": "2022-09-08T00:30:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585BkCVs",
+          "commit": {
+            "abbreviatedOid": "de5a673"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-08T00:43:57Z",
+          "updatedAt": "2022-09-08T00:43:57Z",
+          "comments": [
+            {
+              "originalPosition": 51,
+              "body": "agreed. But I think the part that filters out polluted reports is still worthy calling out, let me move it to Implementation and Operational Considerations, I can delete it if you think that's clearer.",
+              "createdAt": "2022-09-08T00:43:57Z",
+              "updatedAt": "2022-09-08T00:43:57Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585BoVgZ",
+          "commit": {
+            "abbreviatedOid": "5868a1b"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-08T16:59:42Z",
+          "updatedAt": "2022-09-08T16:59:42Z",
+          "comments": [
+            {
+              "originalPosition": 21,
+              "body": "That's definitely a useful property of this extension, and it should be called out in the intro. But I don't think it has to do with transparency.",
+              "createdAt": "2022-09-08T16:59:42Z",
+              "updatedAt": "2022-09-08T16:59:42Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585BoWct",
+          "commit": {
+            "abbreviatedOid": "5868a1b"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2022-09-08T17:02:03Z",
+          "updatedAt": "2022-09-08T17:17:48Z",
+          "comments": [
+            {
+              "originalPosition": 183,
+              "body": "This should actually be a list of buckets. Plus, uint64_t is more useful for defining bucket boundaries.\r\n```suggestion\r\n        case Prio3Aes128Histogram: uint64 buckets<8, 2^16-8>;\r\n```",
+              "createdAt": "2022-09-08T17:02:04Z",
+              "updatedAt": "2022-09-08T17:17:48Z"
+            },
+            {
+              "originalPosition": 174,
+              "body": "```suggestion\r\nThe structure of the `vdaf_config` field is not specified in this document, instead it should be defined by\r\n```",
+              "createdAt": "2022-09-08T17:02:58Z",
+              "updatedAt": "2022-09-08T17:17:48Z"
+            },
+            {
+              "originalPosition": 176,
+              "body": "If we're going to spell out the structure for Prio3, we should be more declaritive.\r\n\r\n> For VDAFs specified in {{!VDAF}}, implementations SHOULD use the following structure:",
+              "createdAt": "2022-09-08T17:06:23Z",
+              "updatedAt": "2022-09-08T17:17:48Z"
+            },
+            {
+              "originalPosition": 166,
+              "body": "Here and below (and update VdafConfig to match)\r\n```suggestion\r\n    prio3-aes128-count(0x00000000),\r\n```",
+              "createdAt": "2022-09-08T17:07:22Z",
+              "updatedAt": "2022-09-08T17:17:48Z"
+            },
+            {
+              "originalPosition": 189,
+              "body": "That probably makes since, but it somewhat depends on the outcome of https://github.com/cfrg/draft-irtf-cfrg-vdaf/issues/94. Let's keep this issue open and add a reference to the VDAF issue.",
+              "createdAt": "2022-09-08T17:09:56Z",
+              "updatedAt": "2022-09-08T17:17:48Z"
+            },
+            {
+              "originalPosition": 198,
+              "body": "I think this extension should spell out derivation of the VDAF verification key, as this needs to be unique per task. Feel free to leave as an OPEN ISSUE in this PR.",
+              "createdAt": "2022-09-08T17:11:07Z",
+              "updatedAt": "2022-09-08T17:17:48Z"
+            },
+            {
+              "originalPosition": 217,
+              "body": "```suggestion\r\nTo offer the \"task-prov\" extension, the client adds the `TaskConfig` structure it received from the task author in the extensions field of its `Report`. It computes the task ID as described in {{construct-task-id}}.\r\n```",
+              "createdAt": "2022-09-08T17:14:16Z",
+              "updatedAt": "2022-09-08T17:17:48Z"
+            },
+            {
+              "originalPosition": 220,
+              "body": "> Task ID can be constructed\r\nfrom `task_info` and any other part of task configuration, as long as the\r\ngenerated task ID is determinstic and stay consistent across all parties. For\r\nexample, the task ID can be a SHA256 hash of the entire serialized\r\n`TaskConfig`. \r\n\r\nThe spec needs to be declaritive here. Instead of saying \"here's one way one might compute the task ID\", spell it out explicitly. For example:\r\n\r\n> When the \"task-prov\" extension is used, the task ID is computed as follows:\r\n> \r\n> ~~~\r\n> task_id = SHA-256(task_config)\r\n> ~~~\r\n\r\nwhere `task_config` is the payload of the extension sent by the client.",
+              "createdAt": "2022-09-08T17:17:40Z",
+              "updatedAt": "2022-09-08T17:17:48Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585BvmJo",
+          "commit": {
+            "abbreviatedOid": "c43ba75"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "What should an Aggregator do if the task ID does not match the hash of the task config? We'll need to spell this out in both the \"Leader Behavior\" and \"Helper Behavior\" sections.",
+          "createdAt": "2022-09-09T23:24:54Z",
+          "updatedAt": "2022-09-10T00:21:15Z",
+          "comments": [
+            {
+              "originalPosition": 49,
+              "body": "hmm, I'm not sure this is fair. In order to say that the extension improves security relative to vanilla DAP, you'd have to have a concrete mechanism to compare it to. In fact, by saying that tasks are configured \"out-of-band\", DAP is effectively saying nothing. Yet it's still possible for some DAP deployment to be just as secure as this extension. For example, imagine clients are configured with one and only one task; this is less useful, but no less secure.",
+              "createdAt": "2022-09-09T23:24:54Z",
+              "updatedAt": "2022-09-10T00:21:15Z"
+            },
+            {
+              "originalPosition": 105,
+              "body": "```suggestion\r\n    can be found. Defined in I-D.draft-ietf-ppm-dap-02. */\r\n```",
+              "createdAt": "2022-09-09T23:25:44Z",
+              "updatedAt": "2022-09-10T00:21:15Z"
+            },
+            {
+              "originalPosition": 110,
+              "body": "```suggestion\r\n    I-D.draft-ietf-ppm-dap-02. */\r\n```",
+              "createdAt": "2022-09-09T23:25:51Z",
+              "updatedAt": "2022-09-10T00:21:15Z"
+            },
+            {
+              "originalPosition": 123,
+              "body": "```suggestion\r\n    for private use. */\r\n```",
+              "createdAt": "2022-09-09T23:27:08Z",
+              "updatedAt": "2022-09-10T00:21:15Z"
+            },
+            {
+              "originalPosition": 136,
+              "body": "```suggestion\r\n        case fixed-size:     uint32 max_batch_size;\r\n```",
+              "createdAt": "2022-09-09T23:27:52Z",
+              "updatedAt": "2022-09-10T00:21:15Z"
+            },
+            {
+              "originalPosition": 149,
+              "body": "Jusify paragraph to match bullet level. Also, the task ID is unconditionally derived from the task_config, right?\r\n```suggestion\r\n  string describing the purpose of this task.\r\n```",
+              "createdAt": "2022-09-09T23:28:36Z",
+              "updatedAt": "2022-09-10T00:21:15Z"
+            },
+            {
+              "originalPosition": 153,
+              "body": "Justify paragraph to match bullet level. Also, I don't think this normative text makes sense, as we have not specified a VDAF \"initialiser\" anywhere. In any case, I don't think it's needed, so just delete it.\r\n```suggestion\r\n  chosen `vdaf_type`.\r\n```",
+              "createdAt": "2022-09-09T23:31:02Z",
+              "updatedAt": "2022-09-10T00:21:15Z"
+            },
+            {
+              "originalPosition": 159,
+              "body": "```suggestion\r\n I-D.draft-irtf-cfrg-vdaf-03. */\r\n```",
+              "createdAt": "2022-09-09T23:31:43Z",
+              "updatedAt": "2022-09-10T00:21:15Z"
+            },
+            {
+              "originalPosition": 170,
+              "body": "```suggestion\r\ninstead it needs to be defined by the VDAF itself. For VDAFs specified\r\n```",
+              "createdAt": "2022-09-09T23:32:28Z",
+              "updatedAt": "2022-09-10T00:21:15Z"
+            },
+            {
+              "originalPosition": 219,
+              "body": "```suggestion\r\nconfiguration to clients. Therefore, a DAP task ID is not available to\r\n```",
+              "createdAt": "2022-09-09T23:34:57Z",
+              "updatedAt": "2022-09-10T00:21:15Z"
+            },
+            {
+              "originalPosition": 230,
+              "body": "This paragraph seems to suggest that there might be some flexibility in how the task ID is derived. If that is the intent, can you say why this flexibility is needed/desirable? This protocol would be a lot simpler if we could just say \"the task ID is defined to be the SHA-256 hash of the task config\".",
+              "createdAt": "2022-09-09T23:36:58Z",
+              "updatedAt": "2022-09-10T00:21:15Z"
+            },
+            {
+              "originalPosition": 240,
+              "body": "Worth point to the OPEN ISSUE above: this spec will spell out how this value is computed.",
+              "createdAt": "2022-09-09T23:39:22Z",
+              "updatedAt": "2022-09-10T00:21:15Z"
+            },
+            {
+              "originalPosition": 242,
+              "body": "```suggestion\r\n## Change to upload sub-protocol\r\n```",
+              "createdAt": "2022-09-09T23:39:45Z",
+              "updatedAt": "2022-09-10T00:21:15Z"
+            },
+            {
+              "originalPosition": 246,
+              "body": "Hmm, typically the core protocol would overrule behavior here. In particular it's typical to allow unrecognized extensions to be ignored and require that extensions be designed in such a way that they can be safely ignored. This isn't clear, so I raised https://github.com/ietf-wg-ppm/draft-ietf-ppm-dap/issues/334.\r\n\r\nAssuming DAP says something like \"Aggregators MUST ignore unrecognized extensions and process the report as usual\", we would want to do something like this.\r\n```suggestion\r\n`extension_type`. If the leader does not support this extension, it MUST ignore it. In particular, if the task ID is not known, then it MUST abort the handshake with \"unrecognizedTask\".\r\n```\r\n\r\nOf course, it's possible that our derived task ID collides with a task ID known to the leader, which would cause the report to be processed with the incorrect VDAF. This is ugly, but not catastrophic, since it basically amounts to an attack on the robustness of the VDAF. (In other words the report will get rejected with overwhelming probability.)\r\n\r\nStill, we could guide implementations towards reducing the probability of a collision. Elsewhere we could add something like this:\r\n\r\n>  In order to reduce the probability of a collision, task authors SHOULD choose `task_info` so that it has high entropy.",
+              "createdAt": "2022-09-09T23:44:11Z",
+              "updatedAt": "2022-09-10T00:21:15Z"
+            },
+            {
+              "originalPosition": 274,
+              "body": "```suggestion\r\n## Change to aggregate sub-protocol\r\n```",
+              "createdAt": "2022-09-09T23:59:26Z",
+              "updatedAt": "2022-09-10T00:21:15Z"
+            },
+            {
+              "originalPosition": 272,
+              "body": "Can you elaborate more on \"position of the client in the batch of reports\"? Is there anything that the client learns from the error response that it couldn't compute on its own?",
+              "createdAt": "2022-09-10T00:00:38Z",
+              "updatedAt": "2022-09-10T00:21:15Z"
+            },
+            {
+              "originalPosition": 276,
+              "body": "Then I think we can just get rid of this section.",
+              "createdAt": "2022-09-10T00:00:57Z",
+              "updatedAt": "2022-09-10T00:21:15Z"
+            },
+            {
+              "originalPosition": 286,
+              "body": "Are changes actually needed? What's the goal here: to signal to the collector that the task hasn't been configured yet, but might eventually? Why is this useful?",
+              "createdAt": "2022-09-10T00:02:49Z",
+              "updatedAt": "2022-09-10T00:21:15Z"
+            },
+            {
+              "originalPosition": 297,
+              "body": "I think this spec should spell out how the vdaf verify key is computed. Say explicitily what else is out-of-band (HTTP request auth assets, collector HPKE config)",
+              "createdAt": "2022-09-10T00:04:02Z",
+              "updatedAt": "2022-09-10T00:21:15Z"
+            },
+            {
+              "originalPosition": 304,
+              "body": "Here again, let's assume that the Helper MUST ignore unrecognized extensions and make sure we spell out the Helper behavior in a way that make sure ignore this is safe.",
+              "createdAt": "2022-09-10T00:05:34Z",
+              "updatedAt": "2022-09-10T00:21:15Z"
+            },
+            {
+              "originalPosition": 304,
+              "body": "Again: Let's assume that the Helper MUST ignore unrecognized extensions. See https://github.com/ietf-wg-ppm/draft-ietf-ppm-dap/issues/334",
+              "createdAt": "2022-09-10T00:06:16Z",
+              "updatedAt": "2022-09-10T00:21:15Z"
+            },
+            {
+              "originalPosition": 321,
+              "body": "Lots of this text is identical to the Leader's behavior. Can we try to de-duplicate it somehow? Perhaps we can add a subsection to the \"Extension\" section that describes this. Maybe call it \"Provisioning a Task\".",
+              "createdAt": "2022-09-10T00:15:31Z",
+              "updatedAt": "2022-09-10T00:21:15Z"
+            },
+            {
+              "originalPosition": 334,
+              "body": "Better to have it toward the end.",
+              "createdAt": "2022-09-10T00:16:19Z",
+              "updatedAt": "2022-09-10T00:21:15Z"
+            },
+            {
+              "originalPosition": 339,
+              "body": "this paragraph strikes me as a security consideration.",
+              "createdAt": "2022-09-10T00:16:53Z",
+              "updatedAt": "2022-09-10T00:21:15Z"
+            },
+            {
+              "originalPosition": 342,
+              "body": "> streaming framework that has `groupBy` operator.\r\n\r\nThis is too vague. If you want to suggest a particular implementation strategy, then you'll need to elaborate more here.",
+              "createdAt": "2022-09-10T00:17:52Z",
+              "updatedAt": "2022-09-10T00:21:15Z"
+            },
+            {
+              "originalPosition": 348,
+              "body": "I agree, changes to core DAP are likely warranted. However I think it's too early to suggest anything concrete, or even file an issue. I would make this paragraph an OPEN ISSUE.\r\n```suggestion\r\n> OPEN ISSUE: This mechanism brings added overhead in `Report` and `ReportShare` since more\r\n> duplicated data is passed around. Some optimisation can be done by sending only\r\n> one copy of extension in `AggregateInitializeReq`.\r\n```",
+              "createdAt": "2022-09-10T00:19:17Z",
+              "updatedAt": "2022-09-10T00:21:15Z"
+            },
+            {
+              "originalPosition": 359,
+              "body": "How does this compare with vanilla DAP? For this property to hold, it's sufficient to ensure a 1:1 mapping from task ID to task config. This is already required by vanilla DAP, so I don't actually think we gain anything here.",
+              "createdAt": "2022-09-10T00:20:55Z",
+              "updatedAt": "2022-09-10T00:21:15Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585B0hkp",
+          "commit": {
+            "abbreviatedOid": "c43ba75"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-12T14:51:21Z",
+          "updatedAt": "2022-09-12T14:51:22Z",
+          "comments": [
+            {
+              "originalPosition": 49,
+              "body": "makes sense, let me reword this ",
+              "createdAt": "2022-09-12T14:51:21Z",
+              "updatedAt": "2022-09-12T14:51:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585B0vns",
+          "commit": {
+            "abbreviatedOid": "3f20ab2"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-12T15:24:00Z",
+          "updatedAt": "2022-09-12T15:24:00Z",
+          "comments": [
+            {
+              "originalPosition": 272,
+              "body": "I can't remember what I was worried about, let me delete this and add back later with example",
+              "createdAt": "2022-09-12T15:24:00Z",
+              "updatedAt": "2022-09-12T15:24:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585B02Hg",
+          "commit": {
+            "abbreviatedOid": "3f20ab2"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-12T15:40:40Z",
+          "updatedAt": "2022-09-12T15:40:40Z",
+          "comments": [
+            {
+              "originalPosition": 304,
+              "body": "what does \"ignore\" mean in this case? it should carry on preparing the shares as if task ID is already associated with an existing task? The current core protocol doesn't specify what happens in the aggregate-flow if the task ID is not recognized. Maybe we should specify that behaviour in the core protocol first, then we can simply see \"ignore\" in this extension.",
+              "createdAt": "2022-09-12T15:40:40Z",
+              "updatedAt": "2022-09-12T15:40:40Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585B08yB",
+          "commit": {
+            "abbreviatedOid": "3f20ab2"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-12T15:58:12Z",
+          "updatedAt": "2022-09-12T15:58:13Z",
+          "comments": [
+            {
+              "originalPosition": 342,
+              "body": "I don't think this paragraph is essential, let me remove this from the first draft and add details later",
+              "createdAt": "2022-09-12T15:58:12Z",
+              "updatedAt": "2022-09-12T15:58:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585B2rOO",
+          "commit": {
+            "abbreviatedOid": "3f20ab2"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-12T21:23:04Z",
+          "updatedAt": "2022-09-12T21:23:04Z",
+          "comments": [
+            {
+              "originalPosition": 286,
+              "body": "this is necessary because batch-validation in core protocol relies on various task parameters known at the time of receiving collectReq, the goal is to let leader have a chance to let collector know what happened, otherwise, how does leader check for e.g. min_batch_size",
+              "createdAt": "2022-09-12T21:23:04Z",
+              "updatedAt": "2022-09-12T21:23:04Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585B3CZF",
+          "commit": {
+            "abbreviatedOid": "00eb8e3"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-12T23:34:09Z",
+          "updatedAt": "2022-09-12T23:51:35Z",
+          "comments": [
+            {
+              "originalPosition": 51,
+              "body": "This section should define the term \"task author\" (introduced by this draft) and elaborate on its role. We can do so in follow-up PR.",
+              "createdAt": "2022-09-12T23:34:10Z",
+              "updatedAt": "2022-09-12T23:51:35Z"
+            },
+            {
+              "originalPosition": 177,
+              "body": "```suggestion\r\n        case prio3-aes128-histogram: uint64 buckets<8, 2^24-8>;\r\n```",
+              "createdAt": "2022-09-12T23:35:39Z",
+              "updatedAt": "2022-09-12T23:51:36Z"
+            },
+            {
+              "originalPosition": 219,
+              "body": "Declarative\r\n```suggestion\r\nconfiguration to clients. Therefore, clients, aggregators and collector\r\nconstruct the DAP task ID prior to uploading. A DAP task ID is computed as\r\n```",
+              "createdAt": "2022-09-12T23:37:24Z",
+              "updatedAt": "2022-09-12T23:51:36Z"
+            },
+            {
+              "originalPosition": 240,
+              "body": "Declaritive\r\n```suggestion\r\nIf the decoding succeeds, aggregator creates a new task using the task ID\r\n```",
+              "createdAt": "2022-09-12T23:38:21Z",
+              "updatedAt": "2022-09-12T23:51:36Z"
+            },
+            {
+              "originalPosition": 264,
+              "body": "No need to include this paragraph.\r\n```suggestion\r\n```",
+              "createdAt": "2022-09-12T23:39:42Z",
+              "updatedAt": "2022-09-12T23:51:36Z"
+            },
+            {
+              "originalPosition": 286,
+              "body": "Fair enough, but the following seems superfluous:\r\n\r\n> In this case the leader MAY respond with HTTP status code 404\r\n> Not Found and an error of type `unrecognizedTask`.\r\n\r\nIn vanilla DAP, if the task ID is not known, then the Leader is already required to abort with \"unrecognizedTask\". As far as I can tell, this text only changes the server behavior by allowing it to abort with 404 rather than the currently mandated 400.\r\n\r\n> The response MAY include a\r\n> Retry-After header field to suggest a pulling interval to the collector.\r\n\r\nThis seems fine, but a little odd. It seems like what you want to do here is distinguish between two cases:\r\n1. A collect request is made for a task that will exist eventually (once we get the first upload request pertaining to the task)\r\n2. A collect request is made for a task that will never exist\r\n\r\nBut how does the Leader know which of these is true, based on the information it has? ",
+              "createdAt": "2022-09-12T23:49:28Z",
+              "updatedAt": "2022-09-12T23:51:36Z"
+            },
+            {
+              "originalPosition": 303,
+              "body": "Fine to point to #334, but I think for this PR we should align the Helper's behavior with the Leader's. In particular we should say that it MUST ignore the extension.",
+              "createdAt": "2022-09-12T23:50:37Z",
+              "updatedAt": "2022-09-12T23:51:36Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585B6sUT",
+          "commit": {
+            "abbreviatedOid": "00eb8e3"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-13T14:23:07Z",
+          "updatedAt": "2022-09-13T14:23:08Z",
+          "comments": [
+            {
+              "originalPosition": 51,
+              "body": "It is defined in the Conventions and Definitions section:\r\n> : The entity that defines the parameters of a task.",
+              "createdAt": "2022-09-13T14:23:07Z",
+              "updatedAt": "2022-09-13T14:23:08Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585B6tpU",
+          "commit": {
+            "abbreviatedOid": "00eb8e3"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-13T14:25:57Z",
+          "updatedAt": "2022-09-13T14:25:57Z",
+          "comments": [
+            {
+              "originalPosition": 51,
+              "body": "Sure, but we definitely need some \"flavor text\" to gently introduce the reader to this concept. We can worry about this later though :)",
+              "createdAt": "2022-09-13T14:25:57Z",
+              "updatedAt": "2022-09-13T14:25:57Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585B6zzV",
+          "commit": {
+            "abbreviatedOid": "d215bc3"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-13T14:39:31Z",
+          "updatedAt": "2022-09-13T14:39:32Z",
+          "comments": [
+            {
+              "originalPosition": 286,
+              "body": "that's a good point, we should probably aim to have collector behave the same in both cases. The core protocol today doesn't describe how leader response to a nonexistent task ID. The only `unrecognizedTask` error happens in hpke_config/ endpoint. I think the ideal solution could be the following:\r\n\r\n- if leader receive a nonexistent task ID, it must responses 404 and `unrecognizedTask`, it may include Retry-After header.\r\n- if collector gets 404 and `unrecognizedTask`, then it's up to collector to retry at a later time.\r\n\r\nIf this is specified in the core protocol, we can get rid of this collector section. thoughts? @cjpatton ",
+              "createdAt": "2022-09-13T14:39:31Z",
+              "updatedAt": "2022-09-13T14:39:32Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585B7vS9",
+          "commit": {
+            "abbreviatedOid": "c43ba75"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-13T17:17:24Z",
+          "updatedAt": "2022-09-13T17:17:24Z",
+          "comments": [
+            {
+              "originalPosition": 286,
+              "body": "I agree, it seems worth spelling this out in the core protocol, if it's not already. Would you mind sending a PR today? If not, I will do so.\r\n\r\nOne nit: Unless there's a specific reason why 404 is desirable, let's just go with 400, which is currently used for all aborts in DAP.",
+              "createdAt": "2022-09-13T17:17:24Z",
+              "updatedAt": "2022-09-13T17:19:31Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585B7v3o",
+          "commit": {
+            "abbreviatedOid": "c43ba75"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-13T17:19:19Z",
+          "updatedAt": "2022-09-13T17:19:19Z",
+          "comments": [
+            {
+              "originalPosition": 304,
+              "body": "If the Helper doesn't recognize the task ID, it's supposed to abort with \"unrecognizedTask\". Are you sure this isn't already spelled out?",
+              "createdAt": "2022-09-13T17:19:19Z",
+              "updatedAt": "2022-09-13T17:19:19Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585B89fS",
+          "commit": {
+            "abbreviatedOid": "b3a9ac4"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-13T22:01:44Z",
+          "updatedAt": "2022-09-13T22:01:44Z",
+          "comments": [
+            {
+              "originalPosition": 286,
+              "body": "I don't have a reason to use 404 but the current core protocol actually says it explicitly: https://github.com/ietf-wg-ppm/draft-ietf-ppm-dap/blob/main/draft-ietf-ppm-dap.md#hpke-configuration-request-hpke-config\r\n\r\n> If the aggregator does not recognize the task ID, then it responds with HTTP status code 404 Not Found and an error of type unrecognizedTask.",
+              "createdAt": "2022-09-13T22:01:44Z",
+              "updatedAt": "2022-09-13T22:01:44Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585B8-Lc",
+          "commit": {
+            "abbreviatedOid": "b3a9ac4"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-13T22:05:42Z",
+          "updatedAt": "2022-09-13T22:05:43Z",
+          "comments": [
+            {
+              "originalPosition": 286,
+              "body": "In the Errors table in the core protocol, it has this:\r\n> unrecognizedTask | An endpoint received a message with an unknown task ID.\r\n\r\nIs this considered \"spelled out\" (It doesn't actually say what HTTP status code to use)? If so, then there's nothing to be done.\r\n",
+              "createdAt": "2022-09-13T22:05:42Z",
+              "updatedAt": "2022-09-13T22:05:43Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585B9jtl",
+          "commit": {
+            "abbreviatedOid": "b3a9ac4"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "This is a great start, let's land this and continue iterating. I've filed a couple issues to start.",
+          "createdAt": "2022-09-14T01:55:36Z",
+          "updatedAt": "2022-09-14T01:56:22Z",
+          "comments": [
+            {
+              "originalPosition": 286,
+              "body": "Hmm, no you're right, I think it's worth spelling out wherever relevant in the text. (I thought that it was.) Please send a PR, if you have time!",
+              "createdAt": "2022-09-14T01:55:36Z",
+              "updatedAt": "2022-09-14T01:56:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585CAOQx",
+          "commit": {
+            "abbreviatedOid": "b3a9ac4"
+          },
+          "author": "junyechen1996",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-09-14T12:08:29Z",
+          "updatedAt": "2022-09-14T12:47:32Z",
+          "comments": [
+            {
+              "originalPosition": 189,
+              "body": "```suggestion\r\n{{?DAP=I-D.draft-ietf-ppm-dap-02}}.\r\n```",
+              "createdAt": "2022-09-14T12:08:30Z",
+              "updatedAt": "2022-09-14T16:43:29Z"
+            },
+            {
+              "originalPosition": 145,
+              "body": "```suggestion\r\nthat are useful for configuring a task in-band:\r\n```",
+              "createdAt": "2022-09-14T12:10:46Z",
+              "updatedAt": "2022-09-14T12:47:32Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585CB8qn",
+          "commit": {
+            "abbreviatedOid": "b3a9ac4"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-14T16:02:11Z",
+          "updatedAt": "2022-09-14T16:02:12Z",
+          "comments": [
+            {
+              "originalPosition": 189,
+              "body": "This draft isn't out yet, so we'll have to update this later :)",
+              "createdAt": "2022-09-14T16:02:12Z",
+              "updatedAt": "2022-09-14T16:02:12Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585CCLs4",
+          "commit": {
+            "abbreviatedOid": "b3a9ac4"
+          },
+          "author": "junyechen1996",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-14T16:42:09Z",
+          "updatedAt": "2022-09-14T16:42:10Z",
+          "comments": [
+            {
+              "originalPosition": 189,
+              "body": "Fair enough, I'm just not clear because there is a mixture of reference to DAP-01 and DAP-02. ",
+              "createdAt": "2022-09-14T16:42:09Z",
+              "updatedAt": "2022-09-14T16:42:10Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585CCQ1l",
+          "commit": {
+            "abbreviatedOid": "b3a9ac4"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-14T16:57:03Z",
+          "updatedAt": "2022-09-14T16:57:04Z",
+          "comments": [
+            {
+              "originalPosition": 189,
+              "body": "TOTALLY understandable! We were hoping to cut DAP-02 last week, but it looks like we'll merge this PR before then.",
+              "createdAt": "2022-09-14T16:57:03Z",
+              "updatedAt": "2022-09-14T16:57:04Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "id": "PR_kwDOH4FR584--iAv",
+      "title": "Clean up TaskConfig definition",
+      "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/pull/7",
+      "state": "MERGED",
+      "author": "cjpatton",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "- Wrie `Dp` (short for diff. privacy) instead of `Privacy`. That way we don't end up conflating this (precise) definition of privacy with other definitions. (For example, in the DAP draft, \"privacy\" refers to an MPC-style definition.)\r\n\r\n- Write `Config` instead of `Params`, for consitency with `TaskConfig`, `QueryConfig`, and `VdafConfig`.\r\n\r\n- Lift `DpConfig` out of `VdafConfig` as these apply to two separable primitives that we are composing in this application.\r\n\r\n- Various editorial nits.",
+      "createdAt": "2022-09-14T21:13:11Z",
+      "updatedAt": "2022-09-15T19:47:09Z",
+      "baseRepository": "wangshan/draft-wang-ppm-dap-taskprov",
+      "baseRefName": "main",
+      "baseRefOid": "6d5319bacf38115206557c3d07cd7ae0d0ec76c9",
+      "headRepository": "wangshan/draft-wang-ppm-dap-taskprov",
+      "headRefName": "cjpatton/1",
+      "headRefOid": "604b9e0abb356d1d7f603269c03fe65ece4a1dfd",
+      "closedAt": "2022-09-15T19:47:08Z",
+      "mergedAt": "2022-09-15T19:47:08Z",
+      "mergedBy": "cjpatton",
+      "mergeCommit": {
+        "oid": "452b321adf39739ff3d192f514b5210a1f39187c"
+      },
+      "comments": [
+        {
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> @cjpatton Why bringing DpConfig to TaskConfig, given that the exact mechanism is likely to be tied to a VDAF?\r\n\r\nFair point. I guess I was a bit confused about the requirements: If the expectation is that how we use DP is *always* VDAF-dependent, then this is a fair move; but there might be ways of applying central DP that apply to a large class of VDAFs (see https://github.com/cfrg/draft-irtf-cfrg-vdaf/issues/94). \r\n\r\nI've merged this back into vdaf_config. If at some point we want to lift this to task_config, we can do so in a way that's backwards compatible, since dp_config comprises the first bytes of vdaf_config.\r\n\r\n> DpConfig is not in the core protocol's out-of-band task configuration, if people wants to introduce a new Dp config and use it out-of-band, then it'll have to be aligned with the struct defined here.\r\n\r\nGood catch!\r\n\r\n",
+          "createdAt": "2022-09-15T17:12:55Z",
+          "updatedAt": "2022-09-15T17:12:55Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH4FR585CHQOp",
+          "commit": {
+            "abbreviatedOid": "239f68a"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-15T13:29:27Z",
+          "updatedAt": "2022-09-15T13:29:28Z",
+          "comments": [
+            {
+              "originalPosition": 68,
+              "body": "nit: why prefer inlined comment?",
+              "createdAt": "2022-09-15T13:29:27Z",
+              "updatedAt": "2022-09-15T13:29:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585CHQy4",
+          "commit": {
+            "abbreviatedOid": "239f68a"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "Left some minor comments, mostly about missed renaming & reformatting.\r\n\r\n@cjpatton Why bringing DpConfig to TaskConfig, given that the exact mechanism is likely to be tied to a VDAF? DpConfig is not in the core protocol's out-of-band task configuration, if people wants to introduce a new Dp config and use it out-of-band, then it'll have to be aligned with the struct defined here.",
+          "createdAt": "2022-09-15T13:30:46Z",
+          "updatedAt": "2022-09-15T14:09:18Z",
+          "comments": [
+            {
+              "originalPosition": 106,
+              "body": "privacy_mechanism -> dp_mechanism\r\nPrivacyParams.privacy_mechanism -> DpConfig.dp_mechanism",
+              "createdAt": "2022-09-15T13:30:46Z",
+              "updatedAt": "2022-09-15T14:09:18Z"
+            },
+            {
+              "originalPosition": 124,
+              "body": "you missed `QueryType`",
+              "createdAt": "2022-09-15T14:03:34Z",
+              "updatedAt": "2022-09-15T14:09:18Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585CH2_a",
+          "commit": {
+            "abbreviatedOid": "239f68a"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-15T14:56:35Z",
+          "updatedAt": "2022-09-15T14:56:36Z",
+          "comments": [
+            {
+              "originalPosition": 68,
+              "body": "It's easier to read, I think.",
+              "createdAt": "2022-09-15T14:56:36Z",
+              "updatedAt": "2022-09-15T14:56:36Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585CJWCp",
+          "commit": {
+            "abbreviatedOid": "f3fe909"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-09-15T19:39:22Z",
+          "updatedAt": "2022-09-15T19:39:22Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "id": "PR_kwDOH4FR584_Uovd",
+      "title": "Flesh out some of the protocol details",
+      "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/pull/9",
+      "state": "OPEN",
+      "author": "cjpatton",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "- Clean up the introduction. Be sure to mention all the salient points, including that some artifacts are still negotiated out of batnd.\r\n\r\n- Spell out \"opt-in\" versus \"opt-out\" conditions. This makes the previous {{provisioning-a-task}} section more explicit and adds some additional features.\r\n\r\n- Formalize the language in the protocol behavior sections.\r\n\r\n- Add notes and an attack to security considerations.\r\n\r\n- Move max_bach_lifetime into QueryConfig, as this parameter constrains queries.\r\n\r\n- Various editorial things, including aligning with editorial changes in DAP-02.",
+      "createdAt": "2022-09-21T05:50:05Z",
+      "updatedAt": "2022-09-21T15:29:38Z",
+      "baseRepository": "wangshan/draft-wang-ppm-dap-taskprov",
+      "baseRefName": "main",
+      "baseRefOid": "452b321adf39739ff3d192f514b5210a1f39187c",
+      "headRepository": "wangshan/draft-wang-ppm-dap-taskprov",
+      "headRefName": "cjpatton/2/editorial",
+      "headRefOid": "d2c1b96bd5fac95344b7dcd056eafa87651cfa8c",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH4FR585CepsU",
+          "commit": {
+            "abbreviatedOid": "d2c1b96"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-21T12:30:54Z",
+          "updatedAt": "2022-09-21T12:30:54Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "question: what's the difference between ! and ? in this format? The vdaf one below is using ? \r\nIs there a standard doc I can refer to for this kind of formatting?",
+              "createdAt": "2022-09-21T12:30:54Z",
+              "updatedAt": "2022-09-21T12:31:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585Cfrf-",
+          "commit": {
+            "abbreviatedOid": "d2c1b96"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-21T15:03:05Z",
+          "updatedAt": "2022-09-21T15:03:06Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "\"!\" denotes \"normative\" reference; \"?\" denotes 'informative\" reference. If a reference is \"normative\", then it is effectively part of the spec.",
+              "createdAt": "2022-09-21T15:03:06Z",
+              "updatedAt": "2022-09-21T15:03:06Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
