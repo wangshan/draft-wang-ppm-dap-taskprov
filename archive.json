@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-09-22T01:47:08.672979+00:00",
+  "timestamp": "2022-09-25T01:46:32.038952+00:00",
   "repo": "wangshan/draft-wang-ppm-dap-taskprov",
   "labels": [
     {
@@ -127,6 +127,22 @@
       "body": "As of https://github.com/ietf-wg-ppm/draft-ietf-ppm-dap/pull/346, DAP uses \"_\".",
       "createdAt": "2022-09-19T19:11:34Z",
       "updatedAt": "2022-09-19T19:11:34Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 10,
+      "id": "I_kwDOH4FR585SaWKQ",
+      "title": "List contributors in alphabetical order",
+      "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/issues/10",
+      "state": "OPEN",
+      "author": "cjpatton",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "agree with alphabetizing\r\n\r\n_Originally posted by @wangshan in https://github.com/wangshan/draft-wang-ppm-dap-taskprov/pull/9#discussion_r976660855_",
+      "createdAt": "2022-09-22T15:27:53Z",
+      "updatedAt": "2022-09-22T15:27:53Z",
       "closedAt": null,
       "comments": []
     }
@@ -1689,18 +1705,26 @@
       "labels": [],
       "body": "- Clean up the introduction. Be sure to mention all the salient points, including that some artifacts are still negotiated out of batnd.\r\n\r\n- Spell out \"opt-in\" versus \"opt-out\" conditions. This makes the previous {{provisioning-a-task}} section more explicit and adds some additional features.\r\n\r\n- Formalize the language in the protocol behavior sections.\r\n\r\n- Add notes and an attack to security considerations.\r\n\r\n- Move max_bach_lifetime into QueryConfig, as this parameter constrains queries.\r\n\r\n- Various editorial things, including aligning with editorial changes in DAP-02.",
       "createdAt": "2022-09-21T05:50:05Z",
-      "updatedAt": "2022-09-21T15:29:38Z",
+      "updatedAt": "2022-09-23T23:07:20Z",
       "baseRepository": "wangshan/draft-wang-ppm-dap-taskprov",
       "baseRefName": "main",
       "baseRefOid": "452b321adf39739ff3d192f514b5210a1f39187c",
       "headRepository": "wangshan/draft-wang-ppm-dap-taskprov",
       "headRefName": "cjpatton/2/editorial",
-      "headRefOid": "d2c1b96bd5fac95344b7dcd056eafa87651cfa8c",
+      "headRefOid": "d5481f6020359234bb52674052a80038310651d6",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "MichaelScaria",
+          "authorAssociation": "NONE",
+          "body": "LGTM! Love to see this.",
+          "createdAt": "2022-09-23T23:07:12Z",
+          "updatedAt": "2022-09-23T23:07:12Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOH4FR585CepsU",
@@ -1741,6 +1765,199 @@
               "updatedAt": "2022-09-21T15:03:06Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585Cetr5",
+          "commit": {
+            "abbreviatedOid": "d2c1b96"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "Took a first pass, left some comments/questions, will take a deeper look later today.",
+          "createdAt": "2022-09-21T12:41:59Z",
+          "updatedAt": "2022-09-22T11:00:21Z",
+          "comments": [
+            {
+              "originalPosition": 70,
+              "body": "```suggestion\r\n  encrypt aggregate shares.\r\n```",
+              "createdAt": "2022-09-21T12:42:00Z",
+              "updatedAt": "2022-09-22T11:00:21Z"
+            },
+            {
+              "originalPosition": 72,
+              "body": "```suggestion\r\n* Any assets required for authenticating HTTP requests.\r\n```",
+              "createdAt": "2022-09-21T12:42:09Z",
+              "updatedAt": "2022-09-22T11:00:21Z"
+            },
+            {
+              "originalPosition": 6,
+              "body": "also am I right the only thing stopping use from using dap-02 and vdaf-03 is that those two are not officially cut yet?",
+              "createdAt": "2022-09-21T12:46:59Z",
+              "updatedAt": "2022-09-22T11:00:21Z"
+            },
+            {
+              "originalPosition": 277,
+              "body": "The task lifetime is to defined in this doc, how is this different from task_expiration?",
+              "createdAt": "2022-09-21T12:57:14Z",
+              "updatedAt": "2022-09-22T11:00:21Z"
+            },
+            {
+              "originalPosition": 231,
+              "body": "Have we concluded why deriving the verification key is better than leader chose one and share with helpers?",
+              "createdAt": "2022-09-21T13:00:11Z",
+              "updatedAt": "2022-09-22T11:00:21Z"
+            },
+            {
+              "originalPosition": 409,
+              "body": "```suggestion\r\nFinally, the Helper completes the aggregate initialize request as usual, deriving the VDAF\r\n```",
+              "createdAt": "2022-09-21T13:05:29Z",
+              "updatedAt": "2022-09-22T11:00:21Z"
+            },
+            {
+              "originalPosition": 357,
+              "body": "Is it even a goal for the collector to opt in/out? the previous text deliberately says no to that",
+              "createdAt": "2022-09-21T14:45:50Z",
+              "updatedAt": "2022-09-22T11:00:21Z"
+            },
+            {
+              "originalPosition": 487,
+              "body": "agree with alphabetizing",
+              "createdAt": "2022-09-21T15:29:38Z",
+              "updatedAt": "2022-09-22T11:00:21Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585Cl_ox",
+          "commit": {
+            "abbreviatedOid": "d2c1b96"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-22T15:24:09Z",
+          "updatedAt": "2022-09-22T15:28:34Z",
+          "comments": [
+            {
+              "originalPosition": 231,
+              "body": "This is a question about the security of the VDAF. We are working on a paper that will address this question; I will keep https://github.com/ietf-wg-ppm/draft-ietf-ppm-dap/issues/161 up-to-date.",
+              "createdAt": "2022-09-22T15:24:09Z",
+              "updatedAt": "2022-09-22T15:28:34Z"
+            },
+            {
+              "originalPosition": 277,
+              "body": "The task_expiration is what I'm referring to. The behavior described here is: \"A party MAY opt out if it thinks the task lives too long\". ",
+              "createdAt": "2022-09-22T15:26:08Z",
+              "updatedAt": "2022-09-22T15:28:34Z"
+            },
+            {
+              "originalPosition": 357,
+              "body": "Which text? The intent is that each party should opt in or out, including the Collector.",
+              "createdAt": "2022-09-22T15:26:33Z",
+              "updatedAt": "2022-09-22T15:28:34Z"
+            },
+            {
+              "originalPosition": 487,
+              "body": "Raised issue",
+              "createdAt": "2022-09-22T15:28:28Z",
+              "updatedAt": "2022-09-22T15:28:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585CtCdX",
+          "commit": {
+            "abbreviatedOid": "d5481f6"
+          },
+          "author": "MichaelScaria",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-23T22:57:31Z",
+          "updatedAt": "2022-09-23T22:57:31Z",
+          "comments": [
+            {
+              "originalPosition": 379,
+              "body": "This should be \"2. \" right? ",
+              "createdAt": "2022-09-23T22:57:31Z",
+              "updatedAt": "2022-09-23T22:57:31Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585CtCi-",
+          "commit": {
+            "abbreviatedOid": "d5481f6"
+          },
+          "author": "MichaelScaria",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-23T22:58:36Z",
+          "updatedAt": "2022-09-23T22:58:36Z",
+          "comments": [
+            {
+              "originalPosition": 391,
+              "body": "\"payload\" typo",
+              "createdAt": "2022-09-23T22:58:36Z",
+              "updatedAt": "2022-09-23T22:58:36Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585CtCu4",
+          "commit": {
+            "abbreviatedOid": "d5481f6"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-23T23:00:55Z",
+          "updatedAt": "2022-09-23T23:00:56Z",
+          "comments": [
+            {
+              "originalPosition": 379,
+              "body": "`make` renders this as an enumerated list (1, 2, 3, ...). Using \"1.\" to indicate an element of an enumerated list is better because you don't have to renumber the list when adding/removing items.",
+              "createdAt": "2022-09-23T23:00:56Z",
+              "updatedAt": "2022-09-23T23:00:56Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585CtDEZ",
+          "commit": {
+            "abbreviatedOid": "d5481f6"
+          },
+          "author": "MichaelScaria",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-23T23:05:02Z",
+          "updatedAt": "2022-09-23T23:05:02Z",
+          "comments": [
+            {
+              "originalPosition": 468,
+              "body": "FWIW, we rate limit the number of \"tasks\" today.",
+              "createdAt": "2022-09-23T23:05:02Z",
+              "updatedAt": "2022-09-23T23:05:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585CtDQe",
+          "commit": {
+            "abbreviatedOid": "d5481f6"
+          },
+          "author": "MichaelScaria",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-09-23T23:07:20Z",
+          "updatedAt": "2022-09-23T23:07:20Z",
+          "comments": []
         }
       ]
     }
