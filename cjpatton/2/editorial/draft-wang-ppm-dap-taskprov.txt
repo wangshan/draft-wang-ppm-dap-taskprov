@@ -411,7 +411,7 @@ struct {
        If not the Helper MUST abort with "unrecognizedMessage".
 
    2.  All report shares with the task_prov extension have the same
-       payload.  If not, the Helper MUST abort with
+       extension payload.  If not, the Helper MUST abort with
        "unrecognizedMessage".
 
       OPEN ISSUE: This awkward input validation step could be skipped if
@@ -419,11 +419,11 @@ struct {
       the task configuration in.  This would also save significantly in
       overhead.
 
-   Next, the Helper attempts to parse the extension paylaod.  If parsing
+   Next, the Helper attempts to parse the extension payload.  If parsing
    fails, it MUST abort with "unrecognizedMessage".
 
    Next, the Helper checks that the task ID included in the message
-   matches the task ID derived from the extension payload ad defined in
+   matches the task ID derived from the extension payload as defined in
    Section 3.1.  If not, the Helper MUST abort with "unrecognizedTask".
 
    Next, the Helper decides whether to opt in to the task as described

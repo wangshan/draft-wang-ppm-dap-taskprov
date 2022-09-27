@@ -1604,7 +1604,7 @@ to the same task. In particular, it checks that:<a href="#section-6-2" class="pi
 <li id="section-6-3.1">Either all report shares have the <code>task_prov</code> extension or none do. If not
 the Helper <span class="bcp14">MUST</span> abort with "unrecognizedMessage".<a href="#section-6-3.1" class="pilcrow">¶</a>
 </li>
-        <li id="section-6-3.2">All report shares with the <code>task_prov</code> extension have the same payload. If
+        <li id="section-6-3.2">All report shares with the <code>task_prov</code> extension have the same extension payload. If
 not, the Helper <span class="bcp14">MUST</span> abort with "unrecognizedMessage".<a href="#section-6-3.2" class="pilcrow">¶</a>
 </li>
       </ol>
@@ -1615,10 +1615,10 @@ not, the Helper <span class="bcp14">MUST</span> abort with "unrecognizedMessage"
 configuration in. This would also save significantly in overhead.<a href="#section-6-4.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-6-5">Next, the Helper attempts to parse the extension paylaod. If parsing fails, it
+<p id="section-6-5">Next, the Helper attempts to parse the extension payload. If parsing fails, it
 <span class="bcp14">MUST</span> abort with "unrecognizedMessage".<a href="#section-6-5" class="pilcrow">¶</a></p>
 <p id="section-6-6">Next, the Helper checks that the task ID included in the message matches the
-task ID derived from the extension payload ad defined in <a href="#construct-task-id" class="xref">Section 3.1</a>.
+task ID derived from the extension payload as defined in <a href="#construct-task-id" class="xref">Section 3.1</a>.
 If not, the Helper <span class="bcp14">MUST</span> abort with "unrecognizedTask".<a href="#section-6-6" class="pilcrow">¶</a></p>
 <p id="section-6-7">Next, the Helper decides whether to opt in to the task as described in
 <a href="#provisioning-a-task" class="xref">Section 3.3</a>. If it opts out, it <span class="bcp14">MUST</span> abort the upload request with
