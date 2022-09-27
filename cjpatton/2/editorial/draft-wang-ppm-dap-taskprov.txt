@@ -5,8 +5,8 @@
 Privacy Preserving Measurement                                   S. Wang
 Internet-Draft                                                Apple Inc.
 Intended status: Informational                                 C. Patton
-Expires: 26 March 2023                                        Cloudflare
-                                                       22 September 2022
+Expires: 31 March 2023                                        Cloudflare
+                                                       27 September 2022
 
 
                    In-band Task Provisioning for DAP
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 March 2023.
+   This Internet-Draft will expire on 31 March 2023.
 
 Copyright Notice
 
@@ -220,9 +220,9 @@ Table of Contents
    guide batch selection.  It is defined as follows:
 
 struct {
-    QueryType query_type;      /* Defined in I-D.draft-ietf-ppm-dap-02 */
-    Duration time_precision;   /* Defined in I-D.draft-ietf-ppm-dap-02 */
-    uint16 max_batch_lifetime; /* Defined in I-D.draft-ietf-ppm-dap-02 */
+    QueryType query_type;         /* Defined in I-D.draft-ietf-ppm-dap-02 */
+    Duration time_precision;      /* Defined in I-D.draft-ietf-ppm-dap-02 */
+    uint16 max_batch_query_count; /* Defined in I-D.draft-ietf-ppm-dap-02 */
     uint32 min_batch_size;
     select (QueryConfig.query_type) {
         case time-interval: Empty;
