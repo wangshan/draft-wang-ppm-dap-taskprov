@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-09-25T01:46:32.038952+00:00",
+  "timestamp": "2022-09-27T01:47:40.831987+00:00",
   "repo": "wangshan/draft-wang-ppm-dap-taskprov",
   "labels": [
     {
@@ -143,6 +143,22 @@
       "body": "agree with alphabetizing\r\n\r\n_Originally posted by @wangshan in https://github.com/wangshan/draft-wang-ppm-dap-taskprov/pull/9#discussion_r976660855_",
       "createdAt": "2022-09-22T15:27:53Z",
       "updatedAt": "2022-09-22T15:27:53Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 11,
+      "id": "I_kwDOH4FR585SqYz_",
+      "title": "Advise deployments to support a global HPKE config if in-band task provisioning is supported",
+      "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/issues/11",
+      "state": "OPEN",
+      "author": "junyechen1996",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "If a deployment supports in-band task provisioning, then clients should not query `/hpke_config` with a specified `task_id`. The reason is:\r\n\r\n1. Aggregators need the first client report for a particular TaskID, in order for the task to be configured.\r\n2. Clients need the HPKE config to submit reports. If `task_id` parameter is included when clients query `/hpke_config` endpoint, the Aggregator may not know that TaskID yet, because it has not received any report for that.\r\n\r\nOne way is to advise deployment to support a global HPKE config, and also advise clients to not pass `task_id` to `/hpke_config` endpoint. The other way is to create the HPKE config on the fly for unseen task ID in `/hpke_config`.",
+      "createdAt": "2022-09-26T23:06:24Z",
+      "updatedAt": "2022-09-26T23:06:24Z",
       "closedAt": null,
       "comments": []
     }
@@ -1705,13 +1721,13 @@
       "labels": [],
       "body": "- Clean up the introduction. Be sure to mention all the salient points, including that some artifacts are still negotiated out of batnd.\r\n\r\n- Spell out \"opt-in\" versus \"opt-out\" conditions. This makes the previous {{provisioning-a-task}} section more explicit and adds some additional features.\r\n\r\n- Formalize the language in the protocol behavior sections.\r\n\r\n- Add notes and an attack to security considerations.\r\n\r\n- Move max_bach_lifetime into QueryConfig, as this parameter constrains queries.\r\n\r\n- Various editorial things, including aligning with editorial changes in DAP-02.",
       "createdAt": "2022-09-21T05:50:05Z",
-      "updatedAt": "2022-09-23T23:07:20Z",
+      "updatedAt": "2022-09-27T01:47:33Z",
       "baseRepository": "wangshan/draft-wang-ppm-dap-taskprov",
       "baseRefName": "main",
       "baseRefOid": "452b321adf39739ff3d192f514b5210a1f39187c",
       "headRepository": "wangshan/draft-wang-ppm-dap-taskprov",
       "headRefName": "cjpatton/2/editorial",
-      "headRefOid": "d5481f6020359234bb52674052a80038310651d6",
+      "headRefOid": "e984a753a3385d61c522740ea48f4925fbe4bc8f",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -1958,6 +1974,134 @@
           "createdAt": "2022-09-23T23:07:20Z",
           "updatedAt": "2022-09-23T23:07:20Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOH4FR585CyUEk",
+          "commit": {
+            "abbreviatedOid": "d5481f6"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2022-09-26T15:42:26Z",
+          "updatedAt": "2022-09-26T21:39:58Z",
+          "comments": [
+            {
+              "originalPosition": 178,
+              "body": "Note this has been renamed to max_batch_query_count in core protocol.",
+              "createdAt": "2022-09-26T15:42:26Z",
+              "updatedAt": "2022-09-26T21:39:58Z"
+            },
+            {
+              "originalPosition": 277,
+              "body": "I think this is ambiguous with the sentence below, which says `A protocol participant MUST opt out if the task has expired.` but this sentence says a participant May opt out even if the task lives too long, but how long is too long? if it's longer than task_expiry then it conflicts with the MUST; if it's sometime before task_expiry then we should spell it out clearly.",
+              "createdAt": "2022-09-26T15:46:46Z",
+              "updatedAt": "2022-09-26T21:39:58Z"
+            },
+            {
+              "originalPosition": 357,
+              "body": "I meant the \"Collector Behaviour\" in main: \r\n\r\n> Collector should behave the same whether it supports `task-prov` extension or not\r\n\r\nWhat's the benefit of distinguishing between a retry of late task and a retry of a truly invalid task at the protocol level?",
+              "createdAt": "2022-09-26T15:54:20Z",
+              "updatedAt": "2022-09-26T21:39:59Z"
+            },
+            {
+              "originalPosition": 399,
+              "body": "```suggestion\r\ntask ID derived from the extension payload as defined in {{construct-task-id}}.\r\n```",
+              "createdAt": "2022-09-26T15:57:48Z",
+              "updatedAt": "2022-09-26T21:39:58Z"
+            },
+            {
+              "originalPosition": 391,
+              "body": "```suggestion\r\nNext, the Helper attempts to parse the extension payload. If parsing fails, it\r\n```",
+              "createdAt": "2022-09-26T16:04:46Z",
+              "updatedAt": "2022-09-26T21:39:58Z"
+            },
+            {
+              "originalPosition": 379,
+              "body": "```suggestion\r\n1. All report shares with the `task_prov` extension have the same extension payload. If\r\n```",
+              "createdAt": "2022-09-26T16:05:57Z",
+              "updatedAt": "2022-09-26T21:39:58Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585C0J1k",
+          "commit": {
+            "abbreviatedOid": "d5481f6"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-26T22:12:13Z",
+          "updatedAt": "2022-09-26T22:12:14Z",
+          "comments": [
+            {
+              "originalPosition": 461,
+              "body": "Yes, in the core protocol, client has nothing to lie about task provision, since task has been provisioned before client knows about it. I think the main point is malicious client who wants to send fake extension data will never be mixed with clients that have legitimate task configurations.",
+              "createdAt": "2022-09-26T22:12:14Z",
+              "updatedAt": "2022-09-26T22:12:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585C0pXK",
+          "commit": {
+            "abbreviatedOid": "e984a75"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-27T01:26:51Z",
+          "updatedAt": "2022-09-27T01:44:59Z",
+          "comments": [
+            {
+              "originalPosition": 277,
+              "body": "My understanding is that task_expiration is basically a timestamp. If this is so, then I don't think this is ambiguous, since the MAY applies to expiration dates in the future, whereas the MUST applies to expiration dates in the past.\r\n\r\nHowever there is another problem here. The goal of this MAY is to allow a party to opt-out if the task is going too long. There are two reasons why it might want to do this:\r\n1. Sanity checking: We want to make sure tasks don't live for 100s of years.\r\n2. For a given deployment of DAP, the parties might make an agreement that they will keep around metadata for anti-replay for as long as the task exists. In this case it would be useful to check that the task exists for, say, no longer than a week so that they don't have to keep around the metadata for longer than needed.\r\n\r\nIn either case, what's missing is the task's \"start time\". This is important because the Author might have created the task minutes or even hours before the Aggregators (in particular the Helper) sees the task for the first time.\r\n\r\nIf you agree this is needed, I'll add it to this PR.",
+              "createdAt": "2022-09-27T01:26:51Z",
+              "updatedAt": "2022-09-27T01:44:59Z"
+            },
+            {
+              "originalPosition": 357,
+              "body": "If a non-taskprov Collector sends a CollectReq and gets unrecognizedTask in response, then it's just supposed to quit, since it's expectation is that there's no point in the future where the Leader will be configured with the task. Instead, we're asking it to retry at some point in the future, but retrying is necessarily fruitless. Since Retry-After is typically handled \"under the hood\" by HTTP clients (in the reqwest crate for Rust, you have to explicitly override this), non-taskprov Collectors will appear to hang indefinitely here.\r\n\r\nThis can be avoided if the Collector has to explicitly opt-in.",
+              "createdAt": "2022-09-27T01:39:11Z",
+              "updatedAt": "2022-09-27T01:44:59Z"
+            },
+            {
+              "originalPosition": 461,
+              "body": "I see.  IMO this doesn't need to be called out in security considerations. In any case, we should try to clean this up. ",
+              "createdAt": "2022-09-27T01:44:31Z",
+              "updatedAt": "2022-09-27T01:44:59Z"
+            },
+            {
+              "originalPosition": 468,
+              "body": "Right, this TODO is asking us to spell out how to do this.",
+              "createdAt": "2022-09-27T01:44:55Z",
+              "updatedAt": "2022-09-27T01:44:59Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585C0sLn",
+          "commit": {
+            "abbreviatedOid": "d5481f6"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-27T01:47:33Z",
+          "updatedAt": "2022-09-27T01:47:33Z",
+          "comments": [
+            {
+              "originalPosition": 468,
+              "body": "We can do this later, no need to do it in this PR.",
+              "createdAt": "2022-09-27T01:47:33Z",
+              "updatedAt": "2022-09-27T01:47:33Z"
+            }
+          ]
         }
       ]
     }
