@@ -469,7 +469,7 @@ struct {
    metadata to encrypted input shares provided by HPKE encryption.
 
       OPEN ISSUE: What if the Collector and Aggregators don't agree on
-      the task configuration?  Consider adding
+      the task configuration?  Decryption should fail.
 
    A "task" now means the same task ID and same task configuration, if a
    malicious client changes the task ID or task configuration, its
