@@ -499,9 +499,9 @@ struct {
    [DAP]      Geoghegan, T., Patton, C., Rescorla, E., and C. A. Wood,
               "Distributed Aggregation Protocol for Privacy Preserving
               Measurement", Work in Progress, Internet-Draft, draft-
-              ietf-ppm-dap-01, 11 July 2022,
+              ietf-ppm-dap-02, 22 September 2022,
               <https://datatracker.ietf.org/doc/html/draft-ietf-ppm-dap-
-              01>.
+              02>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -514,9 +514,9 @@ struct {
 
    [VDAF]     Barnes, R., Patton, C., and P. Schoppmann, "Verifiable
               Distributed Aggregation Functions", Work in Progress,
-              Internet-Draft, draft-irtf-cfrg-vdaf-01, 26 May 2022,
+              Internet-Draft, draft-irtf-cfrg-vdaf-03, 24 August 2022,
               <https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-
-              vdaf-01>.
+              vdaf-03>.
 
 10.2.  Informative References
 
