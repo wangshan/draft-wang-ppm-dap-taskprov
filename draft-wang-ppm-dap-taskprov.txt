@@ -5,8 +5,8 @@
 Privacy Preserving Measurement                                   S. Wang
 Internet-Draft                                                Apple Inc.
 Intended status: Informational                                 C. Patton
-Expires: 1 April 2023                                         Cloudflare
-                                                       28 September 2022
+Expires: 2 April 2023                                         Cloudflare
+                                                       29 September 2022
 
 
                    In-band Task Provisioning for DAP
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 April 2023.
+   This Internet-Draft will expire on 2 April 2023.
 
 Copyright Notice
 
@@ -186,27 +186,26 @@ Table of Contents
    When the Client includes this extension with its report, the body of
    the extension is a TaskConfig defined follows:
 
- struct {
-     /* Info specific for a task. */
-     opaque task_info<1..2^8-1>;
+   struct {
+       /* Info specific for a task. */
+       opaque task_info<1..2^8-1>;
 
-     /* A list of URLs relative to which an Aggregator's API endpoints
-     can be found. Defined in I-D.draft-ietf-ppm-dap-02. */
-     Url aggregator_endpoints<1..2^16-1>;
+       /* A list of URLs relative to which an Aggregator's API endpoints
+       can be found. Defined in I-D.draft-ietf-ppm-dap-02. */
+       Url aggregator_endpoints<1..2^16-1>;
 
-     /* This determines the query type for batch selection and the
-     properties that all batches for this task must have. Defined in
-     I-D.draft-ietf-ppm-dap-02. */
-     QueryConfig query_config;
+       /* This determines the query type for batch selection and the
+       properties that all batches for this task must have. Defined in
+       I-D.draft-ietf-ppm-dap-02. */
+       QueryConfig query_config;
 
-     /* Time up to which Clients are allowed to upload to this task. See
-     https://github.com/ietf-wg-ppm/draft-ietf-ppm-dap/pull/304. Defined
-     in I-D.draft-ietf-ppm-dap-02. */
-     Time task_expiration;
+       /* Time up to which Clients are allowed to upload to this task.
+       Defined in I-D.draft-ietf-ppm-dap-02. */
+       Time task_expiration;
 
-     /* Determines the VDAF type and its config parameters. */
-     VdafConfig vdaf_config;
- } TaskConfig;
+       /* Determines the VDAF type and its config parameters. */
+       VdafConfig vdaf_config;
+   } TaskConfig;
 
    The purpose of TaskConfig is to define all parameters that are
    necessary for configuring an Aggregator.  It includes all the fields
@@ -225,8 +224,8 @@ struct {
     uint16 max_batch_query_count; /* Defined in I-D.draft-ietf-ppm-dap-02 */
     uint32 min_batch_size;
     select (QueryConfig.query_type) {
-        case time-interval: Empty;
-        case fixed-size:    uint32 max_batch_size;
+        case time_interval: Empty;
+        case fixed_size:    uint32 max_batch_size;
     }
 } QueryConfig;
 
@@ -234,10 +233,10 @@ struct {
    task.  It is structured as follows:
 
 enum {
-    prio3-aes128-count(0x00000000),     /* I-D.draft-irtf-cfrg-vdaf-03 */
-    prio3-aes128-sum(0x00000001),       /* I-D.draft-irtf-cfrg-vdaf-03 */
-    prio3-aes128-histogram(0x00000002), /* I-D.draft-irtf-cfrg-vdaf-03 */
-    poplar1-aes128(0x00001000),         /* I-D.draft-irtf-cfrg-vdaf-03 */
+    prio3_aes128_count(0x00000000),     /* I-D.draft-irtf-cfrg-vdaf-03 */
+    prio3_aes128_sum(0x00000001),       /* I-D.draft-irtf-cfrg-vdaf-03 */
+    prio3_aes128_histogram(0x00000002), /* I-D.draft-irtf-cfrg-vdaf-03 */
+    poplar1_aes128(0x00001000),         /* I-D.draft-irtf-cfrg-vdaf-03 */
     (2^32-1)
 } VdafType;
 
@@ -245,10 +244,10 @@ struct {
     DpConfig dp_config;
     VdafType vdaf_type;
     select (VdafConfig.vdaf_type) {
-        case prio3-aes128-count: Empty;
-        case prio3-aes128-sum: uint8 bits;
-        case prio3-aes128-histogram: uint64 buckets<8..2^24-8>;
-        case poplar1-aes128: uint16 bits;
+        case prio3_aes128_count: Empty;
+        case prio3_aes128_sum: uint8 bits;
+        case prio3_aes128_histogram: uint64 buckets<8..2^24-8>;
+        case poplar1_aes128: uint16 bits;
     }
 } VdafConfig;
 
