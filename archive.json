@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-09-27T01:47:40.831987+00:00",
+  "timestamp": "2022-09-29T01:50:52.682079+00:00",
   "repo": "wangshan/draft-wang-ppm-dap-taskprov",
   "labels": [
     {
@@ -90,11 +90,13 @@
       "state": "OPEN",
       "author": "cjpatton",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "cjpatton"
+      ],
       "labels": [],
       "body": "This draft isn't out yet, so we'll have to update this later :)\r\n\r\n_Originally posted by @cjpatton in https://github.com/wangshan/draft-wang-ppm-dap-taskprov/pull/2#discussion_r971020617_",
       "createdAt": "2022-09-14T16:02:23Z",
-      "updatedAt": "2022-09-14T16:02:23Z",
+      "updatedAt": "2022-09-27T15:19:12Z",
       "closedAt": null,
       "comments": []
     },
@@ -122,11 +124,13 @@
       "state": "OPEN",
       "author": "cjpatton",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "cjpatton"
+      ],
       "labels": [],
       "body": "As of https://github.com/ietf-wg-ppm/draft-ietf-ppm-dap/pull/346, DAP uses \"_\".",
       "createdAt": "2022-09-19T19:11:34Z",
-      "updatedAt": "2022-09-19T19:11:34Z",
+      "updatedAt": "2022-09-27T15:18:53Z",
       "closedAt": null,
       "comments": []
     },
@@ -158,7 +162,66 @@
       "labels": [],
       "body": "If a deployment supports in-band task provisioning, then clients should not query `/hpke_config` with a specified `task_id`. The reason is:\r\n\r\n1. Aggregators need the first client report for a particular TaskID, in order for the task to be configured.\r\n2. Clients need the HPKE config to submit reports. If `task_id` parameter is included when clients query `/hpke_config` endpoint, the Aggregator may not know that TaskID yet, because it has not received any report for that.\r\n\r\nOne way is to advise deployment to support a global HPKE config, and also advise clients to not pass `task_id` to `/hpke_config` endpoint. The other way is to create the HPKE config on the fly for unseen task ID in `/hpke_config`.",
       "createdAt": "2022-09-26T23:06:24Z",
-      "updatedAt": "2022-09-26T23:06:24Z",
+      "updatedAt": "2022-09-28T19:26:23Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Yup \ud83d\udc4d ",
+          "createdAt": "2022-09-27T15:17:34Z",
+          "updatedAt": "2022-09-27T15:17:34Z"
+        },
+        {
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@junyechen1996 we just merged #9  so this would be a good time for text",
+          "createdAt": "2022-09-28T19:26:23Z",
+          "updatedAt": "2022-09-28T19:26:23Z"
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "id": "I_kwDOH4FR585SufbV",
+      "title": "Consider adding task start time in the task config",
+      "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/issues/12",
+      "state": "OPEN",
+      "author": "cjpatton",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "cjpatton"
+      ],
+      "labels": [],
+      "body": "        for case1, isn't the task_expiration sufficient? I'm not convinced a start time is the solution but I'm curious how this start time looks like, perhaps we can keep the current PR text and create another PR to address this?\r\n\r\n_Originally posted by @wangshan in https://github.com/wangshan/draft-wang-ppm-dap-taskprov/pull/9#discussion_r981301881_\r\n      ",
+      "createdAt": "2022-09-27T15:02:49Z",
+      "updatedAt": "2022-09-28T19:16:32Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@wangshan and I disussed this offline: The reason one wants to know the task lifetime is to provision storage and to prevent clients' measurements from being over exposed over time. In both cases it's sufficient to use the time at which the task was \"opted-in\" to.\r\n\r\nAdd this to  considerations.",
+          "createdAt": "2022-09-28T19:16:32Z",
+          "updatedAt": "2022-09-28T19:16:32Z"
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "id": "I_kwDOH4FR585Sukyv",
+      "title": "Clean up a security consideration",
+      "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/issues/13",
+      "state": "OPEN",
+      "author": "cjpatton",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "cjpatton"
+      ],
+      "labels": [],
+      "body": "        Yes, in the core protocol, client has nothing to lie about task provision, since task has been provisioned before client knows about it. I think the main point is malicious client who wants to send fake extension data will never be mixed with clients that have legitimate task configurations.\r\n\r\n_Originally posted by @wangshan in https://github.com/wangshan/draft-wang-ppm-dap-taskprov/pull/9#discussion_r980545492_\r\n      ",
+      "createdAt": "2022-09-27T15:16:38Z",
+      "updatedAt": "2022-09-27T15:17:10Z",
       "closedAt": null,
       "comments": []
     }
@@ -1714,24 +1777,26 @@
       "id": "PR_kwDOH4FR584_Uovd",
       "title": "Flesh out some of the protocol details",
       "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/pull/9",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "cjpatton",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "- Clean up the introduction. Be sure to mention all the salient points, including that some artifacts are still negotiated out of batnd.\r\n\r\n- Spell out \"opt-in\" versus \"opt-out\" conditions. This makes the previous {{provisioning-a-task}} section more explicit and adds some additional features.\r\n\r\n- Formalize the language in the protocol behavior sections.\r\n\r\n- Add notes and an attack to security considerations.\r\n\r\n- Move max_bach_lifetime into QueryConfig, as this parameter constrains queries.\r\n\r\n- Various editorial things, including aligning with editorial changes in DAP-02.",
       "createdAt": "2022-09-21T05:50:05Z",
-      "updatedAt": "2022-09-27T01:47:33Z",
+      "updatedAt": "2022-09-28T19:25:22Z",
       "baseRepository": "wangshan/draft-wang-ppm-dap-taskprov",
       "baseRefName": "main",
       "baseRefOid": "452b321adf39739ff3d192f514b5210a1f39187c",
       "headRepository": "wangshan/draft-wang-ppm-dap-taskprov",
       "headRefName": "cjpatton/2/editorial",
       "headRefOid": "e984a753a3385d61c522740ea48f4925fbe4bc8f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2022-09-28T19:25:21Z",
+      "mergedAt": "2022-09-28T19:25:21Z",
+      "mergedBy": "cjpatton",
+      "mergeCommit": {
+        "oid": "65e21d66f7cbd23c63e9c26a5318577841c3f965"
+      },
       "comments": [
         {
           "author": "MichaelScaria",
@@ -2102,6 +2167,159 @@
               "updatedAt": "2022-09-27T01:47:33Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585C2P_8",
+          "commit": {
+            "abbreviatedOid": "e984a75"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-27T08:24:22Z",
+          "updatedAt": "2022-09-27T08:24:22Z",
+          "comments": [
+            {
+              "originalPosition": 461,
+              "body": "If it doesn't add anything to security considerations, I'm fine deleting this paragraph",
+              "createdAt": "2022-09-27T08:24:22Z",
+              "updatedAt": "2022-09-27T08:24:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585C2d2E",
+          "commit": {
+            "abbreviatedOid": "e984a75"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-27T08:54:44Z",
+          "updatedAt": "2022-09-27T08:54:49Z",
+          "comments": [
+            {
+              "originalPosition": 357,
+              "body": "The leader can choose not to send retry-after header if it hasn't opt-in to task_prov, collector will just get unrecognizedTask and quit, the task_prov process happens inside leader/helper, so it should be sufficient for leader to decide whether a retry-after should be given to a collector.\r\n",
+              "createdAt": "2022-09-27T08:54:44Z",
+              "updatedAt": "2022-09-27T08:54:49Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585C4Yhf",
+          "commit": {
+            "abbreviatedOid": "e984a75"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-27T14:11:58Z",
+          "updatedAt": "2022-09-27T14:11:58Z",
+          "comments": [
+            {
+              "originalPosition": 277,
+              "body": "for case1, isn't the task_expiration sufficient? I'm not convinced a start time is the solution but I'm curious how this start time looks like, perhaps we can keep the current PR text and create another PR to address this?",
+              "createdAt": "2022-09-27T14:11:58Z",
+              "updatedAt": "2022-09-27T14:11:58Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585C4w5E",
+          "commit": {
+            "abbreviatedOid": "d2c1b96"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-27T15:04:18Z",
+          "updatedAt": "2022-09-27T15:04:19Z",
+          "comments": [
+            {
+              "originalPosition": 277,
+              "body": "> for case1, isn't the task_expiration sufficient?\r\n\r\nDeciding whether a task has a lifetime of at least 200 years, I would subtract task_start from task_expiration and see if the duration is > 200 years. We can't do this correctly without knowing task_start.\r\n\r\n> I'm not convinced a start time is the solution but I'm curious how this start time looks like, perhaps we can keep the current PR text and create another PR to address this?\r\n\r\nSure, makes sense! Raised https://github.com/wangshan/draft-wang-ppm-dap-taskprov/issues/12",
+              "createdAt": "2022-09-27T15:04:18Z",
+              "updatedAt": "2022-09-27T15:04:19Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585C4yil",
+          "commit": {
+            "abbreviatedOid": "d2c1b96"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-27T15:08:05Z",
+          "updatedAt": "2022-09-27T15:08:05Z",
+          "comments": [
+            {
+              "originalPosition": 357,
+              "body": "How does the collector know that the task is definitely never going to exist? Remember, the intention of this retry-after mechanism is to allow the Leader to keep the Collector on the phone in case the task gets configured in the near future. If a taskprov Leader can't distinguish whether the Collector is taskprov or non-taskprov, it either has to ignore this SHOULD or risk keeping a non-taskprov Collector in an indefinite retry-after loop.\r\n\r\nTBH, I would be happy to avoid this complexity by dropping the retry-after behavior altogether, at least until we can implement it unambiguously. If we keep it, then let's also keep the OPEN ISSUE.\r\n\r\n",
+              "createdAt": "2022-09-27T15:08:05Z",
+              "updatedAt": "2022-09-27T15:09:19Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585C4ywc",
+          "commit": {
+            "abbreviatedOid": "d5481f6"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-27T15:08:31Z",
+          "updatedAt": "2022-09-27T15:08:31Z",
+          "comments": [
+            {
+              "originalPosition": 461,
+              "body": "Ack, I'll leave as-is, we can clean up later.",
+              "createdAt": "2022-09-27T15:08:31Z",
+              "updatedAt": "2022-09-27T15:08:31Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585C42tk",
+          "commit": {
+            "abbreviatedOid": "d5481f6"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-27T15:16:55Z",
+          "updatedAt": "2022-09-27T15:16:55Z",
+          "comments": [
+            {
+              "originalPosition": 461,
+              "body": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/issues/13",
+              "createdAt": "2022-09-27T15:16:55Z",
+              "updatedAt": "2022-09-27T15:16:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585DAkuq",
+          "commit": {
+            "abbreviatedOid": "e984a75"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-09-28T19:05:17Z",
+          "updatedAt": "2022-09-28T19:05:17Z",
+          "comments": []
         }
       ]
     }
