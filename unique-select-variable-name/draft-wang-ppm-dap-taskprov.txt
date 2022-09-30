@@ -5,8 +5,8 @@
 Privacy Preserving Measurement                                   S. Wang
 Internet-Draft                                                Apple Inc.
 Intended status: Informational                                 C. Patton
-Expires: 2 April 2023                                         Cloudflare
-                                                       29 September 2022
+Expires: 3 April 2023                                         Cloudflare
+                                                       30 September 2022
 
 
                    In-band Task Provisioning for DAP
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 April 2023.
+   This Internet-Draft will expire on 3 April 2023.
 
 Copyright Notice
 
@@ -245,9 +245,9 @@ struct {
     VdafType vdaf_type;
     select (VdafConfig.vdaf_type) {
         case prio3_aes128_count: Empty;
-        case prio3_aes128_sum: uint8 prio3_aes128_sum_bits;
-        case prio3_aes128_histogram: uint64 prio3_aes128_histogram_buckets<8..2^24-8>;
-        case poplar1_aes128: uint16 poplar1_aes128_bits;
+        case prio3_aes128_sum: uint8; /* bit length of the summand */
+        case prio3_aes128_histogram: uint64<8..2^24-8>; /* bucket boundaries */
+        case poplar1_aes128: uint16; /* bit length of input string */
     }
 } VdafConfig;
 
