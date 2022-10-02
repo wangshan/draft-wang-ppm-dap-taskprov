@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-09-29T01:50:52.682079+00:00",
+  "timestamp": "2022-10-02T01:51:54.728161+00:00",
   "repo": "wangshan/draft-wang-ppm-dap-taskprov",
   "labels": [
     {
@@ -55,16 +55,24 @@
       "id": "I_kwDOH4FR585RsqjC",
       "title": "Define \"task author\"",
       "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/issues/3",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "cjpatton",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This section should define the term \"task author\" (introduced by this draft) and elaborate on its role. We can do so in follow-up PR.\r\n\r\n_Originally posted by @cjpatton in https://github.com/wangshan/draft-wang-ppm-dap-taskprov/pull/2#discussion_r969014987_",
       "createdAt": "2022-09-12T23:52:03Z",
-      "updatedAt": "2022-09-12T23:52:03Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2022-09-29T14:56:06Z",
+      "closedAt": "2022-09-29T14:56:06Z",
+      "comments": [
+        {
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closed by #9.",
+          "createdAt": "2022-09-29T14:56:06Z",
+          "updatedAt": "2022-09-29T14:56:06Z"
+        }
+      ]
     },
     {
       "number": 4,
@@ -87,7 +95,7 @@
       "id": "I_kwDOH4FR585R2fU7",
       "title": "Upgrade to DAP-02",
       "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/issues/5",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "cjpatton",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -96,8 +104,8 @@
       "labels": [],
       "body": "This draft isn't out yet, so we'll have to update this later :)\r\n\r\n_Originally posted by @cjpatton in https://github.com/wangshan/draft-wang-ppm-dap-taskprov/pull/2#discussion_r971020617_",
       "createdAt": "2022-09-14T16:02:23Z",
-      "updatedAt": "2022-09-27T15:19:12Z",
-      "closedAt": null,
+      "updatedAt": "2022-09-29T14:55:40Z",
+      "closedAt": "2022-09-29T14:55:39Z",
       "comments": []
     },
     {
@@ -121,7 +129,7 @@
       "id": "I_kwDOH4FR585SKM4y",
       "title": "Editorial: Use \"_\" isntead of \"-\"",
       "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/issues/8",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "cjpatton",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -130,8 +138,8 @@
       "labels": [],
       "body": "As of https://github.com/ietf-wg-ppm/draft-ietf-ppm-dap/pull/346, DAP uses \"_\".",
       "createdAt": "2022-09-19T19:11:34Z",
-      "updatedAt": "2022-09-27T15:18:53Z",
-      "closedAt": null,
+      "updatedAt": "2022-09-29T14:55:32Z",
+      "closedAt": "2022-09-29T14:55:32Z",
       "comments": []
     },
     {
@@ -139,15 +147,15 @@
       "id": "I_kwDOH4FR585SaWKQ",
       "title": "List contributors in alphabetical order",
       "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/issues/10",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "cjpatton",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "agree with alphabetizing\r\n\r\n_Originally posted by @wangshan in https://github.com/wangshan/draft-wang-ppm-dap-taskprov/pull/9#discussion_r976660855_",
       "createdAt": "2022-09-22T15:27:53Z",
-      "updatedAt": "2022-09-22T15:27:53Z",
-      "closedAt": null,
+      "updatedAt": "2022-09-29T14:55:52Z",
+      "closedAt": "2022-09-29T14:55:52Z",
       "comments": []
     },
     {
@@ -2319,6 +2327,194 @@
           "body": "",
           "createdAt": "2022-09-28T19:05:17Z",
           "updatedAt": "2022-09-28T19:05:17Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 14,
+      "id": "PR_kwDOH4FR584_2J5s",
+      "title": "Editorial: Use _ isntead of -",
+      "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/pull/14",
+      "state": "MERGED",
+      "author": "wangshan",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Address issue https://github.com/wangshan/draft-wang-ppm-dap-taskprov/issues/8",
+      "createdAt": "2022-09-29T10:52:16Z",
+      "updatedAt": "2022-09-29T14:54:29Z",
+      "baseRepository": "wangshan/draft-wang-ppm-dap-taskprov",
+      "baseRefName": "main",
+      "baseRefOid": "65e21d66f7cbd23c63e9c26a5318577841c3f965",
+      "headRepository": "wangshan/draft-wang-ppm-dap-taskprov",
+      "headRefName": "use-underscore-enum",
+      "headRefOid": "831faf78ba94db5821e29c752b3eaac1d6a402d9",
+      "closedAt": "2022-09-29T14:54:29Z",
+      "mergedAt": "2022-09-29T14:54:28Z",
+      "mergedBy": "cjpatton",
+      "mergeCommit": {
+        "oid": "3cf29d7f531e4096fb9a138663b07f76c596e9fc"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH4FR585DFT6n",
+          "commit": {
+            "abbreviatedOid": "831faf7"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-09-29T14:54:24Z",
+          "updatedAt": "2022-09-29T14:54:24Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "id": "PR_kwDOH4FR584_2Ljq",
+      "title": "List contributors in alphabetical order",
+      "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/pull/15",
+      "state": "MERGED",
+      "author": "wangshan",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Addresses issue https://github.com/wangshan/draft-wang-ppm-dap-taskprov/issues/10",
+      "createdAt": "2022-09-29T10:58:43Z",
+      "updatedAt": "2022-09-29T14:55:19Z",
+      "baseRepository": "wangshan/draft-wang-ppm-dap-taskprov",
+      "baseRefName": "main",
+      "baseRefOid": "65e21d66f7cbd23c63e9c26a5318577841c3f965",
+      "headRepository": "wangshan/draft-wang-ppm-dap-taskprov",
+      "headRefName": "alphabetical-contributors",
+      "headRefOid": "a14fd4a666cdec8de2f52e00dbba70da22b6839e",
+      "closedAt": "2022-09-29T14:55:19Z",
+      "mergedAt": "2022-09-29T14:55:19Z",
+      "mergedBy": "cjpatton",
+      "mergeCommit": {
+        "oid": "40eaec901ec5fe2c04492ec17ce0926827edec5f"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH4FR585DFUR_",
+          "commit": {
+            "abbreviatedOid": "a14fd4a"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-09-29T14:55:14Z",
+          "updatedAt": "2022-09-29T14:55:14Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 16,
+      "id": "PR_kwDOH4FR584_2OvE",
+      "title": "Upgrade to DAP-02",
+      "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/pull/16",
+      "state": "MERGED",
+      "author": "wangshan",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Addresses issue https://github.com/wangshan/draft-wang-ppm-dap-taskprov/issues/5",
+      "createdAt": "2022-09-29T11:09:04Z",
+      "updatedAt": "2022-09-29T14:54:54Z",
+      "baseRepository": "wangshan/draft-wang-ppm-dap-taskprov",
+      "baseRefName": "main",
+      "baseRefOid": "65e21d66f7cbd23c63e9c26a5318577841c3f965",
+      "headRepository": "wangshan/draft-wang-ppm-dap-taskprov",
+      "headRefName": "update-to-dap-02",
+      "headRefOid": "e6a743b9e2e3b4d20d085f0152d8158165e766ce",
+      "closedAt": "2022-09-29T14:54:54Z",
+      "mergedAt": "2022-09-29T14:54:54Z",
+      "mergedBy": "cjpatton",
+      "mergeCommit": {
+        "oid": "f8b82d0895b31d648c87b265c333cc631f49b1f6"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH4FR585DFUGg",
+          "commit": {
+            "abbreviatedOid": "e6a743b"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-09-29T14:54:49Z",
+          "updatedAt": "2022-09-29T14:54:49Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "id": "PR_kwDOH4FR584_5XiA",
+      "title": "Make select branch variable name unique",
+      "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/pull/17",
+      "state": "MERGED",
+      "author": "wangshan",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "This maps well to any union based structs in implementation",
+      "createdAt": "2022-09-29T23:55:12Z",
+      "updatedAt": "2022-09-30T11:30:32Z",
+      "baseRepository": "wangshan/draft-wang-ppm-dap-taskprov",
+      "baseRefName": "main",
+      "baseRefOid": "40eaec901ec5fe2c04492ec17ce0926827edec5f",
+      "headRepository": "wangshan/draft-wang-ppm-dap-taskprov",
+      "headRefName": "unique-select-variable-name",
+      "headRefOid": "b29a67caa6a5617f6706606ae41de1e8eb7776fb",
+      "closedAt": "2022-09-30T11:30:32Z",
+      "mergedAt": "2022-09-30T11:30:32Z",
+      "mergedBy": "wangshan",
+      "mergeCommit": {
+        "oid": "5eb0ba3c7ac9b3c1498e953da233f0c3e5233faa"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH4FR585DHyim",
+          "commit": {
+            "abbreviatedOid": "5bba594"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-09-30T00:05:28Z",
+          "updatedAt": "2022-09-30T00:05:29Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "No objection, but I think this is too verbose. In fact, the following is valid (and preferable I think):\r\n```suggestion\r\n        case prio3_aes128_sum: uint8; /* bit length of the summand */\r\n        case prio3_aes128_histogram: uint64<8..2^24-8>; /* bucket boundaries */\r\n        case poplar1_aes128: uint16; /* bit length of input string */\r\n```",
+              "createdAt": "2022-09-30T00:05:28Z",
+              "updatedAt": "2022-09-30T00:05:29Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585DHzAL",
+          "commit": {
+            "abbreviatedOid": "b29a67c"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-09-30T00:09:42Z",
+          "updatedAt": "2022-09-30T00:09:42Z",
           "comments": []
         }
       ]
