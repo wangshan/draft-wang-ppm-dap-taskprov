@@ -315,7 +315,7 @@ struct {
 
    where task_prov_salt and task_id are as defined in Section 3.1.
    Functions HKDF-Extract() and HKDF-Expand() are as defined in
-   [RFC5869].
+   [RFC5869].  Both functions are instantiated with SHA-256.
 
 3.3.  Configuring a Task
 
