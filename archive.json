@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-10-02T01:51:54.728161+00:00",
+  "timestamp": "2022-10-06T01:27:57.067783+00:00",
   "repo": "wangshan/draft-wang-ppm-dap-taskprov",
   "labels": [
     {
@@ -79,15 +79,15 @@
       "id": "I_kwDOH4FR585Rsqqa",
       "title": "Flesh out VDAF verificaiton key derivation",
       "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/issues/4",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "cjpatton",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Since we're using SHA2 for the task ID, we might as well use HKDF-SHA2-Expand for deriving the verification key.",
       "createdAt": "2022-09-12T23:52:56Z",
-      "updatedAt": "2022-09-12T23:52:56Z",
-      "closedAt": null,
+      "updatedAt": "2022-10-05T22:30:04Z",
+      "closedAt": "2022-10-05T22:30:04Z",
       "comments": []
     },
     {
@@ -194,7 +194,7 @@
       "id": "I_kwDOH4FR585SufbV",
       "title": "Consider adding task start time in the task config",
       "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/issues/12",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "cjpatton",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -203,8 +203,8 @@
       "labels": [],
       "body": "        for case1, isn't the task_expiration sufficient? I'm not convinced a start time is the solution but I'm curious how this start time looks like, perhaps we can keep the current PR text and create another PR to address this?\r\n\r\n_Originally posted by @wangshan in https://github.com/wangshan/draft-wang-ppm-dap-taskprov/pull/9#discussion_r981301881_\r\n      ",
       "createdAt": "2022-09-27T15:02:49Z",
-      "updatedAt": "2022-09-28T19:16:32Z",
-      "closedAt": null,
+      "updatedAt": "2022-10-05T02:39:12Z",
+      "closedAt": "2022-10-05T02:39:12Z",
       "comments": [
         {
           "author": "cjpatton",
@@ -212,6 +212,13 @@
           "body": "@wangshan and I disussed this offline: The reason one wants to know the task lifetime is to provision storage and to prevent clients' measurements from being over exposed over time. In both cases it's sufficient to use the time at which the task was \"opted-in\" to.\r\n\r\nAdd this to  considerations.",
           "createdAt": "2022-09-28T19:16:32Z",
           "updatedAt": "2022-09-28T19:16:32Z"
+        },
+        {
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I started thinking about what to write here, and I came to the conclusion that there's not much to say here. We already say explicitly that party entities MAY opt out if they decide the task will live too long.",
+          "createdAt": "2022-10-05T02:39:12Z",
+          "updatedAt": "2022-10-05T02:39:12Z"
         }
       ]
     },
@@ -220,7 +227,7 @@
       "id": "I_kwDOH4FR585Sukyv",
       "title": "Clean up a security consideration",
       "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/issues/13",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "cjpatton",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -229,8 +236,8 @@
       "labels": [],
       "body": "        Yes, in the core protocol, client has nothing to lie about task provision, since task has been provisioned before client knows about it. I think the main point is malicious client who wants to send fake extension data will never be mixed with clients that have legitimate task configurations.\r\n\r\n_Originally posted by @wangshan in https://github.com/wangshan/draft-wang-ppm-dap-taskprov/pull/9#discussion_r980545492_\r\n      ",
       "createdAt": "2022-09-27T15:16:38Z",
-      "updatedAt": "2022-09-27T15:17:10Z",
-      "closedAt": null,
+      "updatedAt": "2022-10-05T22:29:36Z",
+      "closedAt": "2022-10-05T22:29:36Z",
       "comments": []
     }
   ],
@@ -2515,6 +2522,179 @@
           "body": "",
           "createdAt": "2022-09-30T00:09:42Z",
           "updatedAt": "2022-09-30T00:09:42Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "id": "PR_kwDOH4FR585ALY5u",
+      "title": "Merge pollution security considerations",
+      "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/pull/18",
+      "state": "MERGED",
+      "author": "cjpatton",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #13.",
+      "createdAt": "2022-10-05T02:28:02Z",
+      "updatedAt": "2022-10-05T22:29:36Z",
+      "baseRepository": "wangshan/draft-wang-ppm-dap-taskprov",
+      "baseRefName": "main",
+      "baseRefOid": "5eb0ba3c7ac9b3c1498e953da233f0c3e5233faa",
+      "headRepository": "wangshan/draft-wang-ppm-dap-taskprov",
+      "headRefName": "cjpatton/13",
+      "headRefOid": "8b959e2c9b91bd3c06601cb2b9992158e3917571",
+      "closedAt": "2022-10-05T22:29:35Z",
+      "mergedAt": "2022-10-05T22:29:35Z",
+      "mergedBy": "cjpatton",
+      "mergeCommit": {
+        "oid": "fb3e83d59a63612d851a4eb6ffe9facf3853f514"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH4FR585Deq4e",
+          "commit": {
+            "abbreviatedOid": "8b959e2"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "I think the text looks good. But I'm not sure about the suggested mitigation in TODO. happy to approve and figure out proper mitigation later",
+          "createdAt": "2022-10-05T22:24:57Z",
+          "updatedAt": "2022-10-05T22:25:58Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "@cjpatton I'm not sure limiting number of tasks mitigate this risk. If malicious clients creates enough bad tasks, wouldn't they still achieve DOS since no new tasks can be created now.",
+              "createdAt": "2022-10-05T22:24:57Z",
+              "updatedAt": "2022-10-05T22:25:58Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585Deroi",
+          "commit": {
+            "abbreviatedOid": "8b959e2"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-10-05T22:29:31Z",
+          "updatedAt": "2022-10-05T22:29:31Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "good point",
+              "createdAt": "2022-10-05T22:29:31Z",
+              "updatedAt": "2022-10-05T22:29:31Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "id": "PR_kwDOH4FR585ALhJR",
+      "title": "Use HKDF to extract task ID and VDAF verify key",
+      "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/pull/19",
+      "state": "MERGED",
+      "author": "cjpatton",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #4.",
+      "createdAt": "2022-10-05T03:14:18Z",
+      "updatedAt": "2022-10-05T22:30:03Z",
+      "baseRepository": "wangshan/draft-wang-ppm-dap-taskprov",
+      "baseRefName": "main",
+      "baseRefOid": "5eb0ba3c7ac9b3c1498e953da233f0c3e5233faa",
+      "headRepository": "wangshan/draft-wang-ppm-dap-taskprov",
+      "headRefName": "cjpatton/4",
+      "headRefOid": "2516f374c21705b18f07bfc271655a94dbc1e47f",
+      "closedAt": "2022-10-05T22:30:03Z",
+      "mergedAt": "2022-10-05T22:30:03Z",
+      "mergedBy": "cjpatton",
+      "mergeCommit": {
+        "oid": "95e36371898d77592993d6c5ae1ce92aa697e7fc"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH4FR585Dephc",
+          "commit": {
+            "abbreviatedOid": "2516f37"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2022-10-05T22:16:44Z",
+          "updatedAt": "2022-10-05T22:16:44Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 20,
+      "id": "PR_kwDOH4FR585AQDDT",
+      "title": "Editorial changes",
+      "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/pull/20",
+      "state": "MERGED",
+      "author": "wangshan",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2022-10-05T22:58:32Z",
+      "updatedAt": "2022-10-05T23:40:27Z",
+      "baseRepository": "wangshan/draft-wang-ppm-dap-taskprov",
+      "baseRefName": "main",
+      "baseRefOid": "95e36371898d77592993d6c5ae1ce92aa697e7fc",
+      "headRepository": "wangshan/draft-wang-ppm-dap-taskprov",
+      "headRefName": "editorial-for-draft00",
+      "headRefOid": "52a3739cb6fc38008a84d1a4867a3c0c85178e55",
+      "closedAt": "2022-10-05T23:40:27Z",
+      "mergedAt": "2022-10-05T23:40:27Z",
+      "mergedBy": "wangshan",
+      "mergeCommit": {
+        "oid": "65b4eac4e13d3854e39ce32562ac495821bf29c6"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH4FR585DewZ1",
+          "commit": {
+            "abbreviatedOid": "52a3739"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-10-05T23:00:00Z",
+          "updatedAt": "2022-10-05T23:00:00Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "I thought this helps markdown rendering, apparently not",
+              "createdAt": "2022-10-05T23:00:00Z",
+              "updatedAt": "2022-10-05T23:00:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585DeykO",
+          "commit": {
+            "abbreviatedOid": "52a3739"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-10-05T23:15:41Z",
+          "updatedAt": "2022-10-05T23:15:41Z",
           "comments": []
         }
       ]
