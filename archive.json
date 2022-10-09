@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-10-06T01:27:57.067783+00:00",
+  "timestamp": "2022-10-09T01:44:17.865603+00:00",
   "repo": "wangshan/draft-wang-ppm-dap-taskprov",
   "labels": [
     {
@@ -2696,6 +2696,99 @@
           "createdAt": "2022-10-05T23:15:41Z",
           "updatedAt": "2022-10-05T23:15:41Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 21,
+      "id": "PR_kwDOH4FR585AWzNS",
+      "title": "Address global HPKE config - Issue #11",
+      "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/pull/21",
+      "state": "OPEN",
+      "author": "junyechen1996",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2022-10-06T23:59:39Z",
+      "updatedAt": "2022-10-07T03:30:45Z",
+      "baseRepository": "wangshan/draft-wang-ppm-dap-taskprov",
+      "baseRefName": "main",
+      "baseRefOid": "65b4eac4e13d3854e39ce32562ac495821bf29c6",
+      "headRepository": "junyechen1996/draft-wang-ppm-dap-taskprov",
+      "headRefName": "junyec/global-hpke-config",
+      "headRefOid": "5f27d13fc3101360ce9e6811f06c91ecd73f145c",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "junyechen1996",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> I'm not sure \"SHOULD use a global config\" is the right guidance. It's possible that a single Aggregator would support taskprov tasks as well as non-taskprov tasks. Indeed, an Aggregator might want to be able to enforce key separation between tasks that are provisioned by taskprov and those that are not. Perhaps we can try to be more specific about this guidance?\r\n\r\nI added some text to recommend an Aggregator \"MAY continue to support per-task HPKE configurations for other tasks that are configured out-of-band\". Let me know if this makes things clearer.\r\n\r\n> \r\n> Another more minor issue: An Aggregator might want to periodically rotate the HPKE config it advertises to taskprov Clients.\r\n\r\nI think this can be up to the Aggregator, because key rotation needs to happen for per-task HPKE config as well. I can add some text to recommend key rotation though, let me know what you think.",
+          "createdAt": "2022-10-07T03:30:18Z",
+          "updatedAt": "2022-10-07T03:30:18Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH4FR585DlCB2",
+          "commit": {
+            "abbreviatedOid": "f997686"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "I'm not sure \"SHOULD use a global config\" is the right guidance. It's possible that a single Aggregator would support taskprov tasks as well as non-taskprov tasks. Indeed, an Aggregator might want to be able to enforce key separation between tasks that are provisioned by taskprov and those that are not. Perhaps we can try to be more specific about this guidance?\r\n\r\nAnother more minor issue: An Aggregator might want to periodically rotate the HPKE config it advertises to taskprov Clients.",
+          "createdAt": "2022-10-07T01:03:34Z",
+          "updatedAt": "2022-10-07T01:13:48Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "```suggestion\r\nsending reports. (See HPKE Configuration Request in\r\n```",
+              "createdAt": "2022-10-07T01:03:34Z",
+              "updatedAt": "2022-10-07T01:12:13Z"
+            },
+            {
+              "originalPosition": 11,
+              "body": "```suggestion\r\nSHOULD support a global HPKE configuration independent of the task ID, because\r\n```",
+              "createdAt": "2022-10-07T01:05:23Z",
+              "updatedAt": "2022-10-07T01:12:13Z"
+            },
+            {
+              "originalPosition": 5,
+              "body": "editorial: I suggest reworking this so that all of the motivation is in the first paagragh, then all normative text follows:\r\n\r\n> Clients need to know the HPKE configuration prior to uploading reports, but ...\r\n>\r\n> To mitigate this issue, Aggregators SHOULD ...\r\n>\r\n> In addition, Clients SHOULD NOT ...",
+              "createdAt": "2022-10-07T01:07:52Z",
+              "updatedAt": "2022-10-07T01:12:39Z"
+            },
+            {
+              "originalPosition": 15,
+              "body": "There is no reason to repeat the endpoint format here. The more we can refer to the DAP draft as the source of truth, the better.",
+              "createdAt": "2022-10-07T01:08:40Z",
+              "updatedAt": "2022-10-07T01:12:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585DlViM",
+          "commit": {
+            "abbreviatedOid": "f997686"
+          },
+          "author": "junyechen1996",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-10-07T03:26:51Z",
+          "updatedAt": "2022-10-07T03:26:51Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Good point, there are three paragraphs now: 1. describe the issue of specifying `task_id` in `/hpke_config`, 2. Aggregator's recommended behavior, 3. Client's recommended behavior.",
+              "createdAt": "2022-10-07T03:26:51Z",
+              "updatedAt": "2022-10-07T03:30:45Z"
+            }
+          ]
         }
       ]
     }
