@@ -84,9 +84,7 @@ Table of Contents
    7.  Collector Behavior
    8.  Security Considerations
    9.  IANA Considerations
-   10. References
-     10.1.  Normative References
-     10.2.  Informative References
+   10. Normative References
    Contributors
    Authors' Addresses
 
@@ -518,9 +516,7 @@ Table of Contents
       very least we'll need to allocate a codepoint) but we can leave
       this blank for now.
 
-10.  References
-
-10.1.  Normative References
+10.  Normative References
 
    [DAP]      Geoghegan, T., Patton, C., Rescorla, E., and C. A. Wood,
               "Distributed Aggregation Protocol for Privacy Preserving
@@ -543,17 +539,15 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
+   [RFC9180]  Barnes, R., Bhargavan, K., Lipp, B., and C. Wood, "Hybrid
+              Public Key Encryption", RFC 9180, DOI 10.17487/RFC9180,
+              February 2022, <https://www.rfc-editor.org/rfc/rfc9180>.
+
    [VDAF]     Barnes, R., Patton, C., and P. Schoppmann, "Verifiable
               Distributed Aggregation Functions", Work in Progress,
               Internet-Draft, draft-irtf-cfrg-vdaf-03, 24 August 2022,
               <https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-
               vdaf-03>.
-
-10.2.  Informative References
-
-   [RFC9180]  Barnes, R., Bhargavan, K., Lipp, B., and C. Wood, "Hybrid
-              Public Key Encryption", RFC 9180, DOI 10.17487/RFC9180,
-              February 2022, <https://www.rfc-editor.org/rfc/rfc9180>.
 
 Contributors
 
