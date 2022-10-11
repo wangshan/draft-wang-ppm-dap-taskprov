@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-10-09T01:44:17.865603+00:00",
+  "timestamp": "2022-10-11T01:43:36.850813+00:00",
   "repo": "wangshan/draft-wang-ppm-dap-taskprov",
   "labels": [
     {
@@ -2711,7 +2711,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2022-10-06T23:59:39Z",
-      "updatedAt": "2022-10-07T03:30:45Z",
+      "updatedAt": "2022-10-11T00:23:11Z",
       "baseRepository": "wangshan/draft-wang-ppm-dap-taskprov",
       "baseRefName": "main",
       "baseRefOid": "65b4eac4e13d3854e39ce32562ac495821bf29c6",
@@ -2787,6 +2787,38 @@
               "body": "Good point, there are three paragraphs now: 1. describe the issue of specifying `task_id` in `/hpke_config`, 2. Aggregator's recommended behavior, 3. Client's recommended behavior.",
               "createdAt": "2022-10-07T03:26:51Z",
               "updatedAt": "2022-10-07T03:30:45Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585Dv5ah",
+          "commit": {
+            "abbreviatedOid": "5f27d13"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-10-11T00:12:14Z",
+          "updatedAt": "2022-10-11T00:23:11Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "It's best to avoid writing text that refers to specific constructions in the base protocol. Suppose for example that the core protocol changed the endpoint to `/get_that_cool_hpke_config`: Then we would have to update this reference in-kind. My suggestion avoids this.\r\n```suggestion\r\n`task_prov` extension, if a Client requests the Aggregator's HPKE configuration\r\nwith the task ID computed as described in {{construct-task-id}}, the\r\n```",
+              "createdAt": "2022-10-11T00:12:14Z",
+              "updatedAt": "2022-10-11T00:23:11Z"
+            },
+            {
+              "originalPosition": 23,
+              "body": "I think the reason is clear at this point.\r\n\r\n```suggestion\r\n`/hpke_config` endpoint.\r\n```",
+              "createdAt": "2022-10-11T00:13:10Z",
+              "updatedAt": "2022-10-11T00:23:11Z"
+            },
+            {
+              "originalPosition": 16,
+              "body": "Re: https://github.com/wangshan/draft-wang-ppm-dap-taskprov/pull/21#issuecomment-1271070699\r\n\r\nThe problem is the guidance \"SHOULD support a global HPKE configuration\". We don't want to limit the Aggregator to just one configuration, for the following reasons:\r\n1. It may want to support multiple HPKE cipher suites (say, X25519 and P256)\r\n2. It may want to support multiple HPKE keys at the same time (say, to account for clients that may have used an older config)\r\n\r\nSomething like this might be better: \"SHOULD choose which HPKE configuration to advertise to clients independent of the task ID.\"",
+              "createdAt": "2022-10-11T00:16:52Z",
+              "updatedAt": "2022-10-11T00:23:11Z"
             }
           ]
         }
