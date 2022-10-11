@@ -5,8 +5,8 @@
 Privacy Preserving Measurement                                   S. Wang
 Internet-Draft                                                Apple Inc.
 Intended status: Informational                                 C. Patton
-Expires: 8 April 2023                                         Cloudflare
-                                                          5 October 2022
+Expires: 14 April 2023                                        Cloudflare
+                                                         11 October 2022
 
 
                    In-band Task Provisioning for DAP
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 April 2023.
+   This Internet-Draft will expire on 14 April 2023.
 
 Copyright Notice
 
@@ -84,9 +84,7 @@ Table of Contents
    7.  Collector Behavior
    8.  Security Considerations
    9.  IANA Considerations
-   10. References
-     10.1.  Normative References
-     10.2.  Informative References
+   10. Normative References
    Contributors
    Authors' Addresses
 
@@ -218,38 +216,39 @@ Table of Contents
    The query_config field defines the DAP query configuration used to
    guide batch selection.  It is defined as follows:
 
-struct {
-    QueryType query_type;         /* Defined in I-D.draft-ietf-ppm-dap-02 */
-    Duration time_precision;      /* Defined in I-D.draft-ietf-ppm-dap-02 */
-    uint16 max_batch_query_count; /* Defined in I-D.draft-ietf-ppm-dap-02 */
-    uint32 min_batch_size;
-    select (QueryConfig.query_type) {
-        case time_interval: Empty;
-        case fixed_size:    uint32 max_batch_size;
-    }
-} QueryConfig;
+   struct {
+       QueryType query_type;         /* I-D.draft-ietf-ppm-dap-02 */
+       Duration time_precision;      /* I-D.draft-ietf-ppm-dap-02 */
+       uint16 max_batch_query_count; /* I-D.draft-ietf-ppm-dap-02 */
+       uint32 min_batch_size;
+       select (QueryConfig.query_type) {
+           case time_interval: Empty;
+           case fixed_size:    uint32 max_batch_size;
+       }
+   } QueryConfig;
 
    The vdaf_config defines the configuration of the VDAF in use for this
-   task.  It is structured as follows:
+   task.  It is structured as follows (codepoints are as defined in
+   [VDAF]):
 
-enum {
-    prio3_aes128_count(0x00000000),     /* I-D.draft-irtf-cfrg-vdaf-03 */
-    prio3_aes128_sum(0x00000001),       /* I-D.draft-irtf-cfrg-vdaf-03 */
-    prio3_aes128_histogram(0x00000002), /* I-D.draft-irtf-cfrg-vdaf-03 */
-    poplar1_aes128(0x00001000),         /* I-D.draft-irtf-cfrg-vdaf-03 */
-    (2^32-1)
-} VdafType;
+   enum {
+       prio3_aes128_count(0x00000000),
+       prio3_aes128_sum(0x00000001),
+       prio3_aes128_histogram(0x00000002),
+       poplar1_aes128(0x00001000),
+       (2^32-1)
+   } VdafType;
 
-struct {
-    DpConfig dp_config;
-    VdafType vdaf_type;
-    select (VdafConfig.vdaf_type) {
-        case prio3_aes128_count: Empty;
-        case prio3_aes128_sum: uint8; /* bit length of the summand */
-        case prio3_aes128_histogram: uint64<8..2^24-8>; /* bucket boundaries */
-        case poplar1_aes128: uint16; /* bit length of input string */
-    }
-} VdafConfig;
+   struct {
+       DpConfig dp_config;
+       VdafType vdaf_type;
+       select (VdafConfig.vdaf_type) {
+           case prio3_aes128_count: Empty;
+           case prio3_aes128_sum: uint8; /* bit length of the summand */
+           case prio3_aes128_histogram: uint64<8..2^24-8>; /* buckets */
+           case poplar1_aes128: uint16; /* bit length of input string */
+       }
+   } VdafConfig;
 
    Apart from the VDAF-specific parameters, this structure includes a
    mechanism for differential privacy (DP).  This field, dp_config, is
@@ -374,8 +373,8 @@ struct {
       ignored.  See #334 (https://github.com/ietf-wg-ppm/draft-ietf-ppm-
       dap/issues/334) for discussion.
 
-   Otherwise, if the Leader does support the extension, it first attemps
-   to parse the payload.  If parsing fails, it MUST abort with
+   Otherwise, if the Leader does support the extension, it first
+   attempts to parse the payload.  If parsing fails, it MUST abort with
    "unrecognizedMessage".
 
    Next, it checks that the task ID included in the report matches the
@@ -494,7 +493,7 @@ struct {
    A malicious coalition of Clients might attempt to pollute an
    Aggregator's long-term storage by uploading reports for many
    (thousands or perhaps millions) of distinct tasks.  While this does
-   not direclty impact tasks used by honest Clients, it does present a
+   not directly impact tasks used by honest Clients, it does present a
    Denial-of-Service risk for the Aggregators themselves.
 
       TODO: Suggest mitigations for this.  Perhaps the Aggregators need
@@ -517,9 +516,7 @@ struct {
       very least we'll need to allocate a codepoint) but we can leave
       this blank for now.
 
-10.  References
-
-10.1.  Normative References
+10.  Normative References
 
    [DAP]      Geoghegan, T., Patton, C., Rescorla, E., and C. A. Wood,
               "Distributed Aggregation Protocol for Privacy Preserving
@@ -542,17 +539,15 @@ struct {
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
+   [RFC9180]  Barnes, R., Bhargavan, K., Lipp, B., and C. Wood, "Hybrid
+              Public Key Encryption", RFC 9180, DOI 10.17487/RFC9180,
+              February 2022, <https://www.rfc-editor.org/rfc/rfc9180>.
+
    [VDAF]     Barnes, R., Patton, C., and P. Schoppmann, "Verifiable
               Distributed Aggregation Functions", Work in Progress,
               Internet-Draft, draft-irtf-cfrg-vdaf-03, 24 August 2022,
               <https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-
               vdaf-03>.
-
-10.2.  Informative References
-
-   [RFC9180]  Barnes, R., Bhargavan, K., Lipp, B., and C. Wood, "Hybrid
-              Public Key Encryption", RFC 9180, DOI 10.17487/RFC9180,
-              February 2022, <https://www.rfc-editor.org/rfc/rfc9180>.
 
 Contributors
 
