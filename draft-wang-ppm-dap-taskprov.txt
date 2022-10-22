@@ -5,8 +5,8 @@
 Privacy Preserving Measurement                                   S. Wang
 Internet-Draft                                                Apple Inc.
 Intended status: Informational                                 C. Patton
-Expires: 15 April 2023                                        Cloudflare
-                                                         12 October 2022
+Expires: 25 April 2023                                        Cloudflare
+                                                         22 October 2022
 
 
                    In-band Task Provisioning for DAP
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 April 2023.
+   This Internet-Draft will expire on 25 April 2023.
 
 Copyright Notice
 
@@ -194,8 +194,7 @@ Table of Contents
        Url aggregator_endpoints<1..2^16-1>;
 
        /* This determines the query type for batch selection and the
-       properties that all batches for this task must have. Defined in
-       I-D.draft-ietf-ppm-dap-02. */
+       properties that all batches for this task must have. */
        QueryConfig query_config;
 
        /* Time up to which Clients are allowed to upload to this task.
