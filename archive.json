@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-10-13T01:47:16.196317+00:00",
+  "timestamp": "2022-10-23T01:44:52.310993+00:00",
   "repo": "wangshan/draft-wang-ppm-dap-taskprov",
   "labels": [
     {
@@ -246,6 +246,93 @@
       "updatedAt": "2022-10-05T22:29:36Z",
       "closedAt": "2022-10-05T22:29:36Z",
       "comments": []
+    },
+    {
+      "number": 23,
+      "id": "I_kwDOH4FR585UfH-a",
+      "title": "Decoding unrecognized message variants",
+      "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/issues/23",
+      "state": "OPEN",
+      "author": "cjpatton",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "The following messages have contents for which decoding depends on an `enum`:\r\n- VdafConfig (need to know the VdafType in order to decode the rest of the message)\r\n- DpConfig (need to know the DpMechanism in order to decode the rest of the message)\r\n- QueryConfig (need to know the QueryType in order to decode everything after min_batch_size)\r\n\r\nWhat do we do if we get a variant we don't recognize? How do we decode the rest of the message? The answer is we can't, since we don't know how many more bytes to consume. All we can do in taskprov-00 is abort with \"unrecgonizedMessage\", since we don't know how to parse.\r\n\r\nQuestion 1: Is this the intended behavior? Or would it be better \"opt-out\" by aborting with \"invalidTask\"?\r\n\r\nRegardless of the answer for taskprov-00, I think for the next version (taskprov-01) we ought to make sure messages can always be decoded, regardless of whether we know how to handle the parameters. The easiest way to do this would be to add a length prefix so that the contents can be handled as opaque blobs. This might look something like this (I'll have to double check if this is valid syntax; a similar situation arises in the TLS 1.3 record layer):\r\n\r\n```\r\nstruct {\r\n       DpConfig dp_config;\r\n       VdafType vdaf_type;\r\n+      uint16_t vdaf_param_len;\r\n       select (VdafConfig.vdaf_type) {\r\n           case prio3_aes128_count: Empty;\r\n           case prio3_aes128_sum: uint8; /* bit length of the summand */\r\n           case prio3_aes128_histogram: uint64<8..2^24-8>; /* buckets */\r\n           case poplar1_aes128: uint16; /* bit length of input string */\r\n+          default: opaque[VdafConfig.vdaf_param_len];\r\n       }\r\n   } VdafConfig;\r\n```\r\n\r\nThis came up while reviewing changes for Daphne: https://github.com/cloudflare/daphne/pull/148#discussion_r1001182181.",
+      "createdAt": "2022-10-20T23:09:56Z",
+      "updatedAt": "2022-10-22T01:25:50Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "junyechen1996",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Won't this problem also exist for DAP as well, e.g. enums like `QueryType` and `PrepareStepResult` are needed to decode the rest of the messages? Is the concern that there is no text to recommend what kind of error an aggregator should abort with?\r\n\r\nIn DAP, I don't seem to find any recommendation for `unrecognizedMessage` when an enum value is an unknown variant. Could you point me to those if there is any?",
+          "createdAt": "2022-10-20T23:25:22Z",
+          "updatedAt": "2022-10-20T23:25:22Z"
+        },
+        {
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Fair point, but I think it's more of a problem here than for core DAP:\r\n- (defined in DAP) PrepareStepResult is really quite core DAP, so we don't expect variants to be defined outside of DAP. The spec should say unrecognizedMessage on unknown variant (probably a good idea to make this explicit).\r\n- (defined in DAP) QueryType: I guess I can variants being defined outside the core protocol, but it seems somewhat unlikely, given how invasive new query types might be.\r\n- (defined here) DpMechanism: I'm not sure, but I suspect we'll have a few variants of this. Ideally they would all be defined in this spec?\r\n- (defined here) VdafType: We expect to have lots of variants of this, and I don't expect that all variants in the wild will be defined here.",
+          "createdAt": "2022-10-20T23:38:26Z",
+          "updatedAt": "2022-10-20T23:38:26Z"
+        },
+        {
+          "author": "junyechen1996",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I see, so I guess the concern is this draft doesn't have a clear guidance on what error each entity should throw when encountering an unknown enum.\r\n\r\nRegarding `DpMechanism`, it has implications on how DP noise is added on each entity (client or aggregator), we still need to define this better, but an entity in a deployment may not support all DP mechanisms, so it seems like it should opt out of the task if it cannot support a particular DP mechanism?\r\nRegarding `VdafType`, an entity may not know about all the VDAFs either, so it seems like it should opt out of the task as well?",
+          "createdAt": "2022-10-21T18:00:55Z",
+          "updatedAt": "2022-10-21T18:00:55Z"
+        },
+        {
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "body": " \r\n> Regarding `DpMechanism`, it has implications on how DP noise is added on each entity (client or aggregator), we still need to define this better, but an entity in a deployment may not support all DP mechanisms, so it seems like it should opt out of the task if it cannot support a particular DP mechanism?\r\n\r\nI agree.\r\n\r\n> Regarding `VdafType`, an entity may not know about all the VDAFs either, so it seems like it should opt out of the task as well?\r\n\r\nYes I think so.\r\n\r\nIn both cases, in taskprov-00 we'll have to abort with \"unrecog nizedMessage\". I think what we actually want is to abort with \"invalidTask\". In particular, in taskprov-01 we should:\r\n\r\n1. Makes sure DpConfig and VdafConfig can always be parsed even if the variant is not recognized.\r\n2. Say each protocol participant MUST opt-out if they don't recognize DP mechanism or VDAF type\r\n",
+          "createdAt": "2022-10-21T19:21:15Z",
+          "updatedAt": "2022-10-21T19:21:15Z"
+        },
+        {
+          "author": "junyechen1996",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I'm not sure about this requirement:\r\n\r\n> Makes sure DpConfig and VdafConfig can always be parsed even if the variant is not recognized.\r\n\r\nWon't DAP face this issue as well? For example, `PrepareStepResult` is an unrecognized enum (helper just sends this back intentionally), the rest of `PrepareStep` can't be parsed.",
+          "createdAt": "2022-10-21T19:39:20Z",
+          "updatedAt": "2022-10-21T19:39:20Z"
+        },
+        {
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Again, I think the concern for PrepareStepResult is not comparable because we don't expect new variants of PrepareStep to appear in the wild. ",
+          "createdAt": "2022-10-21T20:53:26Z",
+          "updatedAt": "2022-10-21T20:53:26Z"
+        },
+        {
+          "author": "junyechen1996",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I think I see the motivation better after our discussion about an unknown `DpMechanism` in `VdafConfig`... so an aggregator can parse the whole `TaskConfig`, but then decide whether it should opt in or out of the task. For example, even though an aggregator doesn't know what `DpMechanism` that is, it can still run the VDAF (because it may not need the `DpMechanism`), so the aggregator may still opt into the task?",
+          "createdAt": "2022-10-22T00:52:39Z",
+          "updatedAt": "2022-10-22T00:52:39Z"
+        },
+        {
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "body": "That's a really good point. If I don't recognize the VDAF, then there is nothing I can do but opt out; but if I don't recognize the DP mechanism, it's possible that I'm actually supposed to ignore it. But how would I know that, unless I know the mechanism?",
+          "createdAt": "2022-10-22T01:02:14Z",
+          "updatedAt": "2022-10-22T01:02:14Z"
+        },
+        {
+          "author": "junyechen1996",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> If I don't recognize the VDAF, then there is nothing I can do but opt out;\r\n\r\nCertainly.\r\n\r\n> if I don't recognize the DP mechanism, it's possible that I'm actually supposed to ignore it. But how would I know that, unless I know the mechanism?\r\n\r\nI don't have a clear answer to this to be honest :) because DP is still vaguely defined in the DAP/VDAF context as of today. An unknown `DpMechanism` may not matter to an aggregator when it executes the VDAF, because some VDAFs may choose to only ask clients to add local DP, so there is no need for aggregators to add DP, if minimum batch size is already met. In fact, in Prio2 or Prio3Aes128CountVec, there is no guidance on how central DP is applied yet, so an aggregator has no choice but to ignore `DpMechanism`. A task \"Author\" simply logs the `DpMechanism` for transparency reasons, so clients are aware of what kind of overall DP guarantee they can get by participating in the task.",
+          "createdAt": "2022-10-22T01:14:58Z",
+          "updatedAt": "2022-10-22T01:19:17Z"
+        },
+        {
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I would suspect that, even if the DP mechanism is entirely local to the client, an aggregator may wish to opt-out if it decides the degree of privacy that is provided is too low. Of course, this decision process is beyond the scope of this document. The main thing for this issue, IMO, is to separate \"I don't know how to parse this\" from \"I don't know what to do with this\".",
+          "createdAt": "2022-10-22T01:25:31Z",
+          "updatedAt": "2022-10-22T01:25:50Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -2977,6 +3064,238 @@
           "body": "",
           "createdAt": "2022-10-11T23:16:54Z",
           "updatedAt": "2022-10-11T23:16:54Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 24,
+      "id": "PR_kwDOH4FR585BTwWI",
+      "title": "Fix an inaccurate comment",
+      "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/pull/24",
+      "state": "MERGED",
+      "author": "cjpatton",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "QueryConfig is defined in this spec, not DAP-02.\r\n\r\nThanks to @bhalleycf for flagging.",
+      "createdAt": "2022-10-21T19:17:05Z",
+      "updatedAt": "2022-10-22T01:03:01Z",
+      "baseRepository": "wangshan/draft-wang-ppm-dap-taskprov",
+      "baseRefName": "main",
+      "baseRefOid": "3dfa8a993eb134c1b79e0c2b202e75d456e4e131",
+      "headRepository": "wangshan/draft-wang-ppm-dap-taskprov",
+      "headRefName": "cjpatton/editorial/3",
+      "headRefOid": "6810164c9cf7fef9f3d6fddd54dce833d052c417",
+      "closedAt": "2022-10-22T01:03:01Z",
+      "mergedAt": "2022-10-22T01:03:01Z",
+      "mergedBy": "cjpatton",
+      "mergeCommit": {
+        "oid": "c5ff4f8a0410923c7ff827d0c6641efddd719091"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH4FR585EpbDv",
+          "commit": {
+            "abbreviatedOid": "6810164"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-10-22T00:59:39Z",
+          "updatedAt": "2022-10-22T00:59:39Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 25,
+      "id": "PR_kwDOH4FR585BUkYT",
+      "title": "Handle unrecognized VDAFs or DP mechanisms as \"invalidTask\"",
+      "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/pull/25",
+      "state": "OPEN",
+      "author": "cjpatton",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #23.\r\n\r\nTo do so, we need to ensure that VdafConfig and DpConfig can always be parsed properly.",
+      "createdAt": "2022-10-22T00:34:27Z",
+      "updatedAt": "2022-10-22T01:44:40Z",
+      "baseRepository": "wangshan/draft-wang-ppm-dap-taskprov",
+      "baseRefName": "main",
+      "baseRefOid": "f5967d68f853640087864bbbb76512d08fc4a760",
+      "headRepository": "wangshan/draft-wang-ppm-dap-taskprov",
+      "headRefName": "cjpatton/23/1",
+      "headRefOid": "ec5a0f743df0e7bd3e09eaddf36ad2c9ff881650",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 26,
+      "id": "PR_kwDOH4FR585BUlU0",
+      "title": "Use \"dap-taskprov\" for the salt constant",
+      "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/pull/26",
+      "state": "MERGED",
+      "author": "cjpatton",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "We use \"dap-taskprov-00\" right now, the idea being that we would revise this to \"dap-taskprov-01\" for the next draft. Shan suggests this might end up being a footgun when we have to update to the next draft.",
+      "createdAt": "2022-10-22T00:38:52Z",
+      "updatedAt": "2022-10-22T01:36:46Z",
+      "baseRepository": "wangshan/draft-wang-ppm-dap-taskprov",
+      "baseRefName": "main",
+      "baseRefOid": "3dfa8a993eb134c1b79e0c2b202e75d456e4e131",
+      "headRepository": "wangshan/draft-wang-ppm-dap-taskprov",
+      "headRefName": "cjpatton/taskprov-01/1",
+      "headRefOid": "c4fa71f87826b4786dd9f26729da951e39588680",
+      "closedAt": "2022-10-22T01:36:45Z",
+      "mergedAt": "2022-10-22T01:36:45Z",
+      "mergedBy": "wangshan",
+      "mergeCommit": {
+        "oid": "f5967d68f853640087864bbbb76512d08fc4a760"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH4FR585EpaFP",
+          "commit": {
+            "abbreviatedOid": "c4fa71f"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-10-22T00:39:43Z",
+          "updatedAt": "2022-10-22T00:39:43Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "I have no objection to this change. If we need a hard-break between versions, then we can always update the extension codepoint.",
+              "createdAt": "2022-10-22T00:39:43Z",
+              "updatedAt": "2022-10-22T00:39:43Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585EpbCe",
+          "commit": {
+            "abbreviatedOid": "c4fa71f"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-10-22T00:58:58Z",
+          "updatedAt": "2022-10-22T00:58:58Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 27,
+      "id": "PR_kwDOH4FR585BUmK5",
+      "title": "Use SHA-256() for deriving the task ID",
+      "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/pull/27",
+      "state": "OPEN",
+      "author": "cjpatton",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2022-10-22T00:51:12Z",
+      "updatedAt": "2022-10-22T01:44:00Z",
+      "baseRepository": "wangshan/draft-wang-ppm-dap-taskprov",
+      "baseRefName": "main",
+      "baseRefOid": "f5967d68f853640087864bbbb76512d08fc4a760",
+      "headRepository": "wangshan/draft-wang-ppm-dap-taskprov",
+      "headRefName": "cjpatton/taskprov-01/2",
+      "headRefOid": "a95f6375f2c1f44c494fadf6cb314db32f9a3eaa",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH4FR585Epa02",
+          "commit": {
+            "abbreviatedOid": "50117f5"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-10-22T00:58:09Z",
+          "updatedAt": "2022-10-22T00:58:09Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 28,
+      "id": "PR_kwDOH4FR585BUmUv",
+      "title": "QueryConfig: Move type byte to just before variant",
+      "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/pull/28",
+      "state": "MERGED",
+      "author": "cjpatton",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This allows us to avoid matching on the type byte more than once in code.",
+      "createdAt": "2022-10-22T00:53:52Z",
+      "updatedAt": "2022-10-22T01:36:29Z",
+      "baseRepository": "wangshan/draft-wang-ppm-dap-taskprov",
+      "baseRefName": "main",
+      "baseRefOid": "3dfa8a993eb134c1b79e0c2b202e75d456e4e131",
+      "headRepository": "wangshan/draft-wang-ppm-dap-taskprov",
+      "headRefName": "cjpatton/taskprov-01/3",
+      "headRefOid": "a1572aba79c36b67bf25098462320fcb2a75e5b2",
+      "closedAt": "2022-10-22T01:36:29Z",
+      "mergedAt": "2022-10-22T01:36:29Z",
+      "mergedBy": "wangshan",
+      "mergeCommit": {
+        "oid": "ab2062e99764d646571e56595070aca8a103dd58"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOH4FR585Epaul",
+          "commit": {
+            "abbreviatedOid": "a1572ab"
+          },
+          "author": "cjpatton",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-10-22T00:54:52Z",
+          "updatedAt": "2022-10-22T00:54:53Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "Thanks to @bhalleycf for pointing this awkwardness out.",
+              "createdAt": "2022-10-22T00:54:53Z",
+              "updatedAt": "2022-10-22T00:54:53Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOH4FR585EpbGs",
+          "commit": {
+            "abbreviatedOid": "a1572ab"
+          },
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-10-22T01:01:06Z",
+          "updatedAt": "2022-10-22T01:01:06Z",
           "comments": []
         }
       ]
