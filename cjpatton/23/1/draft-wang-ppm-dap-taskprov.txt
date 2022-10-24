@@ -341,16 +341,17 @@ Table of Contents
        but the task configuration disseminated by the Author does not
        match the existing configuration.
 
-   2.  The VDAF, DP, or query configuration is deemed insufficient for
+   2.  The VDAF type or DP mechanism is not recognized.
+
+   3.  The VDAF, DP, or query configuration is deemed insufficient for
        privacy.
 
-   3.  A secure connection to one or both of the Aggregator endpoints
+   4.  A secure connection to one or both of the Aggregator endpoints
        could not be established.
 
-   4.  The task lifetime is too long.
+   5.  The task lifetime is too long.
 
-   A protocol participant MUST opt out if the task has expired or if it
-   does not recognize the VDAF type or DP mechanism.
+   A protocol participant MUST opt out if the task has expired.
 
    The behavior of each protocol participant is determined by whether or
    not they opt in to a task.

@@ -1489,16 +1489,17 @@ is unrecognized and therefore corresponds to a new task.<a href="#section-3.3-1"
 configuration disseminated by the Author does not match the existing
 configuration.<a href="#section-3.3-3.1" class="pilcrow">¶</a>
 </li>
-          <li id="section-3.3-3.2">The VDAF, DP, or query configuration is deemed insufficient for privacy.<a href="#section-3.3-3.2" class="pilcrow">¶</a>
+          <li id="section-3.3-3.2">The VDAF type or DP mechanism is not recognized.<a href="#section-3.3-3.2" class="pilcrow">¶</a>
 </li>
-          <li id="section-3.3-3.3">A secure connection to one or both of the Aggregator endpoints could not be
-established.<a href="#section-3.3-3.3" class="pilcrow">¶</a>
+          <li id="section-3.3-3.3">The VDAF, DP, or query configuration is deemed insufficient for privacy.<a href="#section-3.3-3.3" class="pilcrow">¶</a>
 </li>
-          <li id="section-3.3-3.4">The task lifetime is too long.<a href="#section-3.3-3.4" class="pilcrow">¶</a>
+          <li id="section-3.3-3.4">A secure connection to one or both of the Aggregator endpoints could not be
+established.<a href="#section-3.3-3.4" class="pilcrow">¶</a>
+</li>
+          <li id="section-3.3-3.5">The task lifetime is too long.<a href="#section-3.3-3.5" class="pilcrow">¶</a>
 </li>
         </ol>
-<p id="section-3.3-4">A protocol participant <span class="bcp14">MUST</span> opt out if the task has expired or if it does not
-recognize the VDAF type or DP mechanism.<a href="#section-3.3-4" class="pilcrow">¶</a></p>
+<p id="section-3.3-4">A protocol participant <span class="bcp14">MUST</span> opt out if the task has expired.<a href="#section-3.3-4" class="pilcrow">¶</a></p>
 <p id="section-3.3-5">The behavior of each protocol participant is determined by whether or not they
 opt in to a task.<a href="#section-3.3-5" class="pilcrow">¶</a></p>
 </section>
