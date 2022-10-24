@@ -5,8 +5,8 @@
 Privacy Preserving Measurement                                   S. Wang
 Internet-Draft                                                Apple Inc.
 Intended status: Informational                                 C. Patton
-Expires: 25 April 2023                                        Cloudflare
-                                                         22 October 2022
+Expires: 27 April 2023                                        Cloudflare
+                                                         24 October 2022
 
 
                    In-band Task Provisioning for DAP
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 April 2023.
+   This Internet-Draft will expire on 27 April 2023.
 
 Copyright Notice
 
@@ -292,13 +292,10 @@ Table of Contents
    When using the task_prov extension, the task ID is computed as
    follows:
 
-   task_id = HKDF-Extract(task_prov_salt, task_config)
+   task_id = SHA-256(task_config)
 
    where task_config is the TaskConfig structure disseminated by the
-   Author.  String task_prov_salt is defined to be the SHA-256 hash of
-   the octet string "dap-taskprov".  Function HKDF-Extract() denotes the
-   HKDF extraction function defined in [RFC5869] instantiated with SHA-
-   256.
+   Author.  Function SHA-256() is as defined in [SHS].
 
 3.2.  Deriving the VDAF Verification Key
 
@@ -324,7 +321,8 @@ Table of Contents
        VERIFY_KEY_SIZE,     # L
    )
 
-   where task_prov_salt and task_id are as defined in Section 3.1.
+   where task_prov_salt is defined to be the SHA-256 hash of the octet
+   string "dap-taskprov" and task_id is as defined in Section 3.1.
    Functions HKDF-Extract() and HKDF-Expand() are as defined in
    [RFC5869].  Both functions are instantiated with SHA-256.
 
@@ -576,6 +574,8 @@ Table of Contents
    [RFC9180]  Barnes, R., Bhargavan, K., Lipp, B., and C. Wood, "Hybrid
               Public Key Encryption", RFC 9180, DOI 10.17487/RFC9180,
               February 2022, <https://www.rfc-editor.org/rfc/rfc9180>.
+
+   [SHS]      "Secure Hash Standard", FIPS PUB 180-4 , 4 August 2015.
 
    [VDAF]     Barnes, R., Patton, C., and P. Schoppmann, "Verifiable
               Distributed Aggregation Functions", Work in Progress,
