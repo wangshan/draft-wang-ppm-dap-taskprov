@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-10-23T01:44:52.310993+00:00",
+  "timestamp": "2022-10-25T01:54:06.109040+00:00",
   "repo": "wangshan/draft-wang-ppm-dap-taskprov",
   "labels": [
     {
@@ -47,6 +47,16 @@
       "name": "wontfix",
       "description": "This will not be worked on",
       "color": "ffffff"
+    },
+    {
+      "name": "draft-02",
+      "description": "",
+      "color": "006b75"
+    },
+    {
+      "name": "draft-01",
+      "description": "",
+      "color": "BE3365"
     }
   ],
   "issues": [
@@ -3077,10 +3087,12 @@
       "author": "cjpatton",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "draft-01"
+      ],
       "body": "QueryConfig is defined in this spec, not DAP-02.\r\n\r\nThanks to @bhalleycf for flagging.",
       "createdAt": "2022-10-21T19:17:05Z",
-      "updatedAt": "2022-10-22T01:03:01Z",
+      "updatedAt": "2022-10-24T23:10:16Z",
       "baseRepository": "wangshan/draft-wang-ppm-dap-taskprov",
       "baseRefName": "main",
       "baseRefOid": "3dfa8a993eb134c1b79e0c2b202e75d456e4e131",
@@ -3119,16 +3131,18 @@
       "author": "cjpatton",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "draft-02"
+      ],
       "body": "Closes #23.\r\n\r\nTo do so, we need to ensure that VdafConfig and DpConfig can always be parsed properly.",
       "createdAt": "2022-10-22T00:34:27Z",
-      "updatedAt": "2022-10-22T01:44:40Z",
+      "updatedAt": "2022-10-24T22:49:32Z",
       "baseRepository": "wangshan/draft-wang-ppm-dap-taskprov",
       "baseRefName": "main",
-      "baseRefOid": "f5967d68f853640087864bbbb76512d08fc4a760",
+      "baseRefOid": "7ffa937d6ea20b85b7d7d944dd439009382fa9d9",
       "headRepository": "wangshan/draft-wang-ppm-dap-taskprov",
       "headRefName": "cjpatton/23/1",
-      "headRefOid": "ec5a0f743df0e7bd3e09eaddf36ad2c9ff881650",
+      "headRefOid": "33785bf3efb272236bacaaf5203ed50b3a555be6",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -3145,10 +3159,12 @@
       "author": "cjpatton",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "draft-01"
+      ],
       "body": "We use \"dap-taskprov-00\" right now, the idea being that we would revise this to \"dap-taskprov-01\" for the next draft. Shan suggests this might end up being a footgun when we have to update to the next draft.",
       "createdAt": "2022-10-22T00:38:52Z",
-      "updatedAt": "2022-10-22T01:36:46Z",
+      "updatedAt": "2022-10-24T23:10:17Z",
       "baseRepository": "wangshan/draft-wang-ppm-dap-taskprov",
       "baseRefName": "main",
       "baseRefOid": "3dfa8a993eb134c1b79e0c2b202e75d456e4e131",
@@ -3203,24 +3219,28 @@
       "id": "PR_kwDOH4FR585BUmK5",
       "title": "Use SHA-256() for deriving the task ID",
       "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/pull/27",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "cjpatton",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "draft-01"
+      ],
       "body": "",
       "createdAt": "2022-10-22T00:51:12Z",
-      "updatedAt": "2022-10-22T01:44:00Z",
+      "updatedAt": "2022-10-24T23:10:17Z",
       "baseRepository": "wangshan/draft-wang-ppm-dap-taskprov",
       "baseRefName": "main",
       "baseRefOid": "f5967d68f853640087864bbbb76512d08fc4a760",
       "headRepository": "wangshan/draft-wang-ppm-dap-taskprov",
       "headRefName": "cjpatton/taskprov-01/2",
       "headRefOid": "a95f6375f2c1f44c494fadf6cb314db32f9a3eaa",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2022-10-24T14:44:16Z",
+      "mergedAt": "2022-10-24T14:44:16Z",
+      "mergedBy": "wangshan",
+      "mergeCommit": {
+        "oid": "7ffa937d6ea20b85b7d7d944dd439009382fa9d9"
+      },
       "comments": [],
       "reviews": [
         {
@@ -3247,10 +3267,12 @@
       "author": "cjpatton",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "draft-01"
+      ],
       "body": "This allows us to avoid matching on the type byte more than once in code.",
       "createdAt": "2022-10-22T00:53:52Z",
-      "updatedAt": "2022-10-22T01:36:29Z",
+      "updatedAt": "2022-10-25T00:07:08Z",
       "baseRepository": "wangshan/draft-wang-ppm-dap-taskprov",
       "baseRefName": "main",
       "baseRefOid": "3dfa8a993eb134c1b79e0c2b202e75d456e4e131",
@@ -3263,7 +3285,15 @@
       "mergeCommit": {
         "oid": "ab2062e99764d646571e56595070aca8a103dd58"
       },
-      "comments": [],
+      "comments": [
+        {
+          "author": "wangshan",
+          "authorAssociation": "OWNER",
+          "body": "this is reverted",
+          "createdAt": "2022-10-24T23:47:38Z",
+          "updatedAt": "2022-10-24T23:47:38Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOH4FR585Epaul",
