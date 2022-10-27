@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-10-25T01:54:06.109040+00:00",
+  "timestamp": "2022-10-27T01:37:23.945345+00:00",
   "repo": "wangshan/draft-wang-ppm-dap-taskprov",
   "labels": [
     {
@@ -343,6 +343,22 @@
           "updatedAt": "2022-10-22T01:25:50Z"
         }
       ]
+    },
+    {
+      "number": 29,
+      "id": "I_kwDOH4FR585U58y1",
+      "title": "DAP Error Addition",
+      "url": "https://github.com/wangshan/draft-wang-ppm-dap-taskprov/issues/29",
+      "state": "OPEN",
+      "author": "bhalleycf",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "This is ultimately something for the DAP spec, but as it came up in the context of taskprov we thought we'd discuss it here first.  We added a boolean config variable to control whether or not taskprov was allowed, but there is no good standard DAP error for operation refused / denied / forbidden due to local policy.  Perhaps we can add such an error to the spec?\r\n",
+      "createdAt": "2022-10-26T17:55:48Z",
+      "updatedAt": "2022-10-26T17:55:48Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
