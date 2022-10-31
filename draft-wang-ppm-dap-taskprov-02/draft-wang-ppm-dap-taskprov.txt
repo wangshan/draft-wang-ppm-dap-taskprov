@@ -5,8 +5,8 @@
 Privacy Preserving Measurement                                   S. Wang
 Internet-Draft                                                Apple Inc.
 Intended status: Informational                                 C. Patton
-Expires: 3 April 2023                                         Cloudflare
-                                                       30 September 2022
+Expires: 4 May 2023                                           Cloudflare
+                                                         31 October 2022
 
 
                    In-band Task Provisioning for DAP
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 April 2023.
+   This Internet-Draft will expire on 4 May 2023.
 
 Copyright Notice
 
@@ -75,6 +75,7 @@ Table of Contents
      3.1.  Deriving the Task ID
      3.2.  Deriving the VDAF Verification Key
      3.3.  Configuring a Task
+     3.4.  Supporting HPKE Configurations Independent of Tasks
    4.  Client Behavior
    5.  Leader Behavior
      5.1.  Upload Protocol
@@ -84,9 +85,7 @@ Table of Contents
    7.  Collector Behavior
    8.  Security Considerations
    9.  IANA Considerations
-   10. References
-     10.1.  Normative References
-     10.2.  Informative References
+   10. Normative References
    Contributors
    Authors' Addresses
 
@@ -120,7 +119,7 @@ Table of Contents
    as a trusted third party: It is incumbent on all protocol
    participants to verify the task configuration disseminated by the
    Author and opt-out if the parameters are deemed insufficient for
-   privacy.  In particular, adopters of this extensions should presume
+   privacy.  In particular, adopters of this extension should presume
    the Author is under the adversary's control.  In fact, we expect in a
    real-world deployment that the Author may be implemented by one of
    the Aggregators or Collector.
@@ -195,8 +194,7 @@ Table of Contents
        Url aggregator_endpoints<1..2^16-1>;
 
        /* This determines the query type for batch selection and the
-       properties that all batches for this task must have. Defined in
-       I-D.draft-ietf-ppm-dap-02. */
+       properties that all batches for this task must have. */
        QueryConfig query_config;
 
        /* Time up to which Clients are allowed to upload to this task.
@@ -210,7 +208,7 @@ Table of Contents
    The purpose of TaskConfig is to define all parameters that are
    necessary for configuring an Aggregator.  It includes all the fields
    to be associated with a task.  (See task configuration in [DAP].)  In
-   addition to the Aggregator endpoints, maximum batch lifetime, and
+   addition to the Aggregator endpoints, maximum batch query count, and
    task expiration, the structure includes an opaque task_info field
    that is specific to a deployment.  For example, this can be a string
    describing the purpose of this task.
@@ -218,38 +216,39 @@ Table of Contents
    The query_config field defines the DAP query configuration used to
    guide batch selection.  It is defined as follows:
 
-struct {
-    QueryType query_type;         /* Defined in I-D.draft-ietf-ppm-dap-02 */
-    Duration time_precision;      /* Defined in I-D.draft-ietf-ppm-dap-02 */
-    uint16 max_batch_query_count; /* Defined in I-D.draft-ietf-ppm-dap-02 */
-    uint32 min_batch_size;
-    select (QueryConfig.query_type) {
-        case time_interval: Empty;
-        case fixed_size:    uint32 max_batch_size;
-    }
-} QueryConfig;
+   struct {
+       QueryType query_type;         /* I-D.draft-ietf-ppm-dap-02 */
+       Duration time_precision;      /* I-D.draft-ietf-ppm-dap-02 */
+       uint16 max_batch_query_count; /* I-D.draft-ietf-ppm-dap-02 */
+       uint32 min_batch_size;
+       select (QueryConfig.query_type) {
+           case time_interval: Empty;
+           case fixed_size:    uint32 max_batch_size;
+       }
+   } QueryConfig;
 
    The vdaf_config defines the configuration of the VDAF in use for this
-   task.  It is structured as follows:
+   task.  It is structured as follows (codepoints are as defined in
+   [VDAF]):
 
-enum {
-    prio3_aes128_count(0x00000000),     /* I-D.draft-irtf-cfrg-vdaf-03 */
-    prio3_aes128_sum(0x00000001),       /* I-D.draft-irtf-cfrg-vdaf-03 */
-    prio3_aes128_histogram(0x00000002), /* I-D.draft-irtf-cfrg-vdaf-03 */
-    poplar1_aes128(0x00001000),         /* I-D.draft-irtf-cfrg-vdaf-03 */
-    (2^32-1)
-} VdafType;
+   enum {
+       prio3_aes128_count(0x00000000),
+       prio3_aes128_sum(0x00000001),
+       prio3_aes128_histogram(0x00000002),
+       poplar1_aes128(0x00001000),
+       (2^32-1)
+   } VdafType;
 
-struct {
-    DpConfig dp_config;
-    VdafType vdaf_type;
-    select (VdafConfig.vdaf_type) {
-        case prio3_aes128_count: Empty;
-        case prio3_aes128_sum: uint8; /* bit length of the summand */
-        case prio3_aes128_histogram: uint64<8..2^24-8>; /* bucket boundaries */
-        case poplar1_aes128: uint16; /* bit length of input string */
-    }
-} VdafConfig;
+   struct {
+       DpConfig dp_config;
+       VdafType vdaf_type;
+       select (VdafConfig.vdaf_type) {
+           case prio3_aes128_count: Empty;
+           case prio3_aes128_sum: uint8; /* bit length of the summand */
+           case prio3_aes128_histogram: uint64<8..2^24-8>; /* buckets */
+           case poplar1_aes128: uint16; /* bit length of input string */
+       }
+   } VdafConfig;
 
    Apart from the VDAF-specific parameters, this structure includes a
    mechanism for differential privacy (DP).  This field, dp_config, is
@@ -268,7 +267,7 @@ struct {
        }
    } DpConfig;
 
-      OPEN ISSUE: Should spell out definition of DcConfig for various
+      OPEN ISSUE: Should spell out definition of DpConfig for various
       differential privacy mechanisms and parameters.  See issue #94
       (https://github.com/cfrg/draft-irtf-cfrg-vdaf/issues/94) for
       discussion.
@@ -284,17 +283,36 @@ struct {
    task_id = SHA-256(task_config)
 
    where task_config is the TaskConfig structure disseminated by the
-   Author.
-
-      OPEN ISSUE: Consider using a randomness extractor, such has HKDF-
-      Extract(), so that we can treat the task_id as pseudorandom in
-      cases where task_config has high min-entropy
-
-      TODO: Add RFC reference for SHA-256.
+   Author.  Function SHA-256() is as defined in [SHS].
 
 3.2.  Deriving the VDAF Verification Key
 
-      TODO
+   When a Leader and Helper implement the task_prov extension in the
+   context of a particular DAP deployment, they SHOULD compute the
+   shared VDAF verification key [VDAF] as described in this section.
+
+   The Aggregators are presumed to have securely exchanged a pre-shared
+   secret out-of-band.  The length of this secret MUST be 32 bytes.  Let
+   us denote this secret by verify_key_init.
+
+   Let VERIFY_KEY_SIZE denote the length of the verification key for the
+   VDAF indicated by the task configuration.  (See [VDAF], Section 5.)
+
+   The VDAF verification key used for the task is computed as follows:
+
+   verify_key = HKDF-Expand(
+       HKDF-Extract(
+           task_prov_salt,  # salt
+           verify_key_init, # IKM
+       ),
+       task_id,             # info
+       VERIFY_KEY_SIZE,     # L
+   )
+
+   where task_prov_salt is defined to be the SHA-256 hash of the octet
+   string "dap-taskprov" and task_id is as defined in Section 3.1.
+   Functions HKDF-Extract() and HKDF-Expand() are as defined in
+   [RFC5869].  Both functions are instantiated with SHA-256.
 
 3.3.  Configuring a Task
 
@@ -323,6 +341,27 @@ struct {
 
    The behavior of each protocol participant is determined by whether or
    not they opt in to a task.
+
+3.4.  Supporting HPKE Configurations Independent of Tasks
+
+   In DAP, Clients need to know the HPKE configuration of each
+   Aggregator before sending reports.  (See HPKE Configuration Request
+   in [DAP].)  However, in a DAP deployment that supports the task_prov
+   extension, if a Client requests the Aggregator's HPKE configuration
+   with the task ID computed as described in Section 3.1, the task ID
+   may not be configured in the Aggregator yet, because the Aggregator
+   is still waiting for the first Client report with the task_prov
+   extension to arrive.
+
+   To mitigate this issue, if an Aggregator wants to support the
+   task_prov extension, it SHOULD choose which HPKE configuration to
+   advertise to Clients independent of the task ID.  It MAY continue to
+   support per-task HPKE configurations for other tasks that are
+   configured out-of-band.
+
+   In addition, if a Client wants to include the task_prov extension in
+   its report, it SHOULD NOT specify the task_id parameter when
+   requesting the HPKE configuration from an Aggregator.
 
 4.  Client Behavior
 
@@ -353,8 +392,8 @@ struct {
       ignored.  See #334 (https://github.com/ietf-wg-ppm/draft-ietf-ppm-
       dap/issues/334) for discussion.
 
-   Otherwise, if the Leader does support the extension, it first attemps
-   to parse the payload.  If parsing fails, it MUST abort with
+   Otherwise, if the Leader does support the extension, it first
+   attempts to parse the payload.  If parsing fails, it MUST abort with
    "unrecognizedMessage".
 
    Next, it checks that the task ID included in the report matches the
@@ -426,7 +465,7 @@ struct {
    Section 3.1.  If not, the Helper MUST abort with "unrecognizedTask".
 
    Next, the Helper decides whether to opt in to the task as described
-   in Section 3.3.  If it opts out, it MUST abort the upload request
+   in Section 3.3.  If it opts out, it MUST abort the aggregate request
    with "invalidTask".
 
       OPEN ISSUE: In case of opt-out, would it be useful to specify how
@@ -470,21 +509,25 @@ struct {
       OPEN ISSUE: What if the Collector and Aggregators don't agree on
       the task configuration?  Decryption should fail.
 
-   A "task" now means the same task ID and same task configuration, if a
-   malicious client changes the task ID or task configuration, its
-   report will be aggregated in a different task, with other poison
-   reports from the same malicious attack.  The "good" reports will not
-   be polluted.
-
-      CP: I don't understand the threat here.  Is it that the client may
-      lie about which task its report is for?  The same is true for
-      vanilla DAP, right?
-
    A malicious coalition of Clients might attempt to pollute an
    Aggregator's long-term storage by uploading reports for many
-   (thousands or perhaps millions) of distinct tasks.
+   (thousands or perhaps millions) of distinct tasks.  While this does
+   not directly impact tasks used by honest Clients, it does present a
+   Denial-of-Service risk for the Aggregators themselves.
 
-      TODO: Suggest mitigations for this.
+      TODO: Suggest mitigations for this.  Perhaps the Aggregators need
+      to keep track of how many tasks in total they are opted in to?
+
+   The HKDF [RFC5869] extraction function is used to derive the task ID.
+   An extractor is not required for security.  In fact, a collision-
+   resistant hash function would be sufficient for our application.  The
+   choice to use an extractor is conservative in that it allows the
+   derived task ID to be treated as pseudorandom whenever the task
+   configuration itself has high min-entropy from the perspective of the
+   adversary.  However, whether this is the case depends on the specific
+   threat model.  We note that, in the the threat model for the core DAP
+   protocol, the task configuration is known to the attacker and thus
+   has no entropy.
 
 9.  IANA Considerations
 
@@ -492,9 +535,7 @@ struct {
       very least we'll need to allocate a codepoint) but we can leave
       this blank for now.
 
-10.  References
-
-10.1.  Normative References
+10.  Normative References
 
    [DAP]      Geoghegan, T., Patton, C., Rescorla, E., and C. A. Wood,
               "Distributed Aggregation Protocol for Privacy Preserving
@@ -508,21 +549,26 @@ struct {
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/rfc/rfc2119>.
 
+   [RFC5869]  Krawczyk, H. and P. Eronen, "HMAC-based Extract-and-Expand
+              Key Derivation Function (HKDF)", RFC 5869,
+              DOI 10.17487/RFC5869, May 2010,
+              <https://www.rfc-editor.org/rfc/rfc5869>.
+
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+   [RFC9180]  Barnes, R., Bhargavan, K., Lipp, B., and C. Wood, "Hybrid
+              Public Key Encryption", RFC 9180, DOI 10.17487/RFC9180,
+              February 2022, <https://www.rfc-editor.org/rfc/rfc9180>.
+
+   [SHS]      "Secure Hash Standard", FIPS PUB 180-4 , 4 August 2015.
 
    [VDAF]     Barnes, R., Patton, C., and P. Schoppmann, "Verifiable
               Distributed Aggregation Functions", Work in Progress,
               Internet-Draft, draft-irtf-cfrg-vdaf-03, 24 August 2022,
               <https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-
               vdaf-03>.
-
-10.2.  Informative References
-
-   [RFC9180]  Barnes, R., Bhargavan, K., Lipp, B., and C. Wood, "Hybrid
-              Public Key Encryption", RFC 9180, DOI 10.17487/RFC9180,
-              February 2022, <https://www.rfc-editor.org/rfc/rfc9180>.
 
 Contributors
 
