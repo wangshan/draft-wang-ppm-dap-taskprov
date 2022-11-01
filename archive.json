@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-10-27T01:37:23.945345+00:00",
+  "timestamp": "2022-11-01T01:53:28.624482+00:00",
   "repo": "wangshan/draft-wang-ppm-dap-taskprov",
   "labels": [
     {
@@ -47,11 +47,6 @@
       "name": "wontfix",
       "description": "This will not be worked on",
       "color": "ffffff"
-    },
-    {
-      "name": "draft-02",
-      "description": "",
-      "color": "006b75"
     },
     {
       "name": "draft-01",
@@ -3147,12 +3142,10 @@
       "author": "cjpatton",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
-      "labels": [
-        "draft-02"
-      ],
+      "labels": [],
       "body": "Closes #23.\r\n\r\nTo do so, we need to ensure that VdafConfig and DpConfig can always be parsed properly.",
       "createdAt": "2022-10-22T00:34:27Z",
-      "updatedAt": "2022-10-24T22:49:32Z",
+      "updatedAt": "2022-10-31T21:01:22Z",
       "baseRepository": "wangshan/draft-wang-ppm-dap-taskprov",
       "baseRefName": "main",
       "baseRefOid": "7ffa937d6ea20b85b7d7d944dd439009382fa9d9",
