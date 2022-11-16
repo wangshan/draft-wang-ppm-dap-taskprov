@@ -5,8 +5,8 @@
 Privacy Preserving Measurement                                   S. Wang
 Internet-Draft                                                Apple Inc.
 Intended status: Informational                                 C. Patton
-Expires: 4 May 2023                                           Cloudflare
-                                                         31 October 2022
+Expires: 20 May 2023                                          Cloudflare
+                                                        16 November 2022
 
 
                    In-band Task Provisioning for DAP
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 May 2023.
+   This Internet-Draft will expire on 20 May 2023.
 
 Copyright Notice
 
