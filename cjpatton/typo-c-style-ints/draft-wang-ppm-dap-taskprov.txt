@@ -5,8 +5,8 @@
 Privacy Preserving Measurement                                   S. Wang
 Internet-Draft                                                Apple Inc.
 Intended status: Informational                                 C. Patton
-Expires: 21 April 2024                                        Cloudflare
-                                                         19 October 2023
+Expires: 24 May 2024                                          Cloudflare
+                                                        21 November 2023
 
 
                    In-band Task Provisioning for DAP
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 April 2024.
+   This Internet-Draft will expire on 24 May 2024.
 
 Copyright Notice
 
@@ -234,7 +234,7 @@ Table of Contents
        Duration time_precision;      /* I-D.draft-ietf-ppm-dap-07 */
        uint16 max_batch_query_count; /* I-D.draft-ietf-ppm-dap-07 */
        uint32 min_batch_size;
-       uint16_t query_type_param_len; /* length of the remainder */
+       uint16 query_type_param_len; /* length of the remainder */
        select (QueryConfig.query_type) {
            case time_interval: Empty;
            case fixed_size:    uint32 max_batch_size;
@@ -258,7 +258,7 @@ Table of Contents
    struct {
        DpConfig dp_config;
        VdafType vdaf_type;
-       uint16_t vdaf_type_param_len; /* length of the remainder */
+       uint16 vdaf_type_param_len; /* length of the remainder */
        select (VdafConfig.vdaf_type) {
            case prio3_count:
                Empty;
@@ -290,7 +290,7 @@ Table of Contents
 
    struct {
        DpMechanism dp_mechanism;
-       uint16_t dp_mechanism_param_len; /* length of the remainder */
+       uint16 dp_mechanism_param_len; /* length of the remainder */
        select (DpConfig.dp_mechanism) {
            case none: Empty;
            default:   opaque[DpConfig.dp_mechanism_param_len];
