@@ -5,8 +5,8 @@
 Privacy Preserving Measurement                                   S. Wang
 Internet-Draft                                                Apple Inc.
 Intended status: Informational                                 C. Patton
-Expires: 26 May 2024                                          Cloudflare
-                                                        23 November 2023
+Expires: 30 May 2024                                          Cloudflare
+                                                        27 November 2023
 
 
                    In-band Task Provisioning for DAP
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 May 2024.
+   This Internet-Draft will expire on 30 May 2024.
 
 Copyright Notice
 
@@ -239,7 +239,7 @@ Table of Contents
            case time_interval: Empty;
            case fixed_size:    uint32 max_batch_size;
            default:            opaque[QueryConfig.query_type_param_len];
-       }
+       };
    } QueryConfig;
 
    The vdaf_config defines the configuration of the VDAF in use for this
@@ -275,7 +275,7 @@ Table of Contents
                uint16; /* bit length of input string */
            default:
                opaque[VdafConfig.vdaf_type_param_len];
-       }
+       };
    } VdafConfig;
 
    Apart from the VDAF-specific parameters, this structure includes a
@@ -294,7 +294,7 @@ Table of Contents
        select (DpConfig.dp_mechanism) {
            case none: Empty;
            default:   opaque[DpConfig.dp_mechanism_param_len];
-       }
+       };
    } DpConfig;
 
       OPEN ISSUE: Should spell out definition of DpConfig for various
