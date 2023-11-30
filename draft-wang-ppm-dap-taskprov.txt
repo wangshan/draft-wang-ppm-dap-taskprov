@@ -5,8 +5,8 @@
 Privacy Preserving Measurement                                   S. Wang
 Internet-Draft                                                Apple Inc.
 Intended status: Informational                                 C. Patton
-Expires: 30 May 2024                                          Cloudflare
-                                                        27 November 2023
+Expires: 2 June 2024                                          Cloudflare
+                                                        30 November 2023
 
 
                    In-band Task Provisioning for DAP
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 May 2024.
+   This Internet-Draft will expire on 2 June 2024.
 
 Copyright Notice
 
@@ -241,6 +241,13 @@ Table of Contents
            default:            opaque[QueryConfig.query_type_param_len];
        };
    } QueryConfig;
+
+   The maximum batch size for fixed_size query is optional.  If
+   query_type is fixed_size and max_batch_size is 0, Aggregator should
+   provision the task without maximum batch size limit.  Which means
+   during batch validation (Section 4.6.5.2.2 of [DAP]), Aggregator does
+   not check len(X) <= max_batch_size, where X is the set of reports
+   successfully aggregated into the batch.
 
    The vdaf_config defines the configuration of the VDAF in use for this
    task.  It is structured as follows (codepoints are as defined in
