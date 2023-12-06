@@ -5,8 +5,8 @@
 Privacy Preserving Measurement                                   S. Wang
 Internet-Draft                                                Apple Inc.
 Intended status: Informational                                 C. Patton
-Expires: 2 June 2024                                          Cloudflare
-                                                        30 November 2023
+Expires: 8 June 2024                                          Cloudflare
+                                                         6 December 2023
 
 
                    In-band Task Provisioning for DAP
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 June 2024.
+   This Internet-Draft will expire on 8 June 2024.
 
 Copyright Notice
 
@@ -238,9 +238,11 @@ Table of Contents
        select (QueryConfig.query_type) {
            case time_interval: Empty;
            case fixed_size:    uint32 max_batch_size;
-           default:            opaque[QueryConfig.query_type_param_len];
        };
    } QueryConfig;
+
+   The value query_type_param_len field MUST match length of the
+   remainder of the structure.
 
    The maximum batch size for fixed_size query is optional.  If
    query_type is fixed_size and max_batch_size is 0, Aggregator should
@@ -280,10 +282,11 @@ Table of Contents
                uint32; /* size of each proof chunk */
            case poplar1:
                uint16; /* bit length of input string */
-           default:
-               opaque[VdafConfig.vdaf_type_param_len];
        };
    } VdafConfig;
+
+   The value vdaf_type_param_len field MUST match length of the
+   remainder of the structure.
 
    Apart from the VDAF-specific parameters, this structure includes a
    mechanism for differential privacy (DP).  This field, dp_config, is
@@ -300,7 +303,6 @@ Table of Contents
        uint16 dp_mechanism_param_len; /* length of the remainder */
        select (DpConfig.dp_mechanism) {
            case none: Empty;
-           default:   opaque[DpConfig.dp_mechanism_param_len];
        };
    } DpConfig;
 
@@ -308,6 +310,9 @@ Table of Contents
       differential privacy mechanisms and parameters.  See draft draft
       (https://github.com/wangshan/draft-wang-ppm-differential-privacy)
       for discussion.
+
+   The value dp_mechansim_param_len field MUST match length of the
+   remainder of the structure.
 
    The definition of Time, Duration, Url, and QueryType follow those in
    [DAP].
