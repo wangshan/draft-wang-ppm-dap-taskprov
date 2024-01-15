@@ -5,8 +5,8 @@
 Privacy Preserving Measurement                                   S. Wang
 Internet-Draft                                                Apple Inc.
 Intended status: Informational                                 C. Patton
-Expires: 8 June 2024                                          Cloudflare
-                                                         6 December 2023
+Expires: 18 July 2024                                         Cloudflare
+                                                         15 January 2024
 
 
                    In-band Task Provisioning for DAP
@@ -51,11 +51,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 June 2024.
+   This Internet-Draft will expire on 18 July 2024.
 
 Copyright Notice
 
-   Copyright (c) 2023 IETF Trust and the persons identified as the
+   Copyright (c) 2024 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -234,15 +234,11 @@ Table of Contents
        uint16 max_batch_query_count; /* I-D.draft-ietf-ppm-dap-07 */
        uint32 min_batch_size;
        QueryType query_type;        /* I-D.draft-ietf-ppm-dap-07 */
-       uint16 query_type_param_len; /* length of the remainder */
        select (QueryConfig.query_type) {
            case time_interval: Empty;
            case fixed_size:    uint32 max_batch_size;
        };
    } QueryConfig;
-
-   The value query_type_param_len field MUST match length of the
-   remainder of the structure.
 
    The maximum batch size for fixed_size query is optional.  If
    query_type is fixed_size and max_batch_size is 0, Aggregator should
@@ -255,64 +251,48 @@ Table of Contents
    task.  It is structured as follows (codepoints are as defined in
    [VDAF]):
 
-   enum {
-       prio3_count(0x00000000),
-       prio3_sum(0x00000001),
-       prio3_sum_vec(0x00000002),
-       prio3_histogram(0x00000003),
-       poplar1(0x00001000),
-       (2^32-1)
-   } VdafType;
+enum {
+    prio3_count(0x00000000),
+    prio3_sum(0x00000001),
+    prio3_sum_vec(0x00000002),
+    prio3_histogram(0x00000003),
+    poplar1(0x00001000),
+    (2^32-1)
+} VdafType;
 
-   struct {
-       DpConfig dp_config;
-       VdafType vdaf_type;
-       uint16 vdaf_type_param_len; /* length of the remainder */
-       select (VdafConfig.vdaf_type) {
-           case prio3_count:
-               Empty;
-           case prio3_sum:
-               uint8;  /* bit length of each summand */
-           case prio3_sum_vec:
-               uint8;  /* bit length of each summand */
-               uint32; /* number of summands */
-               uint32; /* size of each proof chunk */
-           case prio3_histogram:
-               uint32; /* number of buckets */
-               uint32; /* size of each proof chunk */
-           case poplar1:
-               uint16; /* bit length of input string */
-       };
-   } VdafConfig;
+struct {
+    opaque dp_config<1..2^16-1>;  /* Encoded differential privacy parameters */
+    VdafType vdaf_type;
+    select (VdafConfig.vdaf_type) {
+        case prio3_count:
+            Empty;
+        case prio3_sum:
+            uint8;  /* bit length of each summand */
+        case prio3_sum_vec:
+            uint8;  /* bit length of each summand */
+            uint32; /* number of summands */
+            uint32; /* size of each proof chunk */
+        case prio3_histogram:
+            uint32; /* number of buckets */
+            uint32; /* size of each proof chunk */
+        case poplar1:
+            uint16; /* bit length of input string */
+    };
+} VdafConfig;
 
-   The value vdaf_type_param_len field MUST match length of the
-   remainder of the structure.
+   An extension of this draft may define additional VDAF codepoints in
+   VdafType, but if an Aggregator doesn't recognize a VDAF codepoint, it
+   MUST opt out of the task.
 
-   Apart from the VDAF-specific parameters, this structure includes a
-   mechanism for differential privacy (DP).  This field, dp_config, is
-   structured as follows:
-
-   enum {
-       reserved(0), /* Reserved for testing purposes */
-       none(1),
-       (255)
-   } DpMechanism;
-
-   struct {
-       DpMechanism dp_mechanism;
-       uint16 dp_mechanism_param_len; /* length of the remainder */
-       select (DpConfig.dp_mechanism) {
-           case none: Empty;
-       };
-   } DpConfig;
+   Apart from the VDAF-specific parameters, this structure includes an
+   opaque field dp_config to encode differential privacy (DP)
+   parameters.  This draft doesn't mandate the underlying structure for
+   this field yet.
 
       OPEN ISSUE: Should spell out definition of DpConfig for various
       differential privacy mechanisms and parameters.  See draft draft
       (https://github.com/wangshan/draft-wang-ppm-differential-privacy)
       for discussion.
-
-   The value dp_mechansim_param_len field MUST match length of the
-   remainder of the structure.
 
    The definition of Time, Duration, Url, and QueryType follow those in
    [DAP].
