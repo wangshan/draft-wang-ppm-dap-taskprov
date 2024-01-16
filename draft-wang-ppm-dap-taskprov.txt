@@ -5,8 +5,8 @@
 Privacy Preserving Measurement                                   S. Wang
 Internet-Draft                                                Apple Inc.
 Intended status: Informational                                 C. Patton
-Expires: 18 July 2024                                         Cloudflare
-                                                         15 January 2024
+Expires: 19 July 2024                                         Cloudflare
+                                                         16 January 2024
 
 
                    In-band Task Provisioning for DAP
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 July 2024.
+   This Internet-Draft will expire on 19 July 2024.
 
 Copyright Notice
 
@@ -200,10 +200,10 @@ Table of Contents
       /* Info specific for a task. */
       opaque task_info<1..2^8-1>;
 
-      /* Leader API endpoint as defined in I-D.draft-ietf-ppm-dap-07. */
+      /* Leader API endpoint as defined in I-D.draft-ietf-ppm-dap-09. */
       Url leader_aggregator_endpoint;
 
-      /* Helper API endpoint as defined in I-D.draft-ietf-ppm-dap-07. */
+      /* Helper API endpoint as defined in I-D.draft-ietf-ppm-dap-09. */
       Url helper_aggregator_endpoint;
 
       /* This determines the query type for batch selection and the
@@ -211,7 +211,7 @@ Table of Contents
       QueryConfig query_config;
 
       /* Time up to which Clients are allowed to upload to this task.
-      Defined in I-D.draft-ietf-ppm-dap-07. */
+      Defined in I-D.draft-ietf-ppm-dap-09. */
       Time task_expiration;
 
       /* Determines the VDAF type and its config parameters. */
@@ -230,10 +230,10 @@ Table of Contents
    guide batch selection.  It is defined as follows:
 
    struct {
-       Duration time_precision;      /* I-D.draft-ietf-ppm-dap-07 */
-       uint16 max_batch_query_count; /* I-D.draft-ietf-ppm-dap-07 */
+       Duration time_precision;
+       uint16 max_batch_query_count;
        uint32 min_batch_size;
-       QueryType query_type;        /* I-D.draft-ietf-ppm-dap-07 */
+       QueryType query_type;
        select (QueryConfig.query_type) {
            case time_interval: Empty;
            case fixed_size:    uint32 max_batch_size;
@@ -568,12 +568,12 @@ struct {
 
 11.  Normative References
 
-   [DAP]      Geoghegan, T., Patton, C., Rescorla, E., and C. A. Wood,
-              "Distributed Aggregation Protocol for Privacy Preserving
-              Measurement", Work in Progress, Internet-Draft, draft-
-              ietf-ppm-dap-07, 14 September 2023,
+   [DAP]      Geoghegan, T., Patton, C., Pitman, B., Rescorla, E., and
+              C. A. Wood, "Distributed Aggregation Protocol for Privacy
+              Preserving Measurement", Work in Progress, Internet-Draft,
+              draft-ietf-ppm-dap-09, 18 December 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-ppm-dap-
-              07>.
+              09>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -601,9 +601,9 @@ struct {
 
    [VDAF]     Barnes, R., Cook, D., Patton, C., and P. Schoppmann,
               "Verifiable Distributed Aggregation Functions", Work in
-              Progress, Internet-Draft, draft-irtf-cfrg-vdaf-07, 31
-              August 2023, <https://datatracker.ietf.org/doc/html/draft-
-              irtf-cfrg-vdaf-07>.
+              Progress, Internet-Draft, draft-irtf-cfrg-vdaf-08, 20
+              November 2023, <https://datatracker.ietf.org/doc/html/
+              draft-irtf-cfrg-vdaf-08>.
 
 Contributors
 
