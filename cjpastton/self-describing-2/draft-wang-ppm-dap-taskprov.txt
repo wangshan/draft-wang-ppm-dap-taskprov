@@ -208,14 +208,14 @@ Table of Contents
 
       /* This determines the query type for batch selection and the
       properties that all batches for this task must have. */
-      opaque query_config<0..2^16-1>;
+      opaque query_config<1..2^16-1>;
 
       /* Time up to which Clients are allowed to upload to this task.
       Defined in I-D.draft-ietf-ppm-dap-09. */
       Time task_expiration;
 
       /* Determines the VDAF type and its config parameters. */
-      opaque vdaf_config<0..2^16-1>;
+      opaque vdaf_config<1..2^16-1>;
   } TaskConfig;
 
    The purpose of TaskConfig is to define all parameters that are
@@ -252,7 +252,8 @@ Table of Contents
    successfully aggregated into the batch.
 
    The vdaf_config defines the configuration of the VDAF in use for this
-   task.  Its content is follows (codepoints are as defined in [VDAF]):
+   task.  Its content is as follows (codepoints are as defined in
+   [VDAF]):
 
 enum {
     prio3_count(0x00000000),
@@ -288,7 +289,7 @@ struct {
    encountered (i.e., an unimplemented VDAF).
 
    Apart from the VDAF-specific parameters, this structure includes a
-   mechanism for differential privacy (DP).  The opaaque dp_config
+   mechanism for differential privacy (DP).  The opaque dp_config
    contains the following structure:
 
    enum {

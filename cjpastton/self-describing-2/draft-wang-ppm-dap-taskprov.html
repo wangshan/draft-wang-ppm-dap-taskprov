@@ -1334,14 +1334,14 @@ struct {
 
     /* This determines the query type for batch selection and the
     properties that all batches for this task must have. */
-    opaque query_config&lt;0..2^16-1&gt;;
+    opaque query_config&lt;1..2^16-1&gt;;
 
     /* Time up to which Clients are allowed to upload to this task.
     Defined in I-D.draft-ietf-ppm-dap-09. */
     Time task_expiration;
 
     /* Determines the VDAF type and its config parameters. */
-    opaque vdaf_config&lt;0..2^16-1&gt;;
+    opaque vdaf_config&lt;1..2^16-1&gt;;
 } TaskConfig;
 </pre><a href="#section-3-4" class="pilcrow">¶</a>
 </div>
@@ -1377,7 +1377,7 @@ without maximum batch size limit. Which means during batch validation
 <code>len(X) &lt;= max_batch_size</code>, where <code>X</code> is the set of reports successfully
 aggregated into the batch.<a href="#section-3-9" class="pilcrow">¶</a></p>
 <p id="section-3-10">The <code>vdaf_config</code> defines the configuration of the VDAF in use for this task.
-Its content is follows (codepoints are as defined in <span>[<a href="#VDAF" class="cite xref">VDAF</a>]</span>):<a href="#section-3-10" class="pilcrow">¶</a></p>
+Its content is as follows (codepoints are as defined in <span>[<a href="#VDAF" class="cite xref">VDAF</a>]</span>):<a href="#section-3-10" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3-11">
 <pre>
 enum {
@@ -1414,7 +1414,7 @@ struct {
 can be decoded even if an unrecognized variant is encountered (i.e., an
 unimplemented VDAF).<a href="#section-3-12" class="pilcrow">¶</a></p>
 <p id="section-3-13">Apart from the VDAF-specific parameters, this structure includes a mechanism for
-differential privacy (DP). The opaaque <code>dp_config</code> contains the following structure:<a href="#section-3-13" class="pilcrow">¶</a></p>
+differential privacy (DP). The opaque <code>dp_config</code> contains the following structure:<a href="#section-3-13" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3-14">
 <pre>
 enum {
