@@ -5,8 +5,8 @@
 Privacy Preserving Measurement                                   S. Wang
 Internet-Draft                                                Apple Inc.
 Intended status: Informational                                 C. Patton
-Expires: 19 July 2024                                         Cloudflare
-                                                         16 January 2024
+Expires: 20 July 2024                                         Cloudflare
+                                                         17 January 2024
 
 
                    In-band Task Provisioning for DAP
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 July 2024.
+   This Internet-Draft will expire on 20 July 2024.
 
 Copyright Notice
 
@@ -267,10 +267,10 @@ struct {
         case prio3_count:
             Empty;
         case prio3_sum:
-            uint8;  /* bit length of each summand */
+            uint8;  /* bit length of the summand */
         case prio3_sum_vec:
+            uint32; /* length of the vector */
             uint8;  /* bit length of each summand */
-            uint32; /* number of summands */
             uint32; /* size of each proof chunk */
         case prio3_histogram:
             uint32; /* number of buckets */
