@@ -240,7 +240,7 @@ Table of Contents
        };
    } QueryConfig;
 
-   The lengh prefix of the query_config ensures that the QueryConfig
+   The length prefix of the query_config ensures that the QueryConfig
    structure can be decoded even if an unrecognized variant is
    encountered (i.e., an unimplemented query type).
 
@@ -283,7 +283,7 @@ struct {
     };
 } VdafConfig;
 
-   The lengh prefix of the vdaf_config ensures that the VdafConfig
+   The length prefix of the vdaf_config ensures that the VdafConfig
    structure can be decoded even if an unrecognized variant is
    encountered (i.e., an unimplemented VDAF).
 
@@ -309,9 +309,9 @@ struct {
       (https://github.com/wangshan/draft-wang-ppm-differential-privacy)
       for discussion.
 
-   The lengh prefix of the dp_config ensures that the DpConfig structure
-   can be decoded even if an unrecognized variant is encountered (i.e.,
-   an unimplemented DP mechanism).
+   The length prefix of the dp_config ensures that the DpConfig
+   structure can be decoded even if an unrecognized variant is
+   encountered (i.e., an unimplemented DP mechanism).
 
    The definition of Time, Duration, Url, and QueryType follow those in
    [DAP].
