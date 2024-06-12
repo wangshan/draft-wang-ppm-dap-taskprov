@@ -20,7 +20,7 @@ Abstract
    extension with its report, the servers will only aggregate the report
    if all parties agree on the task parameters.  This document also
    specifies an optional mechanism for in-band task provisioning that
-   makes use of the report extension.
+   builds on the report extension.
 
 About This Document
 
@@ -176,14 +176,14 @@ Table of Contents
 
 3.  The Taskbind Extension
 
-   To use Taskbind extension, the Client includes the following
+   To use the Taskbind extension, the Client includes the following
    extension in the report extensions for each Aggregator as described
    in Section 4.4.3 of [DAP]:
 
    [RFC EDITOR: Change this to the IANA-assigned codepoint.]
 
    enum {
-       taskprov(0xff00),
+       taskbind(0xff00),
        (65535)
    } ExtensionType;
 
@@ -208,19 +208,18 @@ Table of Contents
    a report with the Taskbind extension as follows.
 
    First, it looks up the ID and parameters associated with the task.
-   Note the task has already been configured.  Otherwise the Aggregator
+   Note the task has already been configured; otherwise the Aggregator
    would have already aborted the request due to not recognizing the
    task.
 
    Next, the Aggregator encodes the parameters as a TaskConfig defined
    in Section 3.1 and computes the task ID as above.  If the derived
    task ID does not match the task ID of the request, then it MUST
-   reject the report with error "invalid_message" [TODO: A more specific
-   error type may be helpful.]
+   reject the report with error "invalid_message"
 
-   During the upload flow (Section 4.4 of [DAP]), the Leader MAY abort
-   the request with "unrecognizedTask" if the derived task ID does not
-   match the task ID Of the request.
+   During the upload flow (Section 4.4 of [DAP]), the Leader SHOULD
+   abort the request with "unrecognizedTask" if the derived task ID does
+   not match the task ID Of the request.
 
 3.1.  Task Encoding
 
@@ -514,7 +513,7 @@ struct {
 
    Once the client opts into a task, it may begin uploading reports for
    the task.  Each upload request for that task MUST advertise the task
-   configuration.  The extension codepoint taskprov MUST be offered in
+   configuration.  The extension codepoint taskbind MUST be offered in
    the extensions field of both Leader and Helper's PlaintextInputShare.
    In addition, each report's task ID MUST be computed as described in
    Section 3.
@@ -548,7 +547,7 @@ struct {
    upload request as usual.
 
    During the upload flow, if the Leader's report share does not present
-   a taskprov extension type, Leader MUST abort the upload request with
+   a taskbind extension type, Leader MUST abort the upload request with
    "invalidMessage".
 
 4.7.2.  Aggregate Protocol
@@ -600,7 +599,7 @@ struct {
 
    Finally, the Helper completes the request as usual, deriving the VDAF
    verification key for the task as described in Section 4.3.  For any
-   report share that does not include the taskprov extension with an
+   report share that does not include the taskbind extension with an
    empty payload, the Helper MUST mark the report as invalid with error
    "invalid_message" and reject it.
 
