@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
-<title>In-band Task Provisioning for DAP</title>
+<title>Task Binding and In-Band Provisioning for DAP</title>
 <meta content="Shan Wang" name="author">
 <meta content="Christopher Patton" name="author">
 <meta content="
@@ -1032,7 +1032,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <table class="ears">
 <thead><tr>
 <td class="left">Internet-Draft</td>
-<td class="center">In-band Task Provisioning for DAP</td>
+<td class="center">Task Binding and In-Band Provisioning fo</td>
 <td class="right">June 2024</td>
 </tr></thead>
 <tfoot><tr>
@@ -1069,7 +1069,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </dd>
 </dl>
 </div>
-<h1 id="title">In-band Task Provisioning for DAP</h1>
+<h1 id="title">Task Binding and In-Band Provisioning for DAP</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">An extension for the Distributed Aggregation Protocol (DAP) is specified that
@@ -1150,7 +1150,7 @@ provisioning that makes use of the report extension.<a href="#section-abstract-1
             <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-conventions-and-definitions" class="internal xref">Conventions and Definitions</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-the-taskprov-extension" class="internal xref">The Taskprov Extension</a></p>
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-the-taskbind-extension" class="internal xref">The Taskbind Extension</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
                 <p id="section-toc.1-1.3.2.1.1" class="keepWithNext"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-task-encoding" class="internal xref">Task Encoding</a></p>
@@ -1158,7 +1158,7 @@ provisioning that makes use of the report extension.<a href="#section-abstract-1
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
-            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-in-band-task-provisioning-w" class="internal xref">In-band Task Provisioning with the Taskprov Extension</a></p>
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-in-band-task-provisioning-w" class="internal xref">In-band Task Provisioning with the Taskbind Extension</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
                 <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-overview" class="internal xref">Overview</a></p>
@@ -1311,10 +1311,10 @@ used:<a href="#section-2-4" class="pilcrow">¶</a></p>
 </div>
 <div id="definition">
 <section id="section-3">
-      <h2 id="name-the-taskprov-extension">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-the-taskprov-extension" class="section-name selfRef">The Taskprov Extension</a>
+      <h2 id="name-the-taskbind-extension">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-the-taskbind-extension" class="section-name selfRef">The Taskbind Extension</a>
       </h2>
-<p id="section-3-1">To use Taskprov extension, the Client includes the following extension in the
+<p id="section-3-1">To use Taskbind extension, the Client includes the following extension in the
 report extensions for each Aggregator as described in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ppm-dap-09#section-4.4.3" class="relref">Section 4.4.3</a> of [<a href="#DAP" class="cite xref">DAP</a>]</span>:<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">[RFC EDITOR: Change this to the IANA-assigned codepoint.]<a href="#section-3-2" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3-3">
@@ -1327,7 +1327,7 @@ enum {
 </div>
 <p id="section-3-4">The payload of the extension <span class="bcp14">MUST</span> be empty. If the payload is non-empty, then
 the Aggregator <span class="bcp14">MUST</span> reject the report.<a href="#section-3-4" class="pilcrow">¶</a></p>
-<p id="section-3-5">When the client uses the Taskprov extension, it computes the task ID (<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ppm-dap-09#section-4.2" class="relref">Section 4.2</a> of [<a href="#DAP" class="cite xref">DAP</a>]</span>) as follows:<a href="#section-3-5" class="pilcrow">¶</a></p>
+<p id="section-3-5">When the client uses the Taskbind extension, it computes the task ID (<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ppm-dap-09#section-4.2" class="relref">Section 4.2</a> of [<a href="#DAP" class="cite xref">DAP</a>]</span>) as follows:<a href="#section-3-5" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3-6">
 <pre>
 task_id = SHA-256(task_config)
@@ -1341,7 +1341,7 @@ ID this way ensures, in turn, that the report is only aggregated if the Client
 and Aggregator agree on the parameters. This is accomplished by the Aggregator
 behavior below.<a href="#section-3-8" class="pilcrow">¶</a></p>
 <p id="section-3-9">During aggregation (<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ppm-dap-09#section-4.5" class="relref">Section 4.5</a> of [<a href="#DAP" class="cite xref">DAP</a>]</span>), each Aggregator processes a
-report with the Taskprov extension as follows.<a href="#section-3-9" class="pilcrow">¶</a></p>
+report with the Taskbind extension as follows.<a href="#section-3-9" class="pilcrow">¶</a></p>
 <p id="section-3-10">First, it looks up the ID and parameters associated with the task. Note the
 task has already been configured. Otherwise the Aggregator would have already
 aborted the request due to not recognizing the task.<a href="#section-3-10" class="pilcrow">¶</a></p>
@@ -1492,7 +1492,7 @@ unimplemented DP mechanism).<a href="#section-3.1-14" class="pilcrow">¶</a></p>
 <div id="taskprov">
 <section id="section-4">
       <h2 id="name-in-band-task-provisioning-w">
-<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-in-band-task-provisioning-w" class="section-name selfRef">In-band Task Provisioning with the Taskprov Extension</a>
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-in-band-task-provisioning-w" class="section-name selfRef">In-band Task Provisioning with the Taskbind Extension</a>
       </h2>
 <p id="section-4-1">Before a task can be executed, it is necessary to first provision the Clients,
 Aggregators, and Collector with the task's configuration. The core DAP
@@ -1554,7 +1554,7 @@ configuration and decide whether to opt-in; if not, the task's execution halts.<
         <h3 id="name-task-advertisement">
 <a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-task-advertisement" class="section-name selfRef">Task Advertisement</a>
         </h3>
-<p id="section-4.2-1">To advertise a task to its peer, a Taskprov participant includes a header
+<p id="section-4.2-1">To advertise a task to its peer, a Taskbind participant includes a header
 "dap-taskprov" with a request incident to the task execution. The value is the
 <code>TaskConfig</code> structure defined <a href="#task-encoding" class="auto internal xref">Section 3.1</a>, expanded into its URL-safe,
 unpadded Base 64 representation as specified in Sections <a href="https://rfc-editor.org/rfc/rfc4648#section-5" class="relref">5</a> and <a href="https://rfc-editor.org/rfc/rfc4648#section-3.2" class="relref">3.2</a> of <span>[<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
@@ -1640,7 +1640,7 @@ be advertised by a Client.<a href="#section-4.5-1" class="pilcrow">¶</a></p>
 <p id="section-4.5-2">To mitigate this issue, each Aggregator <span class="bcp14">SHOULD</span> choose which HPKE configuration
 to advertise to Clients independent of the task ID. It <span class="bcp14">MAY</span> continue to support
 per-task HPKE configurations for other tasks that are configured out-of-band.<a href="#section-4.5-2" class="pilcrow">¶</a></p>
-<p id="section-4.5-3">In addition, if a Client intends to advertise a task via the Taskprov extension,
+<p id="section-4.5-3">In addition, if a Client intends to advertise a task via the Taskbind extension,
 it <span class="bcp14">SHOULD NOT</span> specify the <code>task_id</code> parameter when requesting the HPKE
 configuration from an Aggregator.<a href="#section-4.5-3" class="pilcrow">¶</a></p>
 </section>
@@ -1720,7 +1720,7 @@ the task to the Helper in every request incident to the task as described in
 <a href="#section-4.7.3" class="section-number selfRef">4.7.3. </a><a href="#name-collect-protocol" class="section-name selfRef">Collect Protocol</a>
           </h4>
 <p id="section-4.7.3-1">The Collector might issue a collect request for a task provisioned by the
-Taskprov extension prior to opting into the task. In this case, the Leader
+Taskbind extension prior to opting into the task. In this case, the Leader
 would need to abort the collect request with "unrecognizedTask". When it does
 so, it is up to the Collector to retry its request.<a href="#section-4.7.3-1" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
@@ -1741,7 +1741,7 @@ the Helper as described in <a href="#task-advertisement" class="auto internal xr
 <a href="#section-4.8" class="section-number selfRef">4.8. </a><a href="#name-helper-behavior" class="section-name selfRef">Helper Behavior</a>
         </h3>
 <p id="section-4.8-1">Upon receiving a task advertisement from the Leader, If the Helper does not
-support the Taskprov extension, it will ignore the "dap-taskprov" HTTP header
+support the Taskbind extension, it will ignore the "dap-taskprov" HTTP header
 and process the aggregate request as usual. In particular, if the Helper does
 not recognize the task ID, it <span class="bcp14">MUST</span> abort the aggregate request with error
 "unrecognizedTask". Otherwise, if the Helper supports the extension, it
@@ -1791,11 +1791,11 @@ of time.<a href="#section-4.9-3" class="pilcrow">¶</a></p>
       <h2 id="name-security-considerations">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-5-1">The Taskprov extension has the same security and privacy considerations as the
+<p id="section-5-1">The Taskbind extension has the same security and privacy considerations as the
 core DAP protocol. In addition, successful execution of a DAP task implies
 agreement on the task configuration. This is providing by binding the
 parameters to the task ID, which in turn is bound to each report uploaded for a
-task. Furthermore, inclusion of the Taskprov extension in the report share
+task. Furthermore, inclusion of the Taskbind extension in the report share
 means Aggregators that do not implement this extension will reject the report
 as required by (<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ppm-dap-09#section-4.5.1.4" class="relref">Section 4.5.1.4</a> of [<a href="#DAP" class="cite xref">DAP</a>]</span>).<a href="#section-5-1" class="pilcrow">¶</a></p>
 <p id="section-5-2">The task provisioning mechanism in <a href="#taskprov" class="auto internal xref">Section 4</a> extends the threat model of DAP
@@ -1809,8 +1809,8 @@ an Aggregator's long-term storage by uploading reports for many (thousands or
 perhaps millions) of distinct tasks. While this does not directly impact tasks
 used by honest Clients, it does present a Denial-of-Service risk for the
 Aggregators themselves. This can be mitigated by limiting the rate at which new
-tasks or configured. It can also be mitigated including a digital signature
-signed by the Author<a href="#section-5-3" class="pilcrow">¶</a></p>
+tasks or configured. In addition, deployments <span class="bcp14">SHOULD</span> arrange for the Author to
+digitally sign the task configuration so that Clients cannot forge task creation.<a href="#section-5-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="operational-considerations">
@@ -1818,7 +1818,7 @@ signed by the Author<a href="#section-5-3" class="pilcrow">¶</a></p>
       <h2 id="name-operational-considerations">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-operational-considerations" class="section-name selfRef">Operational Considerations</a>
       </h2>
-<p id="section-6-1">The Taskprov extension does not introduce any new operational considerations.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-1">The Taskbind extension does not introduce any new operational considerations.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <p id="section-6-2">The task provisioning mechanism in <a href="#taskprov" class="auto internal xref">Section 4</a> is designed so that the
 Aggregators do not need to store individual task configurations long-term.
 Because the task configuration is advertised in each request in the upload,

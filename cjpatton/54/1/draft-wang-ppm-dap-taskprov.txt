@@ -9,7 +9,7 @@ Expires: 14 December 2024                                     Cloudflare
                                                             12 June 2024
 
 
-                   In-band Task Provisioning for DAP
+             Task Binding and In-Band Provisioning for DAP
                    draft-wang-ppm-dap-taskprov-latest
 
 Abstract
@@ -75,9 +75,9 @@ Table of Contents
 
    1.  Introduction
    2.  Conventions and Definitions
-   3.  The Taskprov Extension
+   3.  The Taskbind Extension
      3.1.  Task Encoding
-   4.  In-band Task Provisioning with the Taskprov Extension
+   4.  In-band Task Provisioning with the Taskbind Extension
      4.1.  Overview
      4.2.  Task Advertisement
      4.3.  Deriving the VDAF Verification Key
@@ -174,9 +174,9 @@ Table of Contents
    Task author:  The entity that defines a task's configuration in the
       provisioning mechanism of Section 4.
 
-3.  The Taskprov Extension
+3.  The Taskbind Extension
 
-   To use Taskprov extension, the Client includes the following
+   To use Taskbind extension, the Client includes the following
    extension in the report extensions for each Aggregator as described
    in Section 4.4.3 of [DAP]:
 
@@ -190,7 +190,7 @@ Table of Contents
    The payload of the extension MUST be empty.  If the payload is non-
    empty, then the Aggregator MUST reject the report.
 
-   When the client uses the Taskprov extension, it computes the task ID
+   When the client uses the Taskbind extension, it computes the task ID
    (Section 4.2 of [DAP]) as follows:
 
    task_id = SHA-256(task_config)
@@ -205,7 +205,7 @@ Table of Contents
    This is accomplished by the Aggregator behavior below.
 
    During aggregation (Section 4.5 of [DAP]), each Aggregator processes
-   a report with the Taskprov extension as follows.
+   a report with the Taskbind extension as follows.
 
    First, it looks up the ID and parameters associated with the task.
    Note the task has already been configured.  Otherwise the Aggregator
@@ -353,7 +353,7 @@ struct {
    The definition of Time, Duration, Url, and QueryType follow those in
    [DAP].
 
-4.  In-band Task Provisioning with the Taskprov Extension
+4.  In-band Task Provisioning with the Taskbind Extension
 
    Before a task can be executed, it is necessary to first provision the
    Clients, Aggregators, and Collector with the task's configuration.
@@ -418,7 +418,7 @@ struct {
 
 4.2.  Task Advertisement
 
-   To advertise a task to its peer, a Taskprov participant includes a
+   To advertise a task to its peer, a Taskbind participant includes a
    header "dap-taskprov" with a request incident to the task execution.
    The value is the TaskConfig structure defined Section 3.1, expanded
    into its URL-safe, unpadded Base 64 representation as specified in
@@ -499,7 +499,7 @@ struct {
    MAY continue to support per-task HPKE configurations for other tasks
    that are configured out-of-band.
 
-   In addition, if a Client intends to advertise a task via the Taskprov
+   In addition, if a Client intends to advertise a task via the Taskbind
    extension, it SHOULD NOT specify the task_id parameter when
    requesting the HPKE configuration from an Aggregator.
 
@@ -561,7 +561,7 @@ struct {
 4.7.3.  Collect Protocol
 
    The Collector might issue a collect request for a task provisioned by
-   the Taskprov extension prior to opting into the task.  In this case,
+   the Taskbind extension prior to opting into the task.  In this case,
    the Leader would need to abort the collect request with
    "unrecognizedTask".  When it does so, it is up to the Collector to
    retry its request.
@@ -576,7 +576,7 @@ struct {
 4.8.  Helper Behavior
 
    Upon receiving a task advertisement from the Leader, If the Helper
-   does not support the Taskprov extension, it will ignore the "dap-
+   does not support the Taskbind extension, it will ignore the "dap-
    taskprov" HTTP header and process the aggregate request as usual.  In
    particular, if the Helper does not recognize the task ID, it MUST
    abort the aggregate request with error "unrecognizedTask".
@@ -622,12 +622,12 @@ struct {
 
 5.  Security Considerations
 
-   The Taskprov extension has the same security and privacy
+   The Taskbind extension has the same security and privacy
    considerations as the core DAP protocol.  In addition, successful
    execution of a DAP task implies agreement on the task configuration.
    This is providing by binding the parameters to the task ID, which in
    turn is bound to each report uploaded for a task.  Furthermore,
-   inclusion of the Taskprov extension in the report share means
+   inclusion of the Taskbind extension in the report share means
    Aggregators that do not implement this extension will reject the
    report as required by (Section 4.5.1.4 of [DAP]).
 
@@ -644,12 +644,13 @@ struct {
    does not directly impact tasks used by honest Clients, it does
    present a Denial-of-Service risk for the Aggregators themselves.
    This can be mitigated by limiting the rate at which new tasks or
-   configured.  It can also be mitigated including a digital signature
-   signed by the Author
+   configured.  In addition, deployments SHOULD arrange for the Author
+   to digitally sign the task configuration so that Clients cannot forge
+   task creation.
 
 6.  Operational Considerations
 
-   The Taskprov extension does not introduce any new operational
+   The Taskbind extension does not introduce any new operational
    considerations.
 
    The task provisioning mechanism in Section 4 is designed so that the
