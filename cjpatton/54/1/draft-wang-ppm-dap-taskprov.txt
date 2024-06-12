@@ -5,8 +5,8 @@
 Privacy Preserving Measurement                                   S. Wang
 Internet-Draft                                                Apple Inc.
 Intended status: Informational                                 C. Patton
-Expires: 26 May 2024                                          Cloudflare
-                                                        23 November 2023
+Expires: 14 December 2024                                     Cloudflare
+                                                            12 June 2024
 
 
                    In-band Task Provisioning for DAP
@@ -15,8 +15,12 @@ Expires: 26 May 2024                                          Cloudflare
 Abstract
 
    An extension for the Distributed Aggregation Protocol (DAP) is
-   specified that allows the task configuration to be provisioned in-
-   band.
+   specified that cryptographically binds the parameters of a task to
+   the task's execution.  In particular, when a client includes this
+   extension with its report, the servers will only aggregate the report
+   if all parties agree on the task parameters.  This document also
+   specifies an optional mechanism for in-band task provisioning that
+   makes use of the report extension.
 
 About This Document
 
@@ -51,11 +55,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 May 2024.
+   This Internet-Draft will expire on 14 December 2024.
 
 Copyright Notice
 
-   Copyright (c) 2023 IETF Trust and the persons identified as the
+   Copyright (c) 2024 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -83,10 +87,11 @@ Table of Contents
      5.3.  Collect Protocol
    6.  Helper Behavior
    7.  Collector Behavior
-   8.  Security Considerations
-   9.  Operational Considerations
-   10. IANA Considerations
-   11. Normative References
+   8.  In-band Task Provisioning
+   9.  Security Considerations
+   10. Operational Considerations
+   11. IANA Considerations
+   12. Normative References
    Contributors
    Authors' Addresses
 
@@ -97,52 +102,46 @@ Table of Contents
    determines, among other things, the cryptographic scheme to use for
    the secure computation (a Verifiable Distributed Aggregation Function
    [VDAF]), how reports are partitioned into batches, and privacy
-   parameters such as the minimum size of each batch.  Before a task can
-   be executed, it is necessary to first provision the Clients,
-   Aggregators, and Collector with the task's configuration.
+   parameters such as the minimum size of each batch.  See Section 4.2
+   of [DAP] for a complete listing.
 
-   The core DAP specification does not define a mechanism for
-   provisioning tasks.  This document describes a mechanism designed to
-   fill this gap.  Its key feature is that task configuration is
-   performed completely in-band, via HTTP request headers.
+   In order to execute a task securely, it is required that all parties
+   agree on all parameters associated with the task.  However, the core
+   DAP specification does not specify a mechanism for accomplishing
+   this.  In particular, it is possible that the parties successfully
+   aggregate and collect a batch, but some party does not know the
+   parameters that were enforced.
 
-   This method presumes the existence of a logical "task author"
-   (written as "Author" hereafter) who is capable of pushing
-   configurations to Clients.  All parameters required by downstream
-   entities (the Aggregators and Collector) are encoded in an extension
-   field of the Client's report.  There is no need for out-of-band task
-   orchestration between Leader and Helpers, therefore making adoption
-   of DAP easier.
+   A desirable property for DAP to guarantee is that successful
+   execution implies agreement on the task parameters.  On the other
+   hand, disagreement between a Client and the Aggregators should
+   prevent reports uploaded by that Client from being processed.
 
-   The extension is designed with the same security and privacy
-   considerations of the core DAP protocol.  The Author is not regarded
-   as a trusted third party: It is incumbent on all protocol
-   participants to verify the task configuration disseminated by the
-   Author and opt-out if the parameters are deemed insufficient for
-   privacy.  In particular, adopters of this extension should presume
-   the Author is under the adversary's control.  In fact, we expect in a
-   real-world deployment that the Author may be implemented by one of
-   the Aggregators or Collector.
+   Section 3 specifies a report extension (Section 4.4.3 of [DAP]) that
+   endows DAP with this property.  First, it specifies an encoding of
+   all task parameters that are relevant to all parties.  This excludes
+   cryptographic assets, such as the secret VDAF verification key
+   (Section 5 of [VDAF]) or the public HPKE configurations [RFC9180] of
+   the aggregators or collector.  Second, the task ID is computed by
+   hashing the encoded parameters.  If a report includes the extension,
+   then each aggregator checks if the task ID was computed properly: if
+   not, it rejects the report.  This cryptographic binding of the task
+   to its parameters ensures that the report is only processed if the
+   client and aggregator agree on the task parameters.
 
-   Finally, the DAP protocol requires configuring the entities with a
-   variety of assets that are not task-specific, but are important for
-   establishing Client-Aggregator, Collector-Aggregator, and Aggregator-
-   Aggregator relationships.  These include:
+   One reason this task-binding property is desirable is that it makes
+   the process by which parties are provisioned with task parameters
+   more robust.  This is because misconfiguration of a party would
+   manifest in a server's telemetry as report rejection.  This is
+   preferable to failing silently, as misconfiguration could result in
+   privacy loss.
 
-   *  The Collector's HPKE [RFC9180] configuration used by the
-      Aggregators to encrypt aggregate shares.
-
-   *  Any assets required for authenticating HTTP requests.
-
-   This document does not specify a mechanism for provisioning these
-   assets; as in the core DAP protocol; these are presumed to be
-   configured out-of-band.
-
-   Note that we consider the VDAF verification key [VDAF], used by the
-   Aggregators to aggregate reports, to be a task-specific asset.  This
-   document specifies how to derive this key for a given task from a
-   pre-shared secret, which in turn is presumed to be configured out-of-
-   band.
+   Section 8 specifies one possible mechanism for provisioning DAP tasks
+   that is built on top of the extension in Section 3.  Its chief design
+   goal is to make task configuration completely in-band, via HTTP
+   request headers.  Note that this mechanism is an optional feature of
+   this specification; it is not required to implement the protocol
+   extension in Section 3.
 
 2.  Conventions and Definitions
 
@@ -200,22 +199,22 @@ Table of Contents
       /* Info specific for a task. */
       opaque task_info<1..2^8-1>;
 
-      /* Leader API endpoint as defined in I-D.draft-ietf-ppm-dap-07. */
+      /* Leader API endpoint as defined in I-D.draft-ietf-ppm-dap-09. */
       Url leader_aggregator_endpoint;
 
-      /* Helper API endpoint as defined in I-D.draft-ietf-ppm-dap-07. */
+      /* Helper API endpoint as defined in I-D.draft-ietf-ppm-dap-09. */
       Url helper_aggregator_endpoint;
 
       /* This determines the query type for batch selection and the
       properties that all batches for this task must have. */
-      QueryConfig query_config;
+      opaque query_config<1..2^16-1>;
 
       /* Time up to which Clients are allowed to upload to this task.
-      Defined in I-D.draft-ietf-ppm-dap-07. */
+      Defined in I-D.draft-ietf-ppm-dap-09. */
       Time task_expiration;
 
       /* Determines the VDAF type and its config parameters. */
-      VdafConfig vdaf_config;
+      opaque vdaf_config<1..2^16-1>;
   } TaskConfig;
 
    The purpose of TaskConfig is to define all parameters that are
@@ -226,74 +225,86 @@ Table of Contents
    deployment.  For example, this can be a string describing the purpose
    of this task.
 
-   The query_config field defines the DAP query configuration used to
-   guide batch selection.  It is defined as follows:
+   The opaque query_config field defines the DAP query configuration
+   used to guide batch selection.  Its content is structured as follows:
 
    struct {
-       Duration time_precision;      /* I-D.draft-ietf-ppm-dap-07 */
-       uint16 max_batch_query_count; /* I-D.draft-ietf-ppm-dap-07 */
+       Duration time_precision;
+       uint16 max_batch_query_count;
        uint32 min_batch_size;
-       QueryType query_type;        /* I-D.draft-ietf-ppm-dap-07 */
-       uint16 query_type_param_len; /* length of the remainder */
+       QueryType query_type;
        select (QueryConfig.query_type) {
            case time_interval: Empty;
            case fixed_size:    uint32 max_batch_size;
-           default:            opaque[QueryConfig.query_type_param_len];
        };
    } QueryConfig;
 
+   The length prefix of the query_config ensures that the QueryConfig
+   structure can be decoded even if an unrecognized variant is
+   encountered (i.e., an unimplemented query type).
+
+   The maximum batch size for fixed_size query is optional.  If
+   query_type is fixed_size and max_batch_size is 0, Aggregator should
+   provision the task without maximum batch size limit.  Which means
+   during batch validation (Section 4.6.5.2.2 of [DAP]), Aggregator does
+   not check len(X) <= max_batch_size, where X is the set of reports
+   successfully aggregated into the batch.
+
    The vdaf_config defines the configuration of the VDAF in use for this
-   task.  It is structured as follows (codepoints are as defined in
+   task.  Its content is as follows (codepoints are as defined in
    [VDAF]):
 
-   enum {
-       prio3_count(0x00000000),
-       prio3_sum(0x00000001),
-       prio3_sum_vec(0x00000002),
-       prio3_histogram(0x00000003),
-       poplar1(0x00001000),
-       (2^32-1)
-   } VdafType;
+enum {
+    prio3_count(0x00000000),
+    prio3_sum(0x00000001),
+    prio3_sum_vec(0x00000002),
+    prio3_histogram(0x00000003),
+    poplar1(0x00001000),
+    (2^32-1)
+} VdafType;
 
-   struct {
-       DpConfig dp_config;
-       VdafType vdaf_type;
-       uint16 vdaf_type_param_len; /* length of the remainder */
-       select (VdafConfig.vdaf_type) {
-           case prio3_count:
-               Empty;
-           case prio3_sum:
-               uint8;  /* bit length of each summand */
-           case prio3_sum_vec:
-               uint8;  /* bit length of each summand */
-               uint32; /* number of summands */
-               uint32; /* size of each proof chunk */
-           case prio3_histogram:
-               uint32; /* number of buckets */
-               uint32; /* size of each proof chunk */
-           case poplar1:
-               uint16; /* bit length of input string */
-           default:
-               opaque[VdafConfig.vdaf_type_param_len];
-       };
-   } VdafConfig;
+struct {
+    opaque dp_config<1..2^16-1>;  /* Encoded differential privacy parameters */
+    VdafType vdaf_type;
+    select (VdafConfig.vdaf_type) {
+        case prio3_count:
+            Empty;
+        case prio3_sum:
+            uint8;  /* bit length of the summand */
+        case prio3_sum_vec:
+            uint32; /* length of the vector */
+            uint8;  /* bit length of each summand */
+            uint32; /* size of each proof chunk */
+        case prio3_histogram:
+            uint32; /* number of buckets */
+            uint32; /* size of each proof chunk */
+        case poplar1:
+            uint16; /* bit length of input string */
+    };
+} VdafConfig;
+
+   The length prefix of the vdaf_config ensures that the VdafConfig
+   structure can be decoded even if an unrecognized variant is
+   encountered (i.e., an unimplemented VDAF).
 
    Apart from the VDAF-specific parameters, this structure includes a
-   mechanism for differential privacy (DP).  This field, dp_config, is
-   structured as follows:
+   mechanism for differential privacy (DP).  The opaque dp_config
+   contains the following structure:
 
    enum {
        reserved(0), /* Reserved for testing purposes */
        none(1),
+       aggregator_discrete_gaussian(5),
        (255)
    } DpMechanism;
 
    struct {
        DpMechanism dp_mechanism;
-       uint16 dp_mechanism_param_len; /* length of the remainder */
        select (DpConfig.dp_mechanism) {
            case none: Empty;
-           default:   opaque[DpConfig.dp_mechanism_param_len];
+           case aggregator_discrete_gaussian:
+             RealNumber sigma;
+             RealNumber sensititivity;
        };
    } DpConfig;
 
@@ -301,6 +312,10 @@ Table of Contents
       differential privacy mechanisms and parameters.  See draft draft
       (https://github.com/wangshan/draft-wang-ppm-differential-privacy)
       for discussion.
+
+   The length prefix of the dp_config ensures that the DpConfig
+   structure can be decoded even if an unrecognized variant is
+   encountered (i.e., an unimplemented DP mechanism).
 
    The definition of Time, Duration, Url, and QueryType follow those in
    [DAP].
@@ -521,7 +536,57 @@ Table of Contents
    "unrecognizedTask" error, the Collector MAY retry its collect request
    after waiting for a duration. header.
 
-8.  Security Considerations
+8.  In-band Task Provisioning
+
+   XXX
+
+   Before a task can be executed, it is necessary to first provision the
+   Clients, Aggregators, and Collector with the task's configuration.
+
+   The core DAP specification does not define a mechanism for
+   provisioning tasks.  This document describes a mechanism designed to
+   fill this gap.  Its key feature is that task configuration is
+   performed completely in-band, via HTTP request headers.
+
+   This method presumes the existence of a logical "task author"
+   (written as "Author" hereafter) who is capable of pushing
+   configurations to Clients.  All parameters required by downstream
+   entities (the Aggregators and Collector) are encoded in an extension
+   field of the Client's report.  There is no need for out-of-band task
+   orchestration between Leader and Helpers, therefore making adoption
+   of DAP easier.
+
+   The extension is designed with the same security and privacy
+   considerations of the core DAP protocol.  The Author is not regarded
+   as a trusted third party: It is incumbent on all protocol
+   participants to verify the task configuration disseminated by the
+   Author and opt-out if the parameters are deemed insufficient for
+   privacy.  In particular, adopters of this extension should presume
+   the Author is under the adversary's control.  In fact, we expect in a
+   real-world deployment that the Author may be implemented by one of
+   the Aggregators or Collector.
+
+   Finally, the DAP protocol requires configuring the entities with a
+   variety of assets that are not task-specific, but are important for
+   establishing Client-Aggregator, Collector-Aggregator, and Aggregator-
+   Aggregator relationships.  These include:
+
+   *  The Collector's HPKE [RFC9180] configuration used by the
+      Aggregators to encrypt aggregate shares.
+
+   *  Any assets required for authenticating HTTP requests.
+
+   This document does not specify a mechanism for provisioning these
+   assets; as in the core DAP protocol; these are presumed to be
+   configured out-of-band.
+
+   Note that we consider the VDAF verification key [VDAF], used by the
+   Aggregators to aggregate reports, to be a task-specific asset.  This
+   document specifies how to derive this key for a given task from a
+   pre-shared secret, which in turn is presumed to be configured out-of-
+   band.
+
+9.  Security Considerations
 
    This document has the same security and privacy considerations as the
    core DAP specification.  In particular, for privacy we consider the
@@ -554,7 +619,7 @@ Table of Contents
       TODO: Suggest mitigations for this.  Perhaps the Aggregators need
       to keep track of how many tasks in total they are opted in to?
 
-9.  Operational Considerations
+10.  Operational Considerations
 
    The taskprov extension is designed so that the Aggregators do not
    need to store individual task configurations long-term.  Because the
@@ -568,20 +633,20 @@ Table of Contents
    the task is supported until it expires.  In particular, Aggregators
    that operate in this manner MUST NOT opt out once they have opted in.
 
-10.  IANA Considerations
+11.  IANA Considerations
 
       NOTE(cjpatton) Eventually we'll have IANA considerations (at the
       very least we'll need to allocate a codepoint) but we can leave
       this blank for now.
 
-11.  Normative References
+12.  Normative References
 
-   [DAP]      Geoghegan, T., Patton, C., Rescorla, E., and C. A. Wood,
-              "Distributed Aggregation Protocol for Privacy Preserving
-              Measurement", Work in Progress, Internet-Draft, draft-
-              ietf-ppm-dap-07, 14 September 2023,
+   [DAP]      Geoghegan, T., Patton, C., Pitman, B., Rescorla, E., and
+              C. A. Wood, "Distributed Aggregation Protocol for Privacy
+              Preserving Measurement", Work in Progress, Internet-Draft,
+              draft-ietf-ppm-dap-09, 18 December 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-ppm-dap-
-              07>.
+              09>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -609,9 +674,9 @@ Table of Contents
 
    [VDAF]     Barnes, R., Cook, D., Patton, C., and P. Schoppmann,
               "Verifiable Distributed Aggregation Functions", Work in
-              Progress, Internet-Draft, draft-irtf-cfrg-vdaf-07, 31
-              August 2023, <https://datatracker.ietf.org/doc/html/draft-
-              irtf-cfrg-vdaf-07>.
+              Progress, Internet-Draft, draft-irtf-cfrg-vdaf-08, 20
+              November 2023, <https://datatracker.ietf.org/doc/html/
+              draft-irtf-cfrg-vdaf-08>.
 
 Contributors
 
