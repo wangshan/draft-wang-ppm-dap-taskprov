@@ -215,7 +215,7 @@ Table of Contents
    Next, the Aggregator encodes the parameters as a TaskConfig defined
    in Section 3.1 and computes the task ID as above.  If the derived
    task ID does not match the task ID of the request, then it MUST
-   reject the report with error "invalid_message"
+   reject the report with error "invalid_message".
 
    During the upload flow (Section 4.4 of [DAP]), the Leader SHOULD
    abort the request with "unrecognizedTask" if the derived task ID does
@@ -357,9 +357,9 @@ struct {
    Before a task can be executed, it is necessary to first provision the
    Clients, Aggregators, and Collector with the task's configuration.
    The core DAP specification does not define a mechanism for
-   provisioning tasks.  This section describes a mechanism designed to
-   fill this gap.  Its key feature is that task configuration is
-   performed completely in-band, via HTTP request headers.
+   provisioning tasks.  This section describes a mechanism whose key
+   feature is that task configuration is performed completely in-band,
+   via HTTP request headers.
 
    This method presumes the existence of a logical "task author"
    (written as "Author" hereafter) who is capable of pushing
@@ -367,15 +367,15 @@ struct {
    entities (the Aggregators and Collector) are carried by HTTP headers
    piggy-backed on the protocol flow.
 
-   The extension is designed with the same security and privacy
+   This mechanism is designed with the same security and privacy
    considerations of the core DAP protocol.  The Author is not regarded
    as a trusted third party: it is incumbent on all protocol
    participants to verify the task configuration disseminated by the
    Author and opt-out if the parameters are deemed insufficient for
-   privacy.  In particular, adopters of this extension should presume
+   privacy.  In particular, adopters of this mechanism should presume
    the Author is under the adversary's control.  In fact, we expect in a
-   real-world deployment that the Author may be co-located with one of
-   the Aggregators or Collector.
+   real-world deployment that the Author may be co-located with the
+   Collector.
 
    The DAP protocol also requires configuring the entities with a
    variety of assets that are not task-specific, but are important for
@@ -560,14 +560,14 @@ struct {
 4.7.3.  Collect Protocol
 
    The Collector might issue a collect request for a task provisioned by
-   the Taskbind extension prior to opting into the task.  In this case,
-   the Leader would need to abort the collect request with
+   this mechanism prior to opting into the task.  In this case, the
+   Leader would need to abort the collect request with
    "unrecognizedTask".  When it does so, it is up to the Collector to
    retry its request.
 
       OPEN ISSUE: This semantics is awkward, as there's no way for the
-      Leader to distinguish between Collectors who support the extension
-      and those that don't.
+      Leader to distinguish between Collectors who support this
+      mechanism and those that don't.
 
    The Leader MUST advertise the task in every aggregate share request
    issued to the Helper as described in Section 4.2.
@@ -575,11 +575,11 @@ struct {
 4.8.  Helper Behavior
 
    Upon receiving a task advertisement from the Leader, If the Helper
-   does not support the Taskbind extension, it will ignore the "dap-
-   taskprov" HTTP header and process the aggregate request as usual.  In
+   does not support this mechanism, it will ignore the "dap-taskprov"
+   HTTP header and process the aggregate request as usual.  In
    particular, if the Helper does not recognize the task ID, it MUST
    abort the aggregate request with error "unrecognizedTask".
-   Otherwise, if the Helper supports the extension, it proceeds as
+   Otherwise, if the Helper supports this mechanism, it proceeds as
    follows.
 
    First, the Helper attempts to parse payload of the "dap-taskprov"
@@ -650,7 +650,7 @@ struct {
 6.  Operational Considerations
 
    The Taskbind extension does not introduce any new operational
-   considerations.
+   considerations for DAP.
 
    The task provisioning mechanism in Section 4 is designed so that the
    Aggregators do not need to store individual task configurations long-

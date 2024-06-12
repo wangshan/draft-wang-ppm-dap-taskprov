@@ -1348,7 +1348,7 @@ aborted the request due to not recognizing the task.<a href="#section-3-10" clas
 <p id="section-3-11">Next, the Aggregator encodes the parameters as a <code>TaskConfig</code> defined in
 <a href="#task-encoding" class="auto internal xref">Section 3.1</a> and computes the task ID as above. If the derived task ID
 does not match the task ID of the request, then it <span class="bcp14">MUST</span> reject the report with
-error "invalid_message"<a href="#section-3-11" class="pilcrow">¶</a></p>
+error "invalid_message".<a href="#section-3-11" class="pilcrow">¶</a></p>
 <p id="section-3-12">During the upload flow (<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ppm-dap-09#section-4.4" class="relref">Section 4.4</a> of [<a href="#DAP" class="cite xref">DAP</a>]</span>), the Leader <span class="bcp14">SHOULD</span> abort the
 request with "unrecognizedTask" if the derived task ID does not match the task
 ID Of the request.<a href="#section-3-12" class="pilcrow">¶</a></p>
@@ -1497,20 +1497,19 @@ unimplemented DP mechanism).<a href="#section-3.1-14" class="pilcrow">¶</a></p>
 <p id="section-4-1">Before a task can be executed, it is necessary to first provision the Clients,
 Aggregators, and Collector with the task's configuration. The core DAP
 specification does not define a mechanism for provisioning tasks. This section
-describes a mechanism designed to fill this gap. Its key feature is that task
-configuration is performed completely in-band, via HTTP request headers.<a href="#section-4-1" class="pilcrow">¶</a></p>
+describes a mechanism whose  key feature is that task configuration is
+performed completely in-band, via HTTP request headers.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <p id="section-4-2">This method presumes the existence of a logical "task author" (written as
 "Author" hereafter) who is capable of pushing configurations to Clients. All
 parameters required by downstream entities (the Aggregators and Collector) are
 carried by HTTP headers piggy-backed on the protocol flow.<a href="#section-4-2" class="pilcrow">¶</a></p>
-<p id="section-4-3">The extension is designed with the same security and privacy considerations of
+<p id="section-4-3">This mechanism is designed with the same security and privacy considerations of
 the core DAP protocol. The Author is not regarded as a trusted third party: it
 is incumbent on all protocol participants to verify the task configuration
 disseminated by the Author and opt-out if the parameters are deemed insufficient
-for privacy. In particular, adopters of this extension should presume the
+for privacy. In particular, adopters of this mechanism should presume the
 Author is under the adversary's control. In fact, we expect in a real-world
-deployment that the Author may be co-located with one of the Aggregators or
-Collector.<a href="#section-4-3" class="pilcrow">¶</a></p>
+deployment that the Author may be co-located with the Collector.<a href="#section-4-3" class="pilcrow">¶</a></p>
 <p id="section-4-4">The DAP protocol also requires configuring the entities with a variety of assets
 that are not task-specific, but are important for establishing
 Client-Aggregator, Collector-Aggregator, and Aggregator-Aggregator
@@ -1719,14 +1718,14 @@ the task to the Helper in every request incident to the task as described in
           <h4 id="name-collect-protocol">
 <a href="#section-4.7.3" class="section-number selfRef">4.7.3. </a><a href="#name-collect-protocol" class="section-name selfRef">Collect Protocol</a>
           </h4>
-<p id="section-4.7.3-1">The Collector might issue a collect request for a task provisioned by the
-Taskbind extension prior to opting into the task. In this case, the Leader
-would need to abort the collect request with "unrecognizedTask". When it does
-so, it is up to the Collector to retry its request.<a href="#section-4.7.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.7.3-1">The Collector might issue a collect request for a task provisioned by this
+mechanism prior to opting into the task. In this case, the Leader would need to
+abort the collect request with "unrecognizedTask". When it does so, it is up to
+the Collector to retry its request.<a href="#section-4.7.3-1" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-4.7.3-2.1">
               <p id="section-4.7.3-2.1.1">OPEN ISSUE: This semantics is awkward, as there's no way for the Leader to
-distinguish between Collectors who support the extension and those that don't.<a href="#section-4.7.3-2.1.1" class="pilcrow">¶</a></p>
+distinguish between Collectors who support this mechanism and those that don't.<a href="#section-4.7.3-2.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <p id="section-4.7.3-3">The Leader <span class="bcp14">MUST</span> advertise the task in every aggregate share request issued to
@@ -1741,10 +1740,10 @@ the Helper as described in <a href="#task-advertisement" class="auto internal xr
 <a href="#section-4.8" class="section-number selfRef">4.8. </a><a href="#name-helper-behavior" class="section-name selfRef">Helper Behavior</a>
         </h3>
 <p id="section-4.8-1">Upon receiving a task advertisement from the Leader, If the Helper does not
-support the Taskbind extension, it will ignore the "dap-taskprov" HTTP header
-and process the aggregate request as usual. In particular, if the Helper does
-not recognize the task ID, it <span class="bcp14">MUST</span> abort the aggregate request with error
-"unrecognizedTask". Otherwise, if the Helper supports the extension, it
+support this mechanism, it will ignore the "dap-taskprov" HTTP header and
+process the aggregate request as usual. In particular, if the Helper does not
+recognize the task ID, it <span class="bcp14">MUST</span> abort the aggregate request with error
+"unrecognizedTask". Otherwise, if the Helper supports this mechanism, it
 proceeds as follows.<a href="#section-4.8-1" class="pilcrow">¶</a></p>
 <p id="section-4.8-2">First, the Helper attempts to parse payload of the "dap-taskprov" HTTP header.
 If this step fails, the Helper <span class="bcp14">MUST</span> abort with "invalidMessage".<a href="#section-4.8-2" class="pilcrow">¶</a></p>
@@ -1818,7 +1817,8 @@ digitally sign the task configuration so that Clients cannot forge task creation
       <h2 id="name-operational-considerations">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-operational-considerations" class="section-name selfRef">Operational Considerations</a>
       </h2>
-<p id="section-6-1">The Taskbind extension does not introduce any new operational considerations.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-1">The Taskbind extension does not introduce any new operational considerations
+for DAP.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <p id="section-6-2">The task provisioning mechanism in <a href="#taskprov" class="auto internal xref">Section 4</a> is designed so that the
 Aggregators do not need to store individual task configurations long-term.
 Because the task configuration is advertised in each request in the upload,
