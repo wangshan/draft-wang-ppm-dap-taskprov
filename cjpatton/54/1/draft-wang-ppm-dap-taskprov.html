@@ -1497,7 +1497,7 @@ unimplemented DP mechanism).<a href="#section-3.1-14" class="pilcrow">¶</a></p>
 <p id="section-4-1">Before a task can be executed, it is necessary to first provision the Clients,
 Aggregators, and Collector with the task's configuration. The core DAP
 specification does not define a mechanism for provisioning tasks. This section
-describes a mechanism whose  key feature is that task configuration is
+describes a mechanism whose key feature is that task configuration is
 performed completely in-band, via HTTP request headers.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <p id="section-4-2">This method presumes the existence of a logical "task author" (written as
 "Author" hereafter) who is capable of pushing configurations to Clients. All
@@ -1553,7 +1553,7 @@ configuration and decide whether to opt-in; if not, the task's execution halts.<
         <h3 id="name-task-advertisement">
 <a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-task-advertisement" class="section-name selfRef">Task Advertisement</a>
         </h3>
-<p id="section-4.2-1">To advertise a task to its peer, a Taskbind participant includes a header
+<p id="section-4.2-1">To advertise a task to its peer, a protocol participant includes a header
 "dap-taskprov" with a request incident to the task execution. The value is the
 <code>TaskConfig</code> structure defined <a href="#task-encoding" class="auto internal xref">Section 3.1</a>, expanded into its URL-safe,
 unpadded Base 64 representation as specified in Sections <a href="https://rfc-editor.org/rfc/rfc4648#section-5" class="relref">5</a> and <a href="https://rfc-editor.org/rfc/rfc4648#section-3.2" class="relref">3.2</a> of <span>[<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>.<a href="#section-4.2-1" class="pilcrow">¶</a></p>

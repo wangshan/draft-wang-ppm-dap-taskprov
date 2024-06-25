@@ -417,7 +417,7 @@ struct {
 
 4.2.  Task Advertisement
 
-   To advertise a task to its peer, a Taskbind participant includes a
+   To advertise a task to its peer, a protocol participant includes a
    header "dap-taskprov" with a request incident to the task execution.
    The value is the TaskConfig structure defined Section 3.1, expanded
    into its URL-safe, unpadded Base 64 representation as specified in
