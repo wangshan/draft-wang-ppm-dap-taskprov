@@ -5,8 +5,8 @@
 Privacy Preserving Measurement                                   S. Wang
 Internet-Draft                                                Apple Inc.
 Intended status: Informational                                 C. Patton
-Expires: 14 December 2024                                     Cloudflare
-                                                            12 June 2024
+Expires: 27 December 2024                                     Cloudflare
+                                                            25 June 2024
 
 
              Task Binding and In-Band Provisioning for DAP
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 December 2024.
+   This Internet-Draft will expire on 27 December 2024.
 
 Copyright Notice
 
@@ -219,7 +219,7 @@ Table of Contents
 
    During the upload flow (Section 4.4 of [DAP]), the Leader SHOULD
    abort the request with "unrecognizedTask" if the derived task ID does
-   not match the task ID Of the request.
+   not match the task ID of the request.
 
 3.1.  Task Encoding
 
