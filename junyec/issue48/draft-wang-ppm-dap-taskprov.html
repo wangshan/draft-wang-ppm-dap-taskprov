@@ -1802,17 +1802,19 @@ by including a new logical role, called the Author. The Author is responsible
 for configuring Clients prior to task execution. For privacy we consider the
 Author to be under control of the adversary. It is therefore incumbent on
 protocol participants to verify the privacy parameters of a task before opting
-in. One risk introduced by the addition of the Author is the Author can
-configure tasks uniquely for a Client. If the Author colludes with the Leader,
-it can track the uploading activities of that Client, which leaks information
-about that Client, e.g., location.<a href="#section-5-2" class="pilcrow">¶</a></p>
-<p id="section-5-3">Another risk is that a malicious coalition of Clients might attempt to pollute
-an Aggregator's long-term storage by uploading reports for many (thousands or
-perhaps millions) of distinct tasks. While this does not directly impact tasks
-used by honest Clients, it does present a Denial-of-Service risk for the
-Aggregators themselves. This can be mitigated by limiting the rate at which new
-tasks or configured. In addition, deployments <span class="bcp14">SHOULD</span> arrange for the Author to
-digitally sign the task configuration so that Clients cannot forge task creation.<a href="#section-5-3" class="pilcrow">¶</a></p>
+in.<a href="#section-5-2" class="pilcrow">¶</a></p>
+<p id="section-5-3">One risk introduced by the addition of the Author is the Author can configure
+tasks uniquely for a Client. If the Author colludes with the Leader, it can
+track the uploading activities of that Client, which leaks information about
+that Client, e.g., location.<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-4">Another risk introduced by configuring tasks from the Clients is that a
+malicious coalition of Clients might attempt to pollute an Aggregator's
+long-term storage by uploading reports for many (thousands or perhaps millions)
+of distinct tasks. While this does not directly impact tasks used by honest
+Clients, it does present a Denial-of-Service risk for the Aggregators
+themselves. This can be mitigated by limiting the rate at which new tasks or
+configured. In addition, deployments <span class="bcp14">SHOULD</span> arrange for the Author to digitally
+sign the task configuration so that Clients cannot forge task creation.<a href="#section-5-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="operational-considerations">
