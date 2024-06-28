@@ -522,8 +522,8 @@ struct {
    header, but MAY choose to omit this header in order to save network
    bandwidth.  However, the Leader may respond with "unrecognizedTask"
    if it has not been configured with this task.  In this case, the
-   Client MUST retry the upload request by specifying the "dap-taskprov"
-   HTTP header.
+   Client MUST retry the upload request with the "dap-taskprov" HTTP
+   header.
 
 4.7.  Leader Behavior
 
