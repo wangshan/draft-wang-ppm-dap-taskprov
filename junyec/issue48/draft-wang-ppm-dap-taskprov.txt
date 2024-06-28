@@ -642,13 +642,13 @@ struct {
    Client.  If the Author colludes with the Leader, it can learn some
    metadata information about the Client, e.g., the Client IP and user
    agent string.  This can be mitigated by anonymizing the Client, such
-   as by using OHTTP in the DAP upload route.  We also note that, even
-   the Author is able to deanonymize a Client, the Author should learn
-   nothing other than the fact that the Client has uploaded a report,
-   assuming the Client has verified the privacy parameters of the task
-   before opting into it.  For example, if a task is uniquely configured
-   for the Client, the Client can enforce the minimum batch size is
-   strictly more than 1.
+   as by using Oblivious HTTP [I-D.draft-ietf-ohai-ohttp-08] in the DAP
+   upload route.  We also note that, even the Author is able to
+   deanonymize a Client, the Author should learn nothing other than the
+   fact that the Client has uploaded a report, assuming the Client has
+   verified the privacy parameters of the task before opting into it.
+   For example, if a task is uniquely configured for the Client, the
+   Client can enforce the minimum batch size is strictly more than 1.
 
    Another risk introduced by configuring tasks from the Clients is that
    a malicious coalition of Clients might attempt to pollute an
@@ -690,6 +690,12 @@ struct {
               draft-ietf-ppm-dap-09, 18 December 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-ppm-dap-
               09>.
+
+   [I-D.draft-ietf-ohai-ohttp-08]
+              Thomson, M. and C. A. Wood, "Oblivious HTTP", Work in
+              Progress, Internet-Draft, draft-ietf-ohai-ohttp-08, 15
+              March 2023, <https://datatracker.ietf.org/doc/html/draft-
+              ietf-ohai-ohttp-08>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
