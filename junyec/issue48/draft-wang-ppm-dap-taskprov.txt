@@ -512,29 +512,39 @@ struct {
       to report this to the Author?
 
    Once the client opts into a task, it may begin uploading reports for
-   the task.  Each upload request for that task MUST advertise the task
-   configuration.  The extension codepoint taskbind MUST be offered in
-   the extensions field of both Leader and Helper's PlaintextInputShare.
-   In addition, each report's task ID MUST be computed as described in
-   Section 3.
+   the task to the Leader.  The extension codepoint taskbind MUST be
+   offered in the extensions field of both Leader and Helper's
+   PlaintextInputShare.  In addition, each report's task ID MUST be
+   computed as described in Section 3.
+
+   The Client SHOULD advertise the task configuration by specifying the
+   encoded TaskConfig described in Section 3 in the "dap-taskprov" HTTP
+   header, but MAY choose to omit this header in order to save network
+   bandwidth.  However, the Leader may respond with "unrecognizedTask"
+   if it has not been configured with this task.  In this case, the
+   Client MUST retry the upload request with the "dap-taskprov" HTTP
+   header.
 
 4.7.  Leader Behavior
 
 4.7.1.  Upload Protocol
 
-   Upon receiving a task advertisement from a Client, if the Leader does
-   not support this mechanism, it will ignore the HTTP header.  In
-   particular, if the task ID is not recognized, then it MUST abort the
-   upload request with "unrecognizedTask".
+   Upon receiving a Client report, if the Leader does not support the
+   Section 4 mechanism, it will ignore the "dap-taskprov" HTTP header.
+   In particular, if the task ID is not recognized, then it MUST abort
+   the upload request with "unrecognizedTask".
 
-   Otherwise, if the Leader does support this mechanism, it first
-   attempts to parse the "dap-taskprov" HTTP header payload.  If parsing
-   fails, it MUST abort with "invalidMessage".
+   Otherwise, if the Leader does support this mechanism, it first checks
+   if the "dap-taskprov" HTTP header is specified.  If not, that means
+   the Client has skipped task advertisement.  If the Leader recognizes
+   the task ID, it will include the client report in the aggregation of
+   that task ID.  Otherwise, it MUST abort with "unrecognizedTask".  The
+   Client will then retry with the task advertisement.
 
-   Next, it checks that the task ID indicated by the upload request
-   matches the task ID derived from the extension payload as specified
-   in Section 3.  If the task ID does not match, then the Leader MUST
-   abort with "unrecognizedTask".
+   If the Client advertises the task, the Leader checks that the task ID
+   indicated by the upload request matches the task ID derived from the
+   extension payload as specified in Section 3.  If the task ID does not
+   match, then the Leader MUST abort with "unrecognizedTask".
 
    The Leader then decides whether to opt in to the task as described in
    Section 4.4.  If it opts out, it MUST abort the upload request with
@@ -637,28 +647,26 @@ struct {
    the adversary.  It is therefore incumbent on protocol participants to
    verify the privacy parameters of a task before opting in.
 
-   Another risk introduced by the addition of the Author is the Author
-   could configure tasks uniquely for a Client to fingerprint the
-   Client.  If the Author colludes with the Leader, it can learn some
-   metadata information about the Client, e.g., the Client IP and user
-   agent string.  This can be mitigated by anonymizing the Client, such
-   as by using Oblivious HTTP [I-D.draft-ietf-ohai-ohttp-08] in the DAP
-   upload route.  We also note that, even the Author is able to
-   deanonymize a Client, the Author should learn nothing other than the
-   fact that the Client has uploaded a report, assuming the Client has
-   verified the privacy parameters of the task before opting into it.
-   For example, if a task is uniquely configured for the Client, the
-   Client can enforce the minimum batch size is strictly more than 1.
+   Another risk is that the Author could configure a unique task to
+   fingerprint a Client.  If the Author colludes with the Leader, it can
+   learn some metadata information about the Client, e.g., the Client
+   IP, user agent string, and the upload timestamp.  However, even
+   though the Author is able to deanonymize the Client, the Author
+   should learn nothing other than the fact that the Client has uploaded
+   a report, assuming the Client has verified the privacy parameters of
+   the task before opting into it.  For example, if a task is uniquely
+   configured for the Client, the Client can enforce the minimum batch
+   size is strictly more than 1.
 
-   Another risk introduced by configuring tasks from the Clients is that
-   a malicious coalition of Clients might attempt to pollute an
-   Aggregator's long-term storage by uploading reports for many
-   (thousands or perhaps millions) of distinct tasks.  While this does
-   not directly impact tasks used by honest Clients, it does present a
-   Denial-of-Service risk for the Aggregators themselves.  This can be
-   mitigated by limiting the rate at which new tasks or configured.  In
-   addition, deployments SHOULD arrange for the Author to digitally sign
-   the task configuration so that Clients cannot forge task creation.
+   Another risk for the Aggregators is that a malicious coalition of
+   Clients might attempt to pollute an Aggregator's long-term storage by
+   uploading reports for many (thousands or perhaps millions) of
+   distinct tasks.  While this does not directly impact tasks used by
+   honest Clients, it does present a Denial-of-Service risk for the
+   Aggregators themselves.  This can be mitigated by limiting the rate
+   at which new tasks or configured.  In addition, deployments SHOULD
+   arrange for the Author to digitally sign the task configuration so
+   that Clients cannot forge task creation.
 
 6.  Operational Considerations
 
@@ -690,12 +698,6 @@ struct {
               draft-ietf-ppm-dap-09, 18 December 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-ppm-dap-
               09>.
-
-   [I-D.draft-ietf-ohai-ohttp-08]
-              Thomson, M. and C. A. Wood, "Oblivious HTTP", Work in
-              Progress, Internet-Draft, draft-ietf-ohai-ohttp-08, 15
-              March 2023, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-ohai-ohttp-08>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,

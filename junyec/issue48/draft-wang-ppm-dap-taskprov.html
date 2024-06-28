@@ -1658,11 +1658,16 @@ out, it <span class="bcp14">MUST</span> not attempt to upload reports for the ta
 this to the Author?<a href="#section-4.6-2.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-4.6-3">Once the client opts into a task, it may begin uploading reports for the task.
-Each upload request for that task <span class="bcp14">MUST</span> advertise the task configuration. The
-extension codepoint <code>taskbind</code> <span class="bcp14">MUST</span> be offered in the <code>extensions</code> field of
-both Leader and Helper's <code>PlaintextInputShare</code>. In addition, each report's task
-ID <span class="bcp14">MUST</span> be computed as described in <a href="#definition" class="auto internal xref">Section 3</a>.<a href="#section-4.6-3" class="pilcrow">¶</a></p>
+<p id="section-4.6-3">Once the client opts into a task, it may begin uploading reports for the task
+to the Leader. The extension codepoint <code>taskbind</code> <span class="bcp14">MUST</span> be offered in the
+<code>extensions</code> field of both Leader and Helper's <code>PlaintextInputShare</code>. In
+addition, each report's task ID <span class="bcp14">MUST</span> be computed as described in <a href="#definition" class="auto internal xref">Section 3</a>.<a href="#section-4.6-3" class="pilcrow">¶</a></p>
+<p id="section-4.6-4">The Client <span class="bcp14">SHOULD</span> advertise the task configuration by specifying the encoded
+<code>TaskConfig</code> described in <a href="#definition" class="auto internal xref">Section 3</a> in the "dap-taskprov" HTTP header, but
+<span class="bcp14">MAY</span> choose to omit this header in order to save network bandwidth. However, the
+Leader may respond with "unrecognizedTask" if it has not been configured with
+this task. In this case, the Client <span class="bcp14">MUST</span> retry the upload request with the
+"dap-taskprov" HTTP header.<a href="#section-4.6-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="leader-behavior">
@@ -1675,17 +1680,20 @@ ID <span class="bcp14">MUST</span> be computed as described in <a href="#definit
           <h4 id="name-upload-protocol">
 <a href="#section-4.7.1" class="section-number selfRef">4.7.1. </a><a href="#name-upload-protocol" class="section-name selfRef">Upload Protocol</a>
           </h4>
-<p id="section-4.7.1-1">Upon receiving a task advertisement from a Client, if the Leader does not
-support this mechanism, it will ignore the HTTP header. In particular, if the
+<p id="section-4.7.1-1">Upon receiving a Client report, if the Leader does not support the <a href="#taskprov" class="auto internal xref">Section 4</a>
+mechanism, it will ignore the "dap-taskprov" HTTP header. In particular, if the
 task ID is not recognized, then it <span class="bcp14">MUST</span> abort the upload request with
 "unrecognizedTask".<a href="#section-4.7.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.7.1-2">Otherwise, if the Leader does support this mechanism, it first attempts to
-parse the "dap-taskprov" HTTP header payload. If parsing fails, it <span class="bcp14">MUST</span> abort
-with "invalidMessage".<a href="#section-4.7.1-2" class="pilcrow">¶</a></p>
-<p id="section-4.7.1-3">Next, it checks that the task ID indicated by the upload request matches the
-task ID derived from the extension payload as specified in
-<a href="#definition" class="auto internal xref">Section 3</a>. If the task ID does not match, then the Leader <span class="bcp14">MUST</span> abort
-with "unrecognizedTask".<a href="#section-4.7.1-3" class="pilcrow">¶</a></p>
+<p id="section-4.7.1-2">Otherwise, if the Leader does support this mechanism, it first checks if the
+"dap-taskprov" HTTP header is specified. If not, that means the Client has
+skipped task advertisement. If the Leader recognizes the task ID, it will
+include the client report in the aggregation of that task ID. Otherwise, it
+<span class="bcp14">MUST</span> abort with "unrecognizedTask". The Client will then retry with the task
+advertisement.<a href="#section-4.7.1-2" class="pilcrow">¶</a></p>
+<p id="section-4.7.1-3">If the Client advertises the task, the Leader checks that the task ID indicated
+by the upload request matches the task ID derived from the extension payload as
+specified in <a href="#definition" class="auto internal xref">Section 3</a>. If the task ID does not match, then the Leader <span class="bcp14">MUST</span>
+abort with "unrecognizedTask".<a href="#section-4.7.1-3" class="pilcrow">¶</a></p>
 <p id="section-4.7.1-4">The Leader then decides whether to opt in to the task as described in
 <a href="#provisioning-a-task" class="auto internal xref">Section 4.4</a>. If it opts out, it <span class="bcp14">MUST</span> abort the upload request with
 "invalidTask".<a href="#section-4.7.1-4" class="pilcrow">¶</a></p>
@@ -1803,25 +1811,23 @@ for configuring Clients prior to task execution. For privacy we consider the
 Author to be under control of the adversary. It is therefore incumbent on
 protocol participants to verify the privacy parameters of a task before opting
 in.<a href="#section-5-2" class="pilcrow">¶</a></p>
-<p id="section-5-3">Another risk introduced by the addition of the Author is the Author could
-configure tasks uniquely for a Client to fingerprint the Client. If the Author
-colludes with the Leader, it can learn some metadata information about the
-Client, e.g., the Client IP and user agent string. This can be mitigated by
-anonymizing the Client, such as by using Oblivious HTTP
-<span>[<a href="#I-D.draft-ietf-ohai-ohttp-08" class="cite xref">I-D.draft-ietf-ohai-ohttp-08</a>]</span> in the DAP upload route. We also note that,
-even the Author is able to deanonymize a Client, the Author should learn nothing
-other than the fact that the Client has uploaded a report, assuming the Client
-has verified the privacy parameters of the task before opting into it. For
-example, if a task is uniquely configured for the Client, the Client can enforce
-the minimum batch size is strictly more than 1.<a href="#section-5-3" class="pilcrow">¶</a></p>
-<p id="section-5-4">Another risk introduced by configuring tasks from the Clients is that a
-malicious coalition of Clients might attempt to pollute an Aggregator's
-long-term storage by uploading reports for many (thousands or perhaps millions)
-of distinct tasks. While this does not directly impact tasks used by honest
-Clients, it does present a Denial-of-Service risk for the Aggregators
-themselves. This can be mitigated by limiting the rate at which new tasks or
-configured. In addition, deployments <span class="bcp14">SHOULD</span> arrange for the Author to digitally
-sign the task configuration so that Clients cannot forge task creation.<a href="#section-5-4" class="pilcrow">¶</a></p>
+<p id="section-5-3">Another risk is that the Author could configure a unique task to fingerprint a
+Client. If the Author colludes with the Leader, it can learn some metadata
+information about the Client, e.g., the Client IP, user agent string, and the
+upload timestamp. However, even though the Author is able to deanonymize the
+Client, the Author should learn nothing other than the fact that the Client has
+uploaded a report, assuming the Client has verified the privacy parameters of
+the task before opting into it. For example, if a task is uniquely configured
+for the Client, the Client can enforce the minimum batch size is strictly more
+than 1.<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-4">Another risk for the Aggregators is that a malicious coalition of Clients might
+attempt to pollute an Aggregator's long-term storage by uploading reports for
+many (thousands or perhaps millions) of distinct tasks. While this does not
+directly impact tasks used by honest Clients, it does present a
+Denial-of-Service risk for the Aggregators themselves. This can be mitigated by
+limiting the rate at which new tasks or configured. In addition, deployments
+<span class="bcp14">SHOULD</span> arrange for the Author to digitally sign the task configuration so that
+Clients cannot forge task creation.<a href="#section-5-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="operational-considerations">
@@ -1864,10 +1870,6 @@ we'll need to allocate a codepoint) but we can leave this blank for now.<a href=
 <dt id="DAP">[DAP]</dt>
       <dd>
 <span class="refAuthor">Geoghegan, T.</span>, <span class="refAuthor">Patton, C.</span>, <span class="refAuthor">Pitman, B.</span>, <span class="refAuthor">Rescorla, E.</span>, and <span class="refAuthor">C. A. Wood</span>, <span class="refTitle">"Distributed Aggregation Protocol for Privacy Preserving Measurement"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-ppm-dap-09</span>, <time datetime="2023-12-18" class="refDate">18 December 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-ppm-dap-09">https://datatracker.ietf.org/doc/html/draft-ietf-ppm-dap-09</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="I-D.draft-ietf-ohai-ohttp-08">[I-D.draft-ietf-ohai-ohttp-08]</dt>
-      <dd>
-<span class="refAuthor">Thomson, M.</span> and <span class="refAuthor">C. A. Wood</span>, <span class="refTitle">"Oblivious HTTP"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-ohai-ohttp-08</span>, <time datetime="2023-03-15" class="refDate">15 March 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-ohai-ohttp-08">https://datatracker.ietf.org/doc/html/draft-ietf-ohai-ohttp-08</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
       <dd>
