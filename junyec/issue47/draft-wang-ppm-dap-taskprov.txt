@@ -538,8 +538,8 @@ struct {
    if the "dap-taskprov" HTTP header is specified.  If not, that means
    the Client has skipped task advertisement.  If the Leader recognizes
    the task ID, it will include the client report in the aggregation of
-   that task ID.  Otherwise, it MUST abort with "unrecognizedTask" and
-   ask the Client to retry with the "dap-taskprov" HTTP header.
+   that task ID.  Otherwise, it MUST abort with "unrecognizedTask".  The
+   Client will then retry with the task advertisement.
 
    If the Client specifies the "dap-taskprov" HTTP header, the Leader
    checks that the task ID indicated by the upload request matches the
