@@ -517,9 +517,9 @@ struct {
    PlaintextInputShare.  In addition, each report's task ID MUST be
    computed as described in Section 3.
 
-   The Client MAY advertise the task configuration by specifying the
+   The Client SHOULD advertise the task configuration by specifying the
    encoded TaskConfig described in Section 3 in the "dap-taskprov" HTTP
-   header, but may choose to omit this header in order to save network
+   header, but MAY choose to omit this header in order to save network
    bandwidth.  However, the Leader may respond with "unrecognizedTask"
    if it has not been configured with this task.  In this case, the
    Client MUST retry the upload request by specifying the "dap-taskprov"
