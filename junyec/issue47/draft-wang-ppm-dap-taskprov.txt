@@ -531,7 +531,7 @@ struct {
 
    Upon receiving a Client report, if the Leader does not support the
    Section 4 mechanism, it will ignore the "dap-taskprov" HTTP header.
-   In particular, if the task ID is notrecognized, then it MUST abort
+   In particular, if the task ID is not recognized, then it MUST abort
    the upload request with "unrecognizedTask".
 
    Otherwise, if the Leader does support this mechanism, it first checks
