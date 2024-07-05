@@ -652,7 +652,7 @@ struct {
    guaranteed by DAP, some systems built on top of DAP may hope to
    achieve this property by using a proxy server with Oblivious HTTP
    [RFC9458] to forward Client reports to the Leader.  If the Author
-   colludes with the Leader, the attacker can learn some metadata
+   colludes with the Leader, the Author can learn some metadata
    information about the Client, e.g., the Client IP, user agent string,
    which may deanonymize the Client.  However, even if the Author
    succeeds in doing so, the Author should learn nothing other than the
