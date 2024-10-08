@@ -189,6 +189,9 @@ struct {
     properties that all batches for this task must have. */
     opaque query_config<1..2^16-1>;
 
+    /* Unix epoch time that describes the start time of this task. */
+    Time task_start;
+
     /* Time up to which Clients are allowed to upload to this task.
     Defined in I-D.draft-ietf-ppm-dap-09. */
     Time task_expiration;
@@ -205,7 +208,12 @@ task expiration, the structure includes an opaque `task_info` field that is
 specific to a deployment. For example, this can be a string describing the
 purpose of this task. It does not include cryptographic assets shared by only a
 subset of the parties, including the secret VDAF verification key {{!VDAF}} or
-public HPKE configurations {{!RFC9180}}.
+public HPKE configurations {{!RFC9180}}. This structure also includes a
+`task_start` field that describes the start time of the task in unix epoch time.
+This allows protocol participants to opt out of the task if the task lifetime
+given by `task_start` and `task_expiration` is too long. In particular, it also
+allows Aggregators to reject a report if its timestamp is before the task start
+time.
 
 The opaque `query_config` field defines the DAP query configuration used to
 guide batch selection. Its content is structured as follows:
